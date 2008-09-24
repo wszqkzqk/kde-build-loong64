@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cd build
+
+for i in `cat ../kde-dep-packages`; do
+	cd ${i}/trunk
+	makepkg -isL --noconfirm || exit 1
+	cd ../..
+done
+
+for i in `cat ../kde-opt-packages`; do
+	cd ${i}/trunk
+	makepkg -sL --noconfirm || exit 1
+	cd ../..
+done
+
+for i in `cat ../kde-l10n-names`; do
+	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
+	cd kde-l10n-${pkglang}/trunk
+	makepkg -sL --noconfirm || exit 1
+	cd ../..
+done
+
+cd ..

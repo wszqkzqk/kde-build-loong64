@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd build
+
+for i in ./; do
+	cd ${i}/trunk
+	extrapkg || exit 1
+	cd ../..
+done
+
+cd ..
