@@ -6,7 +6,6 @@ kdever=${1}
 cd build
 
 for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
-	archco ${i}
 	cd ${i}/trunk
 	scp ktown.kde.org:~/stable/${kdever}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
 	sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
@@ -17,7 +16,6 @@ done
 
 for i in `cat ../kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	archco kde-l10n-${pkglang}
 	cd kde-l10n-${pkglang}/trunk
 	scp ktown.kde.org:~/stable/${kdever}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/
 	sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
