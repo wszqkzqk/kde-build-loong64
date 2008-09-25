@@ -6,7 +6,6 @@ for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
 	archco ${i}
 done
 
-
 for i in `cat ../kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
 	archco kde-l10n-${pkglang}

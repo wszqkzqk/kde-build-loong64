@@ -2,8 +2,15 @@
 
 cd build
 
-for i in ./; do
+for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
 	cd ${i}/trunk
+	extrapkg || exit 1
+	cd ../..
+done
+
+for i in `cat ../kde-l10n-names`; do
+	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
+	cd kde-l10n-${pkglang}/trunk
 	extrapkg || exit 1
 	cd ../..
 done
