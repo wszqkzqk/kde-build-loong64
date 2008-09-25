@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sudo pacman -U $(for i in `cat kde-dep-packages kde-opt-packages`; do echo build/${i}/trunk/${i}-*.pkg.tar.gz; done; echo build/kde-l10n-de/trunk/kde-l10n-de-*.pkg.tar.gz)
