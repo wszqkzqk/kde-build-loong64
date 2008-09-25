@@ -1,0 +1,18 @@
+#!/bin/bash
+
+cd build
+
+for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
+	cd ${i}/trunk
+	rm -rf pkg src
+	cd ../..
+done
+
+for i in `cat ../kde-l10n-names`; do
+	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
+	cd kde-l10n-${pkglang}/trunk
+	rm -rf pkg src
+	cd ../..
+done
+
+cd ..
