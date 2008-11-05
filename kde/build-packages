@@ -2,23 +2,29 @@
 
 cd build
 
+broken=''
+
 for i in `cat ../kde-dep-packages`; do
 	cd ${i}/trunk
-	makepkg -isLc --noconfirm || exit 1
+	makepkg -isLc --noconfirm || broken="${broken} ${i}"
 	cd ../..
 done
 
 for i in `cat ../kde-opt-packages`; do
 	cd ${i}/trunk
-	makepkg -sLc --noconfirm || exit 1
+	makepkg -sLc --noconfirm || broken="${broken} ${i}"
 	cd ../..
 done
 
 for i in `cat ../kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
 	cd kde-l10n-${pkglang}/trunk
-	makepkg -sLc --noconfirm || exit 1
+	makepkg -sLc --noconfirm || broken="${broken} kde-l10n-${pkglang}"
 	cd ../..
 done
 
 cd ..
+
+if [ "${broken}" != "" ]; then
+	echo "Broken packages: ${broken}"
+fi
