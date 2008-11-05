@@ -4,14 +4,16 @@ cd build
 
 for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
 	cd ${i}/trunk
-	namcap ${i}-*.pkg.tar.gz | tee namcap.log
+	echo "checking ${i}..."
+	namcap ${i}-*.pkg.tar.gz > namcap.log
 	cd ../..
 done
 
 for i in `cat ../kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
 	cd kde-l10n-${pkglang}/trunk
-	namcap kde-l10n-${pkglang}-*.pkg.tar.gz | tee namcap.log
+	echo "checking kde-l10n-${pkglang}..."
+	namcap kde-l10n-${pkglang}-*.pkg.tar.gz > namcap.log
 	cd ../..
 done
 
