@@ -3,12 +3,12 @@
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
-	pkglist="${pkglist} build/${i}/trunk/${i}-*.pkg.tar.gz"
+	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
 done
 
 for i in `cat kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	pkglist="${pkglist} build/kde-l10n-${pkglang}/trunk/kde-l10n-${pkglang}-*.pkg.tar.gz"
+	pkglist="${pkglist} $(pacman -Qq kde-l10n-${pkglang} 2> /dev/null)"
 done
 
-sudo pacman -U ${pkglist}
+sudo pacman -Rcn ${pkglist}
