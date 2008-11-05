@@ -1,5 +1,7 @@
 *~
 .svn
-build/
+src/
+pkg/
+repos/
 *.tar.*
-
+*.log*

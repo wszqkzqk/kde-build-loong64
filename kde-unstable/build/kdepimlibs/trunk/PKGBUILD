@@ -1,0 +1,26 @@
+# $Id: $
+# Maintainer: Pierre Schmitz <pierre@archlinux.de>
+
+pkgname=kdepimlibs
+pkgver=4.1.72
+pkgrel=1
+pkgdesc="KDE PIM Libraries"
+arch=('i686' 'x86_64')
+url='http://www.kde.org'
+license=('GPL' 'LGPL')
+groups=('kde')
+depends=('kdelibs' 'akonadi' 'gpgme' 'libical')
+makedepends=('pkgconfig' 'cmake' 'automoc4' 'boost' 'cyrus-sasl' 'openldap')
+source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
+md5sums=('a0425fd5b3023d74fe45d1be8eb15206')
+
+build() {
+	cd $srcdir
+	mkdir build
+	cd build
+	cmake ../${pkgname}-${pkgver} \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr
+	make
+	make DESTDIR=$pkgdir install
+}

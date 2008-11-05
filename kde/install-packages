@@ -8,7 +8,7 @@ done
 
 for i in `cat kde-l10n-names`; do
 	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	pkglist="${pkglist} build/kde-l10n-${pkglang}/trunk/kde-l10n-${pkglang}-*.pkg.tar.gz"
+#	pkglist="${pkglist} build/kde-l10n-${pkglang}/trunk/kde-l10n-${pkglang}-*.pkg.tar.gz"
 done
 
 sudo pacman -U ${pkglist}
