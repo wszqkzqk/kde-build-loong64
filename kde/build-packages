@@ -6,7 +6,7 @@ broken=''
 
 for i in `cat ../kde-dep-packages`; do
 	cd ${i}/trunk
-	makepkg -isLc --noconfirm || broken="${broken} ${i}"
+	makepkg -isLc --noconfirm || exit 1
 	cd ../..
 done
 
