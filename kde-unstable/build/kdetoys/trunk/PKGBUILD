@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdetoys
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Toys"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4')
 options=('docs')
 install='kdetoys.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('bef37d3f6364eba2914689fa2e0e56ba')
+md5sums=('71398f95c9d7d4f5856ddd6848e50e4b')
 
 build() {
 	cd $srcdir

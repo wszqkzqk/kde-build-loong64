@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdelibs
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Core Libraries"
 arch=('i686' 'x86_64')
@@ -18,7 +18,7 @@ options=('docs')
 install='kdelibs.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2"
         'kde-applications-menu.patch' 'archlinux-menu.patch')
-md5sums=('4e233d135b7f5b21f2c4dc5db74267cd'
+md5sums=('22267d18926163552131c177845b77f5'
          '3daa0f01fe26325fb3dbd807a04898ad'
          '0ad42200df2d2b8aab01d2ef4b21e02f')
 

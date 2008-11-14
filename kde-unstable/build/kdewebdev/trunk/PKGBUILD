@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdewebdev
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Web Development Applications"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4')
 options=('docs')
 install='kdewebdev.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('f65dabfdf6c061e00ee504126ce0aa22')
+md5sums=('3a318970e4b02ffaf5322e378f98b132')
 
 build() {
 	cd $srcdir

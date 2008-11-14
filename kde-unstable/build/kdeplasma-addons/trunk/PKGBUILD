@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdeplasma-addons
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Plasma addons"
 arch=('i686' 'x86_64')
@@ -15,7 +15,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4')
 options=('docs')
 install='kdeplasma-addons.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('20e386df892b1197e910ed9871622847')
+md5sums=('059989a7dc4acc0903408929c2419421')
 
 build() {
 	cd $srcdir

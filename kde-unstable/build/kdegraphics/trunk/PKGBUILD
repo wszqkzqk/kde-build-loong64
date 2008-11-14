@@ -2,8 +2,8 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdegraphics
-pkgver=4.1.72
-pkgrel=2
+pkgver=4.1.73
+pkgrel=1
 pkgdesc="KDE Graphics is a collection of graphic oriented applications:"
 arch=('i686' 'x86_64')
 url='http://www.kde.org'
@@ -15,7 +15,7 @@ replaces=('gwenview' 'gwenview-i18n')
 options=('docs')
 install='kdegraphics.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('d25659237dfee5d7aae0072e5f1816f1')
+md5sums=('e493064985ab62af262c2a70fc59ffab')
 
 build() {
 	cd $srcdir

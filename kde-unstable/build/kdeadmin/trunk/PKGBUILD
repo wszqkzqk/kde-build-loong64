@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdeadmin
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Administration Programs"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4')
 options=('docs')
 install='kdeadmin.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('4b5e035221591b1b1106da47667721f7')
+md5sums=('5a88afd8ea299108e4d4937dc17dc7d1')
 
 build() {
 	cd $srcdir

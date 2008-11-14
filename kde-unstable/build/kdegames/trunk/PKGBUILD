@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdegames
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Games"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4')
 options=('docs')
 install='kdegames.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('34680d4dca2bab916dd5056e58a951ec')
+md5sums=('84bc67f239ced4f2955f444dc21402fc')
 
 build() {
 	cd $srcdir

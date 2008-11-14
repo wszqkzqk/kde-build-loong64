@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdenetwork
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Network related programs"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4' 'boost')
 options=('docs')
 install='kdenetwork.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('37a3efe9c9d16aaff3e102a07a31d708')
+md5sums=('2ad514e610d663f2b7c48e256adce9f9')
 
 build() {
 	cd $srcdir

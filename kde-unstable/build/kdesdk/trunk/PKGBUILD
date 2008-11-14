@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdesdk
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE SDK is a collection of applications and tools used by KDE developers"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4' 'boost')
 options=('docs')
 install='kdesdk.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('cdf048f9ecce67117aa8e9b4509632ab')
+md5sums=('9da74e4373f37d03f254c3e4d72515ae')
 
 build() {
 	cd $srcdir

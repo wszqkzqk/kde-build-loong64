@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdebindings
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Language Bindings"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ depends=('kdepimlibs' 'kdebase-workspace' 'python' 'ruby' 'qscintilla')
 makedepends=('pkgconfig' 'cmake' 'automoc4' 'sip' 'pyqt')
 options=('docs')
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('41ec77eedbbbdd2bc1aea998f412368c')
+md5sums=('683104c4ddcd7f183b466053c6e1f901')
 
 build() {
 	cd $srcdir

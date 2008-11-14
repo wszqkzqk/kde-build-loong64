@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdeutils
-pkgver=4.1.72
+pkgver=4.1.73
 pkgrel=1
 pkgdesc="KDE Utils is a compilation of various desktop utilities."
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4' 'pyqt')
 options=('docs')
 install='kdeutils.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('efb5c762f908e5396c756acc80b4adfb')
+md5sums=('a073ff0990dc87ee7caa96019adb9025')
 
 build() {
 	cd $srcdir
