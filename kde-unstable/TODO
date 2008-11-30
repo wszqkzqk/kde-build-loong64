@@ -1,0 +1,45 @@
+* check for unneeded or already satisfied deps (namcap)
+* check the following deps:
+	* kdeadmin
+		* pykde (from kdebindings?)
+		* pycups
+		* system-config-printer
+	* kdeartwork
+		* eigen >= 2.0
+	* kdebase-runtime
+		* libpulse (as long as we don't officially support PulseAudio this is not needed)
+			-> disable by default
+	* kdebase-workspace
+		* GoogleGadgets
+		* qedje
+		* pykde
+		* xmms (disable by default)
+		* ck-connector (consolekit)
+	* kdebindings
+		* does not build at all
+	* kdeedu
+		* pykde 
+		* libindi
+	* kdelibs
+		* fam (disabled by default)
+	* kdemultimedia
+		* rebuild xine-lib and phonon with xcb support
+	* kdenetwork
+		* libnxcl
+		* libortp
+		* decibel
+		* webkitkde
+		* xmms (disable by default)
+		* libmsn
+		* libmeanwhile
+	* kdepim
+		* opensync (not released yet)
+		* pilot-link
+		* libmal
+	* kdeplasma-addons
+		* libkexiv2
+	* kdeutils
+		* pykde
+		* pycups
+		* system-config-printer
+* rebuild mysql with embedded support
