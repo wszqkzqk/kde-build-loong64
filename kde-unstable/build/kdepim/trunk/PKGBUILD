@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdepim
-pkgver=4.1.73
+pkgver=4.1.81
 pkgrel=1
 pkgdesc="KDE Personal Information Management suite"
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ makedepends=('pkgconfig' 'cmake' 'automoc4' 'boost')
 options=('docs')
 install='kdepim.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('f18406c9b843f094bbe24a31e7c31134')
+md5sums=('c28fed4f9ecc720adbb3309e25b6f839')
 
 build() {
 	cd $srcdir

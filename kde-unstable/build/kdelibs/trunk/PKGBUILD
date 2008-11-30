@@ -2,14 +2,14 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdelibs
-pkgver=4.1.73
+pkgver=4.1.81
 pkgrel=1
 pkgdesc="KDE Core Libraries"
 arch=('i686' 'x86_64')
 url='http://www.kde.org'
 license=('GPL' 'LGPL' 'FDL')
 groups=('kde')
-depends=('libxcursor' 'phonon' 'shared-mime-info' 'qt>=4.4' 'libxpm' 'hal'
+depends=('libxcursor' 'phonon' 'shared-mime-info' 'qt>=4.4' 'libxpm' 'hal' 'perl'
 	 'enchant' 'jasper' 'openexr' 'strigi' 'bzip2' 'libxslt' 'libxtst'
 	 'giflib' 'soprano' 'ca-certificates' 'heimdal' 'xdg-utils' 'libxft')
 makedepends=('pkgconfig' 'cmake' 'automoc4' 'intltool' 'avahi' 'libgl' 'hspell')
@@ -18,7 +18,7 @@ options=('docs')
 install='kdelibs.install'
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2"
         'kde-applications-menu.patch' 'archlinux-menu.patch')
-md5sums=('22267d18926163552131c177845b77f5'
+md5sums=('665cb23d9deb1f7e66b1ca7efd53911c'
          '3daa0f01fe26325fb3dbd807a04898ad'
          '0ad42200df2d2b8aab01d2ef4b21e02f')
 

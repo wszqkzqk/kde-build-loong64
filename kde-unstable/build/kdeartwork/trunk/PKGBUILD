@@ -2,7 +2,7 @@
 # Maintainer: Pierre Schmitz <pierre@archlinux.de>
 
 pkgname=kdeartwork
-pkgver=4.1.73
+pkgver=4.1.81
 pkgrel=1
 pkgdesc="KDE additional artwork"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ groups=('kde')
 depends=('kdebase-workspace')
 makedepends=('pkgconfig' 'cmake' 'automoc4' 'xscreensaver')
 source=("http://download.kde.org/unstable/${pkgver}/src/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('a4a002a7f849a24271d620440c3fbf2f')
+md5sums=('eb30ee0ff9ef01823db43117ba1861c9')
 
 build() {
 	cd $srcdir

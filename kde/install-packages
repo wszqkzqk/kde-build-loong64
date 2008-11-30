@@ -3,7 +3,12 @@
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
-	pkglist="${pkglist} build/${i}/trunk/${i}-*.pkg.tar.gz"
+	for j in build/${i}/trunk/${i}-*.pkg.tar.gz; do
+		if [[ -f ${j} ]]; then
+			pkgfile=${j}
+		fi
+	done
+	pkglist="${pkglist} ${pkgfile}"
 done
 
 for i in `cat kde-l10n-names`; do
