@@ -1,23 +1,23 @@
 #!/bin/bash
 
+. common
+
 if [ "$1" = "" ]; then
 	echo "Usage: ${0} <comment>"
 	exit 1
 fi
 
-cd build
 
-for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
-	cd ${i}/trunk
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	pushd build/${i}/${svnbranch}
 	svn commit -m"${1}" || exit 1
-	cd ../..
+	popd
 done
 
-for i in `cat ../kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	cd kde-l10n-${pkglang}/trunk
-	svn commit -m"${1}" || exit 1
-	cd ../..
-done
-
-cd ..
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		pushd build/${i}/${svnbranch}
+		svn commit -m"${1}" || exit 1
+		popd
+	done
+fi

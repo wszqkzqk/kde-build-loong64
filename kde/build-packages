@@ -1,29 +1,28 @@
 #!/bin/bash
 
-cd build
+. common
 
 broken=''
 
-for i in `cat ../kde-dep-packages`; do
-	cd ${i}/trunk
+for i in `cat kde-dep-packages`; do
+	pushd build/${i}/${svnbranch}
 	makepkg -isLc --noconfirm || exit 1
-	cd ../..
+	popd
 done
 
-for i in `cat ../kde-opt-packages`; do
-	cd ${i}/trunk
+for i in `cat kde-opt-packages`; do
+	pushd build/${i}/${svnbranch}
 	makepkg -sLc --noconfirm || broken="${broken} ${i}"
-	cd ../..
+	popd
 done
 
-for i in `cat ../kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	cd kde-l10n-${pkglang}/trunk
-	makepkg -sLc --noconfirm || broken="${broken} kde-l10n-${pkglang}"
-	cd ../..
-done
-
-cd ..
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		pushd build/${i}/${svnbranch}
+		makepkg -sLc --noconfirm || broken="${broken} ${i}"
+		popd
+	done
+fi
 
 if [ "${broken}" != "" ]; then
 	echo "Broken packages: ${broken}"

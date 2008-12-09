@@ -1,55 +1,35 @@
 #!/bin/bash
 
-. /etc/makepkg.conf
+. common
 
-if [ "$1" = "" ]; then
-	echo "Usage: ${0} <version>"
-	exit 1
-fi
 
-kdever=${1}
-
-if ssh ktown.kde.org "[ -d ~/stable/${kdever} ]"; then
-	branch='stable'
-	echo "KDE-${kdever} found in stable branch"
-elif ssh ktown.kde.org "[ -d ~/unstable/${kdever} ]"; then
-	branch='unstable'
-	echo "KDE-${kdever} found in unstable branch"
-else
-	echo "KDE-${kdever} not found!"
-	exit 1
-fi
-
-cd build
-
-for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages`; do
 	if [ ! -f ${SRCDEST}/${i}-${kdever}.tar.bz2 ]; then
 		echo "${i}-${kdever}.tar.bz2 not found!"
 		exit 1
 	fi
 
-	cd ${i}/trunk
+	pushd build/${i}/${svnbranch}
 	sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
 	sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
 	{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
-	cd ../..
+	popd
 done
 
-if [ $branch == 'stable' ]; then
-	for i in `cat ../kde-l10n-names`; do
+if $l10n; then
+	for i in `cat kde-l10n-names`; do
 		if [ ! -f ${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2 ]; then
 			echo "kde-l10n-${i}-${kdever}.tar.bz2 not found!"
 			exit 1
 		fi
 
 		pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-		cd kde-l10n-${pkglang}/trunk
+		pushd build/kde-l10n-${pkglang}/${svnbranch}
 		sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
 		sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+		sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
 		{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
-		cd ../..
+		popd
 	done
 fi
-
-cd ..

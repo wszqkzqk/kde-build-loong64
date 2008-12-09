@@ -1,14 +1,17 @@
 #!/bin/bash
 
-cd build
+. common
+
+pushd build
 
 for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
 	archco ${i}
 done
 
-for i in `cat ../kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	archco kde-l10n-${pkglang}
-done
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		archco ${i}
+	done
+fi
 
-cd ..
+popd

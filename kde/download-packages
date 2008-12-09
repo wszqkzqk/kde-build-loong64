@@ -1,24 +1,6 @@
 #!/bin/bash
 
-. /etc/makepkg.conf
-
-if [ "$1" = "" ]; then
-	echo "Usage: ${0} <version>"
-	exit 1
-fi
-
-kdever=${1}
-
-if ssh ktown.kde.org "[ -d ~/stable/${kdever} ]"; then
-	branch='stable'
-	echo "KDE-${kdever} found in stable branch"
-elif ssh ktown.kde.org "[ -d ~/unstable/${kdever} ]"; then
-	branch='unstable'
-	echo "KDE-${kdever} found in unstable branch"
-else
-	echo "KDE-${kdever} not found!"
-	exit 1
-fi
+. common
 
 checkIntegrity() {
 	if [ "$(md5sum "${1}" | cut -d' ' -f1)" != "$(ssh ktown.kde.org md5sum "${2}" | cut -d' ' -f1)" ]; then
@@ -41,7 +23,7 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 	fi
 done
 
-if [ $branch == 'stable' ]; then
+if $l10n; then
 	for i in `cat kde-l10n-names`; do
 		if [ ! -f "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" ]; then
 			scp ktown.kde.org:~/${branch}/${kdever}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/

@@ -1,0 +1,18 @@
+. /etc/makepkg.conf
+. config
+
+if [[ ! -d build ]]; then
+	mkdir build
+fi
+
+if [ $branch == 'unstable' ]; then
+	svnbranch=repos/kde-unstable-${CARCH}
+else
+	svnbranch=trunk
+fi
+
+getL10nPkgNames() {
+	for i in `cat kde-l10n-names`; do
+		echo kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])
+	done
+}

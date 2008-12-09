@@ -1,18 +1,21 @@
 #!/bin/bash
 
+.common
+
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
-	if [ -f build/${i}/trunk/namcap.log ]; then
+	if [ -f build/${i}/${svnbranch}/namcap.log ]; then
 		pkglist="${pkglist} build/${i}/trunk/namcap.log"
 	fi
 done
 
-for i in `cat kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	if [ -f build/kde-l10n-${pkglang}/trunk/namcap.log ]; then
-		pkglist="${pkglist} build/kde-l10n-${pkglang}/trunk/namcap.log"
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+	if [ -f build/${i}/${svnbranch}/namcap.log ]; then
+		pkglist="${pkglist} build/${i}/trunk/namcap.log"
 	fi
-done
+	done
+fi
 
 cat ${pkglist} | less

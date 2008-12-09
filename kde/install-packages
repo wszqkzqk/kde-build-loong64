@@ -1,9 +1,11 @@
 #!/bin/bash
 
+. common
+
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
-	for j in build/${i}/trunk/${i}-*.pkg.tar.gz; do
+	for j in build/${i}/${svnbranch}/${i}-*.pkg.tar.gz; do
 		if [[ -f ${j} ]]; then
 			pkgfile=${j}
 		fi
@@ -11,9 +13,11 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 	pkglist="${pkglist} ${pkgfile}"
 done
 
-for i in `cat kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-#	pkglist="${pkglist} build/kde-l10n-${pkglang}/trunk/kde-l10n-${pkglang}-*.pkg.tar.gz"
-done
+
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		pkglist="${pkglist} build/${i}/${svnbranch}/${i}-*.pkg.tar.gz"
+	done
+fi
 
 sudo pacman -U ${pkglist}

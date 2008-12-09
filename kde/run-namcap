@@ -1,20 +1,20 @@
 #!/bin/bash
 
-cd build
+. common
 
-for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
-	cd ${i}/trunk
+
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	pushd build/${i}/${svnbranch}
 	echo "checking ${i}..."
 	namcap ${i}-*.pkg.tar.gz > namcap.log
-	cd ../..
+	popd
 done
 
-for i in `cat ../kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	cd kde-l10n-${pkglang}/trunk
-	echo "checking kde-l10n-${pkglang}..."
-	namcap kde-l10n-${pkglang}-*.pkg.tar.gz > namcap.log
-	cd ../..
-done
-
-cd ..
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		pushd build/${i}/${svnbranch}
+		echo "checking ${i}..."
+		namcap ${i}-*.pkg.tar.gz > namcap.log
+		popd
+	done
+fi

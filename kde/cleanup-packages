@@ -1,18 +1,21 @@
 #!/bin/bash
 
-cd build
+. common
+
+pushd build
 
 for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
-	cd ${i}/trunk
+	pushd ${i}/${svnbranch}
 	rm -rf pkg src
-	cd ../..
+	popd
 done
 
-for i in `cat ../kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	cd kde-l10n-${pkglang}/trunk
-	rm -rf pkg src
-	cd ../..
-done
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		pushd ${i}/${svnbranch}
+		rm -rf pkg src
+		popd
+	done
+fi
 
-cd ..
+popd

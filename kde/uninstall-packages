@@ -1,14 +1,15 @@
 #!/bin/bash
 
+. common
+
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
 	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
 done
 
-for i in `cat kde-l10n-names`; do
-	pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-	pkglist="${pkglist} $(pacman -Qq kde-l10n-${pkglang} 2> /dev/null)"
+for i in $(getL10nPkgNames); do
+	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
 done
 
 sudo pacman -Rcn ${pkglist}
