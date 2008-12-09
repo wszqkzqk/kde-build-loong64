@@ -1,0 +1,25 @@
+#!/bin/bash
+
+. common
+
+
+if [ "$1" = "" || "$2" = "" ]; then
+	echo "Usage: ${0} <source> <target>"
+	echo "Example: ${0} repos/kde-unstable-x86_64 repos/kde-unstable-i686"
+	exit 1
+fi
+
+source=$1
+target=$2
+
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	svn rm --force build/${i}/${target}/*
+	svn cp build/${i}/${source}/* build/${i}/${target}/
+done
+
+if $l10n; then
+	for i in $(getL10nPkgNames); do
+		svn rm --force build/${i}/${target}/*
+		svn cp build/${i}/${source}/* build/${i}/${target}/
+	done
+fi
