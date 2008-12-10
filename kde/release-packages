@@ -20,3 +20,4 @@ if [ $svnbranch == 'trunk' ]; then
 fi
 
 ssh archlinux.org /arch/db-update $repo $CARCH
+ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
