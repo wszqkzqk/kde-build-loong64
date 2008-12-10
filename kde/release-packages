@@ -1,0 +1,22 @@
+#!/bin/bash
+
+. common
+
+
+if [ $svnbranch == 'trunk' ]; then
+	for i in `cat kde-dep-packages kde-opt-packages`; do
+		pushd build/${i}/trunk
+		archrelease $repo-$CARCH
+		popd
+	done
+
+	if $l10n; then
+		for i in $(getL10nPkgNames); do
+			pushd build/${i}/trunk
+			archrelease $repo-$CARCH
+			popd
+		done
+	fi
+fi
+
+ssh archlinux.org /arch/db-update $repo $CARCH

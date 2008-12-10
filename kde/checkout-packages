@@ -2,16 +2,17 @@
 
 . common
 
-pushd build
+copkg() {
+	svn co svn+ssh://svn.archlinux.org/srv/svn-packages/${1} ${2}
+}
 
-for i in `cat ../kde-dep-packages ../kde-opt-packages`; do
-	archco ${i}
+
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	copkg ${i} build/
 done
 
 if $l10n; then
 	for i in $(getL10nPkgNames); do
-		archco ${i}
+		copkg ${i} build/
 	done
 fi
-
-popd

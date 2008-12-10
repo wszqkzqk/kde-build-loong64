@@ -1,4 +1,9 @@
 . /etc/makepkg.conf
+
+if [ -r ~/.makepkg.conf ]; then
+	. ~/.makepkg.conf
+fi
+
 . config
 
 if [[ ! -d build ]]; then
@@ -6,9 +11,11 @@ if [[ ! -d build ]]; then
 fi
 
 if [ $branch == 'unstable' ]; then
-	svnbranch=repos/kde-unstable-${CARCH}
+	svnbranch="repos/kde-unstable-${CARCH}"
+	repo='kde-unstable'
 else
-	svnbranch=trunk
+	svnbranch='trunk'
+	repo='extra'
 fi
 
 getL10nPkgNames() {
