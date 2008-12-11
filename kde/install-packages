@@ -14,10 +14,10 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 done
 
 
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		pkglist="${pkglist} build/${i}/${svnbranch}/${i}-*.pkg.tar.gz"
-	done
-fi
+#if $l10n; then
+#	for i in $(getL10nPkgNames); do
+#		pkglist="${pkglist} build/${i}/${svnbranch}/${i}-*.pkg.tar.gz"
+#	done
+#fi
 
 sudo pacman -U ${pkglist}
