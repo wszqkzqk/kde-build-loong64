@@ -2,4 +2,6 @@ kdelibs
 kdepimlibs
 kdebase-runtime
 kdemultimedia
+kdebindings
 kdebase-workspace
+kdegraphics
