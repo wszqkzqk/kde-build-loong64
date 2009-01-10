@@ -4,11 +4,7 @@
 
 pkglist=''
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
-	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
-done
-
-for i in $(getL10nPkgNames); do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
 done
 

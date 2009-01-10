@@ -18,8 +18,10 @@ else
 	repo='extra'
 fi
 
-getL10nPkgNames() {
+l10nPkgName=''
+
+if $l10n; then
 	for i in `cat kde-l10n-names`; do
-		echo kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])
+		l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
 	done
-}
+fi

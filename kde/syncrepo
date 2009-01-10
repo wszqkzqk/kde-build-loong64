@@ -12,14 +12,7 @@ fi
 source=$1
 target=$2
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	svn rm --force build/${i}/${target}/*
 	svn cp build/${i}/${source}/* build/${i}/${target}/
 done
-
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		svn rm --force build/${i}/${target}/*
-		svn cp build/${i}/${source}/* build/${i}/${target}/
-	done
-fi

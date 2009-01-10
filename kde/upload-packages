@@ -11,16 +11,8 @@ upload() {
 	fi
 }
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	pushd build/${i}/${svnbranch}
 	upload
 	popd
 done
-
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		pushd build/${i}/${svnbranch}
-		upload
-		popd
-	done
-fi

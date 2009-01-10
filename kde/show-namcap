@@ -4,18 +4,10 @@
 
 pkglist=''
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	if [ -f build/${i}/${svnbranch}/namcap.log ]; then
 		pkglist="${pkglist} build/${i}/${svnbranch}/namcap.log"
 	fi
 done
-
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-	if [ -f build/${i}/${svnbranch}/namcap.log ]; then
-		pkglist="${pkglist} build/${i}/${svnbranch}/namcap.log"
-	fi
-	done
-fi
 
 cat ${pkglist} | less

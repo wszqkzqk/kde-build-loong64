@@ -3,18 +3,9 @@
 . common
 
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	pushd build/${i}/${svnbranch}
 	echo "checking ${i}..."
 	namcap ${i}-*.pkg.tar.gz > namcap.log
 	popd
 done
-
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		pushd build/${i}/${svnbranch}
-		echo "checking ${i}..."
-		namcap ${i}-*.pkg.tar.gz > namcap.log
-		popd
-	done
-fi

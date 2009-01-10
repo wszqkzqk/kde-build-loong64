@@ -10,19 +10,12 @@ for i in `cat kde-dep-packages`; do
 	popd
 done
 
-for i in `cat kde-opt-packages`; do
+for i in `cat kde-opt-packages` ${l10nPkgName}; do
 	pushd build/${i}/${svnbranch}
 	makepkg -sLc --noconfirm || broken="${broken} ${i}"
 	popd
 done
 
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		pushd build/${i}/${svnbranch}
-		makepkg -sLc --noconfirm || broken="${broken} ${i}"
-		popd
-	done
-fi
 
 if [ "${broken}" != "" ]; then
 	echo "Broken packages: ${broken}"

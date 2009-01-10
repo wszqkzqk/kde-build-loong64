@@ -7,12 +7,6 @@ copkg() {
 }
 
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	copkg ${i} build/${i}
 done
-
-if $l10n; then
-	for i in $(getL10nPkgNames); do
-		copkg ${i} build/${i}
-	done
-fi
