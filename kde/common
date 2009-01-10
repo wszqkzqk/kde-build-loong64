@@ -11,8 +11,8 @@ if [[ ! -d build ]]; then
 fi
 
 if [ $branch == 'unstable' ]; then
-	svnbranch="repos/kde-unstable-${CARCH}"
-	repo='kde-unstable'
+	svnbranch='trunk'
+	repo='testing'
 else
 	svnbranch='trunk'
 	repo='extra'
