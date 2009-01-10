@@ -1,3 +1,5 @@
 kdever=4.1.96
 branch=unstable
 l10n=true
+svnbranch=trunk
+repo=testing

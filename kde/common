@@ -10,14 +10,6 @@ if [[ ! -d build ]]; then
 	mkdir build
 fi
 
-if [ $branch == 'unstable' ]; then
-	svnbranch='trunk'
-	repo='testing'
-else
-	svnbranch='trunk'
-	repo='extra'
-fi
-
 l10nPkgName=''
 
 if $l10n; then
