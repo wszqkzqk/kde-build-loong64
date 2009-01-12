@@ -1,0 +1,38 @@
+Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
+
+== Requrements ==
+* separate chroot build environment for extra and testing
+* usage of schroot is recommend
+* ssh access to archlinux.org and ktown.kde.org without user interaction
+* setup sudo to allow running pacman without password
+* get the scripts: git clone http://git.archlinux.de/~pierre/build-scripts.git
+* set SRCDEST in makepkg.conf
+
+== Usage by file ==
+* build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages
+* checkout-packages: checkout the working tree from svn.archlinux.org
+* cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
+* commit-packages: commit all changes to the svn branch (usually trunk). This does not release any package
+* config: set version, branch and if l10n packages should be build. Also the target repo can be set.
+* download-packages: Load the sources from KDE server. If they are already downloaded just check integrity.
+* install-packages: install all kde packages from the build dir
+* release-packages: run archrelease, the db- and cleanup-scripts. This acutally releases the packages. Note: You have tu run upload-packages before.
+* repackage: repackage all packages. Usefull for changes to the PKGBUILD that do not require a rebuild
+* run-namcap: run namcap on all packages and store the result to namcap.log
+* show-namcap: show namcap.log for all packages.
+* syncrepo: was used to keep i686 and x86_64 kde-unstable in sync
+* uninstall-packages: uninstall all KDE packages. Should be done before building.
+* update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the md5sum array.
+* upload-packages: upload all packages to your staging dir
+
+== Sample workflow ==
+* edit config to your needs
+* run download-packages to get all sources
+* run checkout-packages to get the abs working tree
+* run update-pkgbuilds to update all PKGBUILDs
+* optional edit PKGBUILDs (e.g. remove old patches etc.)
+* build-packages build all packages. It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
+* run-namcap and have a look at the logs with show-namcap
+* maybe you want to repackage after some meta changes; make sure to run-namcap again
+* upload-packages to your staging dir
+* release-packages will finally move all packages to the repo
