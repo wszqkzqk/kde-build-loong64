@@ -1,5 +1,5 @@
-kdever=4.2.1
+kdever=4.2.2
 branch=stable
 l10n=true
 svnbranch=trunk
-repo=extra
+repo=testing
