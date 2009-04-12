@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ "$1" = "" ]; then
+	echo "Usage: ${0} <pkgver>"
+	exit 1
+fi
+
+if [ ! -f PKGBUILD ]; then
+	echo "PKGBUILD not found!"
+	exit 1
+fi
+
+
+sed -r "s|pkgver=.*|pkgver=${1}|g" -i PKGBUILD
+sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
