@@ -17,3 +17,5 @@ if $l10n; then
 		l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
 	done
 fi
+
+pwd=$(pwd)

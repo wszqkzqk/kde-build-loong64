@@ -10,10 +10,8 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 	fi
 
 	pushd build/${i}/${svnbranch}
-	sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
-	sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
-	{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
+	$pwd/../common/updpkg ${kdever}
 	popd
 done
 
@@ -26,10 +24,8 @@ if $l10n; then
 
 		pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
 		pushd build/kde-l10n-${pkglang}/${svnbranch}
-		sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
-		sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
 		sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
-		{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
+		$pwd/../common/updpkg ${kdever}
 		popd
 	done
 fi

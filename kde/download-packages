@@ -12,10 +12,10 @@ checkIntegrity() {
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
 	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
-		scp ktown.kde.org:~/${branch}/${kdever}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
+		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
 	fi
 
-	if checkIntegrity "${SRCDEST}/${i}-${kdever}.tar.bz2" "~/${branch}/${kdever}/src/${i}-${kdever}.tar.bz2"; then
+	if checkIntegrity "${SRCDEST}/${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2"; then
 		echo "${i}-${kdever}.tar.bz2 ok"
 	else
 		echo "${i}-${kdever}.tar.bz2 corrupted"
@@ -26,10 +26,10 @@ done
 if $l10n; then
 	for i in `cat kde-l10n-names`; do
 		if [ ! -f "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" ]; then
-			scp ktown.kde.org:~/${branch}/${kdever}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/
+			scp ktown.kde.org:~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/
 		fi
 
-		if checkIntegrity "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" "~/${branch}/${kdever}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2"; then
+		if checkIntegrity "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2"; then
 			echo "kde-l10n-${i}-${kdever}.tar.bz2 ok"
 		else
 			echo "kde-l10n-${i}-${kdever}.tar.bz2 corrupted"
