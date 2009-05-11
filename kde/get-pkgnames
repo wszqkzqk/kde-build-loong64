@@ -1,0 +1,5 @@
+#!/bin/bash
+
+. common
+
+echo $(cat kde-dep-packages kde-opt-packages) ${l10nPkgName}
