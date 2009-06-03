@@ -1,6 +1,6 @@
-kdever=4.2.4
+kdever=4.2.90
 dirver=$kdever
-branch=stable
-l10n=true
-svnbranch=trunk
-repo=testing
+branch=unstable
+l10n=false
+svnbranch=kde-unstable
+repo=kde-unstable
