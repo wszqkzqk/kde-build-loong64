@@ -1,5 +1,6 @@
 kdever=4.2.90
 dirver=$kdever
+debug=true
 branch=unstable
 l10n=false
 svnbranch=kde-unstable

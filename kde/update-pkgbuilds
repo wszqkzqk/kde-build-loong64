@@ -11,6 +11,21 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 
 	pushd build/${i}/${svnbranch}
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
+
+	# configure debug build; see http://techbase.kde.org/Development/CMake/Build_Types
+	# @TODO: add !strip to existing optinos array (there are none atm anyway)
+	sed -ie "/options=('!strip')/d" -i PKGBUILD
+	if $debug; then
+		sed -r 's|-DCMAKE_BUILD_TYPE=Release|-DCMAKE_BUILD_TYPE=RelWithDebInfo|g' -i PKGBUILD
+		if grep -q 'options=(' PKGBUILD; then
+			echo 'Warning: options array already exists!'
+		else
+			echo "options=('!strip')" >> PKGBUILD
+		fi
+	else
+		sed -r 's|-DCMAKE_BUILD_TYPE=RelWithDebInfo|-DCMAKE_BUILD_TYPE=Release|g' -i PKGBUILD
+	fi
+
 	$pwd/../common/updpkg ${kdever}
 	popd
 done
