@@ -5,6 +5,7 @@
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	_pushd build/${i}/${svnbranch}
+	namcap PKGBUILD > namcap-PKGBUILD.log
 	unset pkgname
 	. PKGBUILD
 	for j in ${pkgname[@]}; do

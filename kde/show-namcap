@@ -10,7 +10,7 @@ for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
 		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
-		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-${pkgfile}.log"
+		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log build/${i}/${svnbranch}/namcap-${pkgfile}.log"
 	done
 	_popd
 done
