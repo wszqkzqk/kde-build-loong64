@@ -5,9 +5,14 @@
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
-	if [ -f build/${i}/${svnbranch}/namcap.log ]; then
-		pkglist="${pkglist} build/${i}/${svnbranch}/namcap.log"
-	fi
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-${pkgfile}.log"
+	done
+	_popd
 done
 
 cat ${pkglist} | less

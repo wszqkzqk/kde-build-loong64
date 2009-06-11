@@ -5,15 +5,15 @@
 broken=''
 
 for i in `cat kde-dep-packages`; do
-	pushd build/${i}/${svnbranch}
-	makepkg -isLc --noconfirm || exit 1
-	popd
+	_pushd build/${i}/${svnbranch}
+	makepkg -isL --noconfirm || exit 1
+	_popd
 done
 
 for i in `cat kde-opt-packages` ${l10nPkgName}; do
-	pushd build/${i}/${svnbranch}
-	makepkg -sLc --noconfirm || broken="${broken} ${i}"
-	popd
+	_pushd build/${i}/${svnbranch}
+	makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
+	_popd
 done
 
 

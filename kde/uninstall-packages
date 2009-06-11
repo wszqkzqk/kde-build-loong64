@@ -5,7 +5,13 @@
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
-	pkglist="${pkglist} $(pacman -Qq ${i} 2> /dev/null)"
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkglist="${pkglist} $(pacman -Qq ${j} 2> /dev/null)"
+	done
+	_popd
 done
 
 sudo pacman -Rcn ${pkglist}

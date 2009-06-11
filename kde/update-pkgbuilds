@@ -9,7 +9,7 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 		exit 1
 	fi
 
-	pushd build/${i}/${svnbranch}
+	_pushd build/${i}/${svnbranch}
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
 
 	# configure debug build; see http://techbase.kde.org/Development/CMake/Build_Types
@@ -27,7 +27,7 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 	fi
 
 	$pwd/../common/updpkg ${kdever}
-	popd
+	_popd
 done
 
 if $l10n; then
@@ -38,9 +38,9 @@ if $l10n; then
 		fi
 
 		pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-		pushd build/kde-l10n-${pkglang}/${svnbranch}
+		_pushd build/kde-l10n-${pkglang}/${svnbranch}
 		sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
 		$pwd/../common/updpkg ${kdever}
-		popd
+		_popd
 	done
 fi

@@ -4,8 +4,13 @@
 
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
-	pushd build/${i}/${svnbranch}
-	echo "checking ${i}..."
-	namcap ${i}-*.pkg.tar.gz > namcap.log
-	popd
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		echo "checking ${pkgfile}..."
+		namcap ${pkgfile} > namcap-${pkgfile}.log
+	done
+	_popd
 done

@@ -5,12 +5,14 @@
 pkglist=''
 
 for i in `cat kde-dep-packages kde-opt-packages`; do
-	for j in build/${i}/${svnbranch}/${i}-*.pkg.tar.gz; do
-		if [[ -f ${j} ]]; then
-			pkgfile=${j}
-		fi
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		pkglist="${pkglist} ${pkgfile}"
 	done
-	pkglist="${pkglist} ${pkgfile}"
+	_popd
 done
 
 

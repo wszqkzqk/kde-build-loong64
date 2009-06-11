@@ -3,9 +3,9 @@
 . common
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
-	pushd build/${i}/$svnbranch
+	_pushd build/${i}/$svnbranch
 	$pwd/../common/urelease $repo-$CARCH
-	popd
+	_popd
 done
 
 ssh archlinux.org /arch/db-update $repo $CARCH

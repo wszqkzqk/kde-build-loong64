@@ -2,12 +2,12 @@
 
 . common
 
-pushd build
+_pushd build
 
 for i in `cat ../kde-dep-packages ../kde-opt-packages` ${l10nPkgName}; do
-	pushd ${i}/${svnbranch}
-	rm -rf pkg src *.log* *.pkg.tar.gz
-	popd
+	_pushd ${i}/${svnbranch}
+	rm -rf pkg src *.log* *${PKGEXT}
+	_popd
 done
 
-popd
+_popd

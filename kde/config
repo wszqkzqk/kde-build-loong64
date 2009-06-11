@@ -1,7 +1,12 @@
 kdever=4.2.90
 dirver=$kdever
-debug=true
+debug=false
 branch=unstable
 l10n=false
 svnbranch=kde-unstable
 repo=kde-unstable
+installall=true
+
+makepkg() {
+	makepkg-git "${@}"
+}

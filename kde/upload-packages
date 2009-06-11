@@ -3,16 +3,19 @@
 . common
 
 upload() {
+	unset pkgname
 	. PKGBUILD
-	pkgfile=${pkgname}-${pkgver}-${pkgrel}-${CARCH}.pkg.tar.gz
-	scp "${pkgfile}" archlinux.org:staging/${repo}/
-	if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
-		echo "${pkgfile} got corrupted during upload!"
-	fi
+	for i in ${pkgname[@]}; do
+		pkgfile=${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		scp "${pkgfile}" archlinux.org:staging/${repo}/
+		if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
+			echo "${pkgfile} got corrupted during upload!"
+		fi
+	done
 }
 
 for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
-	pushd build/${i}/${svnbranch}
+	_pushd build/${i}/${svnbranch}
 	upload
-	popd
+	_popd
 done

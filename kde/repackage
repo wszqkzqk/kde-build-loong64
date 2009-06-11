@@ -5,19 +5,19 @@
 broken=''
 
 for i in `cat kde-dep-packages`; do
-	pushd build/${i}/${svnbranch}
-	mkdir pkg
-	tar -xzf ${i}-*.pkg.tar.gz -C pkg
-	makepkg -Rifc --noconfirm || exit 1
-	popd
+	_pushd build/${i}/${svnbranch}
+	#mkdir pkg
+	#tar -xzf ${i}-*.pkg.tar.gz -C pkg
+	makepkg -Rif --noconfirm || exit 1
+	_popd
 done
 
 for i in `cat kde-opt-packages` ${l10nPkgName}; do
-	pushd build/${i}/${svnbranch}
-	mkdir pkg
-	tar -xzf ${i}-*.pkg.tar.gz -C pkg
-	makepkg -Rfc --noconfirm || broken="${broken} ${i}"
-	popd
+	_pushd build/${i}/${svnbranch}
+	#mkdir pkg
+	#tar -xzf ${i}-*.pkg.tar.gz -C pkg
+	makepkg -R$(${installall} && echo 'i')f --noconfirm || broken="${broken} ${i}"
+	_popd
 done
 
 

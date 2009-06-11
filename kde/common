@@ -19,3 +19,11 @@ if $l10n; then
 fi
 
 pwd=$(pwd)
+
+_pushd() {
+	pushd "$@" > /dev/null
+}
+
+_popd() {
+	popd "$@" > /dev/null
+}

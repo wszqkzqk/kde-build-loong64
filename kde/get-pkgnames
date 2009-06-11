@@ -2,4 +2,16 @@
 
 . common
 
-echo $(cat kde-dep-packages kde-opt-packages) ${l10nPkgName}
+pkglist=''
+
+for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for i in ${pkgname[@]}; do
+		pkglist="${pkglist} ${j}"
+	done
+	_popd
+done
+
+echo ${pkglist}
