@@ -8,5 +8,6 @@ for i in `cat kde-dep-packages kde-opt-packages` ${l10nPkgName}; do
 	_popd
 done
 
-ssh archlinux.org /arch/db-update $repo $CARCH
-ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
+# FIXME: this wont work with splitted packages
+#ssh archlinux.org /arch/db-update $repo $CARCH
+#ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
