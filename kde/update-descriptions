@@ -1,0 +1,60 @@
+#!/bin/bash
+
+. common
+
+updateDescription() {
+	pkgname=$(echo "$1" | sed -e "s/'/´/")
+	pkgdesc=$(echo "$2" | sed -e "s/'/´/")
+
+	php -n -r "file_put_contents('PKGBUILD', preg_replace('/(package_${pkgname}.+?pkgdesc=)[^\n]+/s', '\$1\'${pkgdesc}\'', file_get_contents('PKGBUILD')));"
+}
+
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	_pushd build/${i}/${svnbranch}
+		unset pkgname
+		unset pkgbase
+		. PKGBUILD
+		[ "$pkgbase" == "" ] && pkgbase=$pkgname
+ 		if [[ -d src/$pkgbase-$pkgver/ ]]; then
+			for j in ${pkgname[@]}; do
+				desktop=($(find src/$pkgbase-$pkgver/ -iname "${j#${pkgbase}-}.desktop"))
+
+				fuzzy=false
+
+				if [[ "$desktop" == "" ]]; then
+					desktop=($(find src/$pkgbase-$pkgver/${j#${pkgbase}-} -name *.desktop))
+					fuzzy=true
+				fi
+
+				if [[ -f $desktop ]]; then
+					if grep -q 'Comment=' $desktop; then
+						pkgdesc=$(grep -m1 'Comment=' $desktop |\
+						sed -e 's/Comment=//')
+					elif  grep -q 'GenericName=' $desktop; then
+						pkgdesc=$(grep -m1 'GenericName=' $desktop |\
+						sed -e 's/GenericName=//')
+					elif  grep -q 'Name=' $desktop; then
+						pkgdesc=$(grep -m1 'Name=' $desktop |\
+							sed -e 's/Name=//')
+					else
+						echo "Warning: No description found for $j"
+					fi
+
+					if $fuzzy; then
+						echo -n "Suggestion for $j: [Y/n]"
+						echo -e "\t$pkgdesc"
+						read confirm
+						if [ "$confirm" == "n" ]; then
+							continue
+						fi
+					fi
+					updateDescription "$j" "$pkgdesc"
+				else
+					echo "Warning: No desktop file found for $j"
+				fi
+			done
+		else
+			echo "src for $pkgbase not found!"
+		fi
+	_popd
+done

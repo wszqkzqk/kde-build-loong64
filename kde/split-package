@@ -1,0 +1,66 @@
+#!/bin/bash
+
+if [ ! -f PKGBUILD ]; then
+	echo "PKGBUILD not found!"
+	exit 1
+fi
+
+makepkg -o
+
+. PKGBUILD
+
+cd src/$pkgname-$pkgver
+
+if [ "$pkgname" == 'kdebase' ]; then
+	cd apps
+elif  [ "$pkgname" == 'kdebase-workspace' ]; then
+	cd workspace
+elif  [ "$pkgname" == 'kdebase-runtime' ]; then
+	cd runtime
+fi
+
+getSubdirs() {
+	grep -v '^#' "$1" \
+	| grep -o 'add_subdirectory([^)]*' \
+	| sed -e 's/add_subdirectory(//' \
+	| grep -v -e 'doc' -e 'cmake' \
+	| sort -u
+}
+
+subdirs=$(getSubdirs CMakeLists.txt)
+
+# if [ "$pkgname" == 'kdeplasma-addons' ]; then
+# 	tmpsubdirs=''
+# 	for i in ${subdirs[@]}; do
+# 		tmpsubdirs="${tmpsubdirs}$(getSubdirs ${i}/CMakeLists.txt)"
+# 	done
+# 	subdirs=$tmpsubdirs
+# fi
+
+
+echo "pkgbase=${pkgname}"
+echo -n 'pkgname=('
+ct=0
+for i in ${subdirs[@]}; do
+	[ $ct -gt 0 ] && echo -en "\n         "
+	echo -n "'${pkgname}-$(echo "${i}" | tr [:upper:] [:lower:])'"
+	ct=$(($ct+1))
+done
+echo ')'
+echo
+
+
+for i in ${subdirs[@]}; do
+	echo "package_${pkgname}-$(echo "${i}" | tr [:upper:] [:lower:])() {"
+	echo -e "\tpkgdesc=''"
+	echo -e "\tdepends=($(for d in ${depends[@]};do echo -n "'${d}' ";done))"
+	echo -e "\tinstall='${install}'"
+	echo -e "\tcd \$srcdir/build/${i}"
+	echo -e "\tmake DESTDIR=\$pkgdir install"
+	if [ -d "doc/${i}" ]; then
+		echo -e "\tcd \$srcdir/build/doc/${i}"
+		echo -e "\tmake DESTDIR=\$pkgdir install"
+	fi
+	echo "}"
+	echo
+done
