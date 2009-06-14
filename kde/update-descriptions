@@ -27,13 +27,13 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 				fi
 
 				if [[ -f $desktop ]]; then
-					if grep -q 'Comment=' $desktop; then
+					if grep -q 'Comment=\w' $desktop; then
 						pkgdesc=$(grep -m1 'Comment=' $desktop |\
 						sed -e 's/Comment=//')
-					elif  grep -q 'GenericName=' $desktop; then
+					elif  grep -q 'GenericName=\w' $desktop; then
 						pkgdesc=$(grep -m1 'GenericName=' $desktop |\
 						sed -e 's/GenericName=//')
-					elif  grep -q 'Name=' $desktop; then
+					elif  grep -q 'Name=\w' $desktop; then
 						pkgdesc=$(grep -m1 'Name=' $desktop |\
 							sed -e 's/Name=//')
 					else
@@ -41,10 +41,10 @@ for i in `cat kde-dep-packages kde-opt-packages`; do
 					fi
 
 					if $fuzzy; then
-						echo -n "Suggestion for $j: [Y/n]"
+						echo -n "Suggestion for $j: [y/N]"
 						echo -e "\t$pkgdesc"
 						read confirm
-						if [ "$confirm" == "n" ]; then
+						if [ "$confirm" != "y" ]; then
 							continue
 						fi
 					fi
