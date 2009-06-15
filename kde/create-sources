@@ -1,0 +1,39 @@
+#!/bin/bash
+
+. common
+
+revision=${kdever#*svn}
+tmp=$(mktemp -d)
+
+_pushd $tmp
+
+for i in `cat ${pwd}/kde-dep-packages ${pwd}/kde-opt-packages`; do
+	echo "$i"
+
+	if [ "$i" == "kdebase" ]; then
+		src="KDE/kdebase/apps"
+	elif [ "$i" == "kdebase-runtime" ]; then
+		src="KDE/kdebase/runtime"
+	elif [ "$i" == "kdebase-workspace" ]; then
+		src="KDE/kdebase/workspace"
+	elif [ "$i" == "kdelibs-experimental" ]; then
+		src="KDE/kdelibs/experimental"
+	elif [ "$i" == "oxygen-icons" ]; then
+		src="kdesupport/oxygen-icons"
+	else
+		src="KDE/$i"
+	fi
+
+	svn export -r "${revision}" "svn://anonsvn.kde.org/home/kde/trunk/${src}" "${i}-${kdever}"
+
+	if [ "$i" == "kdelibs" ]; then
+		rm -rf "${i}-${kdever}/experimental"
+	fi
+
+	bsdtar -cjf "${SRCDEST}/${i}-${kdever}.tar.bz2" "${i}-${kdever}"
+	rm -rf "${i}-${kdever}"
+done
+
+_popd
+
+rm -rf $tmp
