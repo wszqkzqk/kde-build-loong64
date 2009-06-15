@@ -1,0 +1,65 @@
+#!/bin/bash
+
+. common
+
+in_array() {
+	local needle=$1; shift
+	[ -z "$1" ] && return 1 # Not Found
+	local item
+	for item in "$@"; do
+		[ "$item" = "$needle" ] && return 0 # Found
+	done
+	return 1 # Not Found
+}
+
+getSubModules() {
+	grep -v '^\W*#' "$1" \
+	| grep -o 'add_subdirectory([^)]*' \
+	| sed -e 's/add_subdirectory(//' \
+	| grep -v -e 'doc' -e 'cmake' \
+	| sort -u \
+	| tr [:upper:] [:lower:]
+}
+
+for i in `cat kde-dep-packages kde-opt-packages`; do
+	_pushd build/${i}/${svnbranch}
+		unset pkgname
+		unset pkgbase
+		unset subdirs
+		unset srcdir
+#		echo ${i}
+		. PKGBUILD
+		[ "$pkgbase" == "" ] && pkgbase=$pkgname
+
+		srcdir=src/$pkgbase-$pkgver/
+		if [ "$pkgbase" == 'kdebase' ]; then
+			srcdir=$srcdir/apps
+# 		elif  [ "$pkgbase" == 'kdebase-workspace' ]; then
+# 			srcdir=$srcdir/workspace
+# 		elif  [ "$pkgbase" == 'kdebase-runtime' ]; then
+# 			srcdir=$srcdir/runtime
+		fi
+
+ 		if [[ -d $srcdir ]]; then
+			subdirs=($(getSubModules $srcdir/CMakeLists.txt))
+
+			for j in ${pkgname[@]}; do
+				if in_array "${j#${pkgbase}-}" ${subdirs[@]}; then
+					continue
+				else
+					echo -e "(removed)\t${pkgbase}:\t${j#${pkgbase}-}"
+				fi
+			done
+
+			for j in ${subdirs[@]}; do
+				if in_array "${pkgbase}-${j}" ${pkgname[@]}; then
+					continue
+				else
+					echo -e "(new)\t\t${pkgbase}:\t${j}"
+				fi
+			done
+		else
+			echo "src for $pkgbase not found: $srcdir"
+		fi
+	_popd
+done
