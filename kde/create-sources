@@ -20,6 +20,8 @@ for i in `cat ${pwd}/kde-dep-packages ${pwd}/kde-opt-packages`; do
 		src="KDE/kdelibs/experimental"
 	elif [ "$i" == "oxygen-icons" ]; then
 		src="kdesupport/oxygen-icons"
+	elif [ "$i" == "kde-meta" ]; then
+		continue
 	else
 		src="KDE/$i"
 	fi
