@@ -7,7 +7,7 @@ tmp=$(mktemp -d)
 
 _pushd $tmp
 
-for i in `cat ${pwd}/kde-dep-packages ${pwd}/kde-opt-packages`; do
+for i in ${depPkgName} ${optPkgName}; do
 	echo "$i"
 
 	if [ "$i" == "kdebase" ]; then

@@ -11,12 +11,27 @@ if [[ ! -d build ]]; then
 fi
 
 l10nPkgName=''
-
 if $l10n; then
-	for i in `cat kde-l10n-names`; do
-		l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
-	done
+	while read i; do
+		if [ $(echo "${i}" | grep -q -v '^#') ]; then
+			l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
+		fi
+	done < kde-l10n-names
 fi
+
+depPkgName=''
+while read i; do
+	if $(echo "${i}" | grep -q -v '^#'); then
+		depPkgName="${depPkgName} ${i}"
+	fi
+done < kde-dep-packages
+
+optPkgName=''
+while read i; do
+	if $(echo "${i}" | grep -q -v '^#'); then
+		optPkgName="${optPkgName} ${i}"
+	fi
+done < kde-opt-packages
 
 pwd=$(pwd)
 

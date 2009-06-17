@@ -4,7 +4,7 @@
 
 broken=''
 
-for i in `cat kde-dep-packages`; do
+for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	#mkdir pkg
 	#tar -xzf ${i}-*.pkg.tar.gz -C pkg
@@ -12,7 +12,7 @@ for i in `cat kde-dep-packages`; do
 	_popd
 done
 
-for i in `cat kde-opt-packages` ${l10nPkgName}; do
+for i in ${optPkgName} ${l10nPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	#mkdir pkg
 	#tar -xzf ${i}-*.pkg.tar.gz -C pkg

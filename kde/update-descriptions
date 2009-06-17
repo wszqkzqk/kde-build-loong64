@@ -9,7 +9,7 @@ updateDescription() {
 	php -n -r "file_put_contents('PKGBUILD', preg_replace('/(package_${pkgname}.+?pkgdesc=)[^\n]+/s', '\$1\'${pkgdesc}\'', file_get_contents('PKGBUILD')));"
 }
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 		unset pkgname
 		unset pkgbase

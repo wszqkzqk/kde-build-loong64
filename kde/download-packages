@@ -10,7 +10,7 @@ checkIntegrity() {
 	fi
 }
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in ${depPkgName} ${optPkgName}; do
 	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
 		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
 	fi

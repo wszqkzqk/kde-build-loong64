@@ -21,7 +21,7 @@ getSubModules() {
 	| tr [:upper:] [:lower:]
 }
 
-for i in `cat kde-dep-packages kde-opt-packages`; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 		unset pkgname
 		unset pkgbase

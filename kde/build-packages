@@ -4,13 +4,13 @@
 
 broken=''
 
-for i in `cat kde-dep-packages`; do
+for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	makepkg -isL --noconfirm || exit 1
 	_popd
 done
 
-for i in `cat kde-opt-packages` ${l10nPkgName}; do
+for i in ${optPkgName} ${l10nPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
 	_popd

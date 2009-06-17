@@ -4,7 +4,7 @@
 
 _pushd build
 
-for i in `cat ../kde-dep-packages ../kde-opt-packages` ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
 	_pushd ${i}/${svnbranch}
 	rm -rf pkg src *.log* *${PKGEXT}
 	_popd
