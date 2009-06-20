@@ -22,6 +22,10 @@ getSubModules() {
 }
 
 for i in ${depPkgName} ${optPkgName}; do
+	if [ "${i}" == "kde-meta" ]; then
+		continue
+	fi
+
 	_pushd build/${i}/${svnbranch}
 		unset pkgname
 		unset pkgbase

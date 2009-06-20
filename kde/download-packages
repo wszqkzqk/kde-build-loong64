@@ -11,6 +11,10 @@ checkIntegrity() {
 }
 
 for i in ${depPkgName} ${optPkgName}; do
+	if [ "${i}" == "kde-meta" ]; then
+		continue
+	fi
+
 	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
 		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
 	fi

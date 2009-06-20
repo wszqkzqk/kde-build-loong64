@@ -10,9 +10,7 @@ _pushd $tmp
 for i in ${depPkgName} ${optPkgName}; do
 	echo "$i"
 
-	if [ "$i" == "kdebase" ]; then
-		src="KDE/kdebase/apps"
-	elif [ "$i" == "kdebase-runtime" ]; then
+	if [ "$i" == "kdebase-runtime" ]; then
 		src="KDE/kdebase/runtime"
 	elif [ "$i" == "kdebase-workspace" ]; then
 		src="KDE/kdebase/workspace"
@@ -26,11 +24,24 @@ for i in ${depPkgName} ${optPkgName}; do
 		src="KDE/$i"
 	fi
 
-	svn export -r "${revision}" "svn://anonsvn.kde.org/home/kde/trunk/${src}" "${i}-${kdever}"
+	svn co -q -r "${revision}" "svn://websvn.kde.org:443/home/kde/trunk/${src}" "${i}-${kdever}"
 
-	if [ "$i" == "kdelibs" ]; then
+	if [ "$i" == "kdebase-workspace" ]; then
+		svn propset svn:externals \
+			"lib svn://websvn.kde.org:443/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
+			"${i}-${kdever}/kwin/clients/oxygen"
+		svn propset svn:externals \
+			"lib svn://websvn.kde.org:443/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
+			"${i}-${kdever}/kwin/clients/ozone"
+		svn up -q -r "${revision}" "${i}-${kdever}"
+	elif [ "$i" == "kdelibs" ]; then
 		rm -rf "${i}-${kdever}/experimental"
+	elif [ "$i" == "kdebase" ]; then
+		rm -rf "${i}-${kdever}/workspace"
+		rm -rf "${i}-${kdever}/runtime"
 	fi
+
+	rm -rf $(find "${i}-${kdever}" -type d -name .svn)
 
 	bsdtar -cjf "${SRCDEST}/${i}-${kdever}.tar.bz2" "${i}-${kdever}"
 	rm -rf "${i}-${kdever}"
