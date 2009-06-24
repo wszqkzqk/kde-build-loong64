@@ -18,6 +18,8 @@ for i in ${depPkgName} ${optPkgName}; do
 		src="KDE/kdelibs/experimental"
 	elif [ "$i" == "oxygen-icons" ]; then
 		src="kdesupport/oxygen-icons"
+	elif [ "$i" == "kdepim-runtime" ]; then
+		src="KDE/kdepim/akonadi"
 	elif [ "$i" == "kde-meta" ]; then
 		continue
 	else
@@ -39,6 +41,8 @@ for i in ${depPkgName} ${optPkgName}; do
 	elif [ "$i" == "kdebase" ]; then
 		rm -rf "${i}-${kdever}/workspace"
 		rm -rf "${i}-${kdever}/runtime"
+	elif [ "$i" == "kdepim" ]; then
+		rm -rf "${i}-${kdever}/akonadi"
 	fi
 
 	rm -rf $(find "${i}-${kdever}" -type d -name .svn)
