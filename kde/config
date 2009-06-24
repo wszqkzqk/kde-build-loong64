@@ -1,4 +1,4 @@
-kdever=4.2.92svn984151
+kdever=4.2.95
 dirver=${kdever%svn*}
 debug=false
 branch=unstable
