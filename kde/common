@@ -20,18 +20,20 @@ if $l10n; then
 fi
 
 depPkgName=''
-while read i; do
-	if $(echo "${i}" | grep -q -v '^#'); then
-		depPkgName="${depPkgName} ${i}"
-	fi
-done < kde-dep-packages
-
 optPkgName=''
-while read i; do
-	if $(echo "${i}" | grep -q -v '^#'); then
-		optPkgName="${optPkgName} ${i}"
-	fi
-done < kde-opt-packages
+if $core; then
+	while read i; do
+		if $(echo "${i}" | grep -q -v '^#'); then
+			depPkgName="${depPkgName} ${i}"
+		fi
+	done < kde-dep-packages
+
+	while read i; do
+		if $(echo "${i}" | grep -q -v '^#'); then
+			optPkgName="${optPkgName} ${i}"
+		fi
+	done < kde-opt-packages
+fi
 
 pwd=$(pwd)
 

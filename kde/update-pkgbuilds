@@ -4,9 +4,6 @@
 
 
 for i in ${depPkgName} ${optPkgName}; do
-	if [ "${i}" == "kde-meta" ]; then
-		continue
-	fi
 
 	if [ ! -f ${SRCDEST}/${i}-${kdever}.tar.bz2 ]; then
 		echo "${i}-${kdever}.tar.bz2 not found!"

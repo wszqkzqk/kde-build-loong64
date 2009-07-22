@@ -2,6 +2,7 @@ kdever=4.2.98
 dirver=${kdever%svn*}
 debug=false
 branch=unstable
+core=true
 l10n=false
 svnbranch=kde-unstable
 repo=kde-unstable
