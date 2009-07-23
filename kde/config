@@ -5,7 +5,7 @@ branch=unstable
 core=true
 l10n=true
 svnbranch=trunk
-repo=kde-unstable
+repo=testing
 installall=true
 
 makepkg() {

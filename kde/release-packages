@@ -4,13 +4,13 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
-	$pwd/../common/urelease $repo-$CARCH
+	archrelease $repo-$CARCH
 	_popd
 done
 
 for i in ${l10nPkgName}; do
 	_pushd build/${i}/$svnbranch
-	$pwd/../common/urelease $repo-any
+	archrelease $repo-any
 	_popd
 done
 
