@@ -2,12 +2,20 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
 	$pwd/../common/urelease $repo-$CARCH
+	_popd
+done
+
+for i in ${l10nPkgName}; do
+	_pushd build/${i}/$svnbranch
+	$pwd/../common/urelease $repo-any
 	_popd
 done
 
 # FIXME: this wont work with splitted packages
 #ssh archlinux.org /arch/db-update $repo $CARCH
 #ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
+#ssh archlinux.org /arch/db-update $repo any
+#ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo any

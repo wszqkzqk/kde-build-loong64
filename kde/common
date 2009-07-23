@@ -13,7 +13,7 @@ fi
 l10nPkgName=''
 if $l10n; then
 	while read i; do
-		if [ $(echo "${i}" | grep -q -v '^#') ]; then
+		if $(echo "${i}" | grep -q -v '^#'); then
 			l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
 		fi
 	done < kde-l10n-names

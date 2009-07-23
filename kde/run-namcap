@@ -3,13 +3,26 @@
 . common
 
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	namcap PKGBUILD > namcap-PKGBUILD.log
 	unset pkgname
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
 		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		echo "checking ${pkgfile}..."
+		namcap ${pkgfile} > namcap-${pkgfile}.log
+	done
+	_popd
+done
+
+for i in ${l10nPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	namcap PKGBUILD > namcap-PKGBUILD.log
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkgfile=${j}-${pkgver}-${pkgrel}-any${PKGEXT}
 		echo "checking ${pkgfile}..."
 		namcap ${pkgfile} > namcap-${pkgfile}.log
 	done

@@ -4,12 +4,23 @@
 
 pkglist=''
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
 		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log build/${i}/${svnbranch}/namcap-${pkgfile}.log"
+	done
+	_popd
+done
+
+for i in ${l10nPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for j in ${pkgname[@]}; do
+		pkgfile=${j}-${pkgver}-${pkgrel}-any${PKGEXT}
 		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log build/${i}/${svnbranch}/namcap-${pkgfile}.log"
 	done
 	_popd

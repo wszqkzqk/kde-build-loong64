@@ -6,7 +6,7 @@ upload() {
 	unset pkgname
 	. PKGBUILD
 	for i in ${pkgname[@]}; do
-		pkgfile=${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		pkgfile=${i}-${pkgver}-${pkgrel}-${1}${PKGEXT}
 		scp "${pkgfile}" archlinux.org:staging/${repo}/
 		if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
 			echo "${pkgfile} got corrupted during upload!"
@@ -14,8 +14,14 @@ upload() {
 	done
 }
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	upload
+	upload ${CARCH}
+	_popd
+done
+
+for i in ${l10nPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	upload any
 	_popd
 done

@@ -3,8 +3,8 @@ dirver=${kdever%svn*}
 debug=false
 branch=unstable
 core=true
-l10n=false
-svnbranch=kde-unstable
+l10n=true
+svnbranch=trunk
 repo=kde-unstable
 installall=true
 
