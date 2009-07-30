@@ -5,18 +5,14 @@ if [ ! -f PKGBUILD ]; then
 	exit 1
 fi
 
-makepkg -o
+# makepkg -o
 
 . PKGBUILD
 
-cd src/$pkgname-$pkgver
+cd src/$pkgbase-$pkgver
 
 if [ "$pkgname" == 'kdebase' ]; then
 	cd apps
-elif  [ "$pkgname" == 'kdebase-workspace' ]; then
-	cd workspace
-elif  [ "$pkgname" == 'kdebase-runtime' ]; then
-	cd runtime
 fi
 
 getSubdirs() {
@@ -27,23 +23,24 @@ getSubdirs() {
 	| sort -u
 }
 
-subdirs=$(getSubdirs CMakeLists.txt)
 
-# if [ "$pkgname" == 'kdeplasma-addons' ]; then
-# 	tmpsubdirs=''
-# 	for i in ${subdirs[@]}; do
-# 		tmpsubdirs="${tmpsubdirs}$(getSubdirs ${i}/CMakeLists.txt)"
-# 	done
-# 	subdirs=$tmpsubdirs
-# fi
+if [ "$pkgbase" == 'kdeplasma-addons' ]; then
+	for i in $(getSubdirs CMakeLists.txt); do
+		for j in $(getSubdirs $i/CMakeLists.txt); do
+			subdirs=(${subdirs[@]} "$(basename $i)-$j")
+		done
+	done
+else
+	subdirs=($(getSubdirs CMakeLists.txt))
+fi
 
 
-echo "pkgbase=${pkgname}"
+echo "pkgbase=${pkgbase}"
 echo -n 'pkgname=('
 ct=0
 for i in ${subdirs[@]}; do
 	[ $ct -gt 0 ] && echo -en "\n         "
-	echo -n "'${pkgname}-$(echo "${i}" | tr [:upper:] [:lower:])'"
+	echo -n "'${pkgbase}-$(echo "${i}" | tr [:upper:] [:lower:])'"
 	ct=$(($ct+1))
 done
 echo ')'
@@ -51,7 +48,7 @@ echo
 
 
 for i in ${subdirs[@]}; do
-	echo "package_${pkgname}-$(echo "${i}" | tr [:upper:] [:lower:])() {"
+	echo "package_${pkgbase}-$(echo "${i}" | tr [:upper:] [:lower:])() {"
 	echo -e "\tpkgdesc=''"
 	echo -e "\tdepends=($(for d in ${depends[@]};do echo -n "'${d}' ";done))"
 	echo -e "\tinstall='${install}'"

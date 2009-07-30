@@ -21,31 +21,34 @@ getSubModules() {
 	| tr [:upper:] [:lower:]
 }
 
-for i in ${depPkgName} ${optPkgName}; do
-	if [ "${i}" == "kde-meta" ]; then
-		continue
+checkSrcDir() {
+	if [ "$2" == 'kdeplasma-addons' ]; then
+		for i in $(getSubModules $1/CMakeLists.txt); do
+			for j in $(getSubModules $1/$i/CMakeLists.txt); do
+				echo "$(basename $i)-$j"
+			done
+		done
 	fi
 
+	getSubModules $1/CMakeLists.txt
+}
+
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 		unset pkgname
 		unset pkgbase
 		unset subdirs
 		unset srcdir
-#		echo ${i}
 		. PKGBUILD
 		[ "$pkgbase" == "" ] && pkgbase=$pkgname
 
 		srcdir=src/$pkgbase-$pkgver/
 		if [ "$pkgbase" == 'kdebase' ]; then
 			srcdir=$srcdir/apps
-# 		elif  [ "$pkgbase" == 'kdebase-workspace' ]; then
-# 			srcdir=$srcdir/workspace
-# 		elif  [ "$pkgbase" == 'kdebase-runtime' ]; then
-# 			srcdir=$srcdir/runtime
 		fi
 
  		if [[ -d $srcdir ]]; then
-			subdirs=($(getSubModules $srcdir/CMakeLists.txt))
+			subdirs=($(checkSrcDir $srcdir $pkgbase))
 
 			for j in ${pkgname[@]}; do
 				if in_array "${j#${pkgbase}-}" ${subdirs[@]}; then

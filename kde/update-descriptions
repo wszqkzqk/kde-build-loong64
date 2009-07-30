@@ -10,10 +10,6 @@ updateDescription() {
 }
 
 for i in ${depPkgName} ${optPkgName}; do
-	if [ "${i}" == "kde-meta" ]; then
-		continue
-	fi
-
 	_pushd build/${i}/${svnbranch}
 		unset pkgname
 		unset pkgbase
@@ -21,13 +17,24 @@ for i in ${depPkgName} ${optPkgName}; do
 		[ "$pkgbase" == "" ] && pkgbase=$pkgname
  		if [[ -d src/$pkgbase-$pkgver/ ]]; then
 			for j in ${pkgname[@]}; do
-				desktop=($(find src/$pkgbase-$pkgver/ -iname "${j#${pkgbase}-}.desktop"))
+				if [ "$pkgbase" == "kdeplasma-addons" ]; then
+					desktop=($(find src/$pkgbase-$pkgver/ -iname "$(echo ${j#${pkgbase}-}.desktop | sed -E 's/\w+-//')"))
 
-				fuzzy=false
+					fuzzy=false
 
-				if [[ "$desktop" == "" ]]; then
-					desktop=($(find src/$pkgbase-$pkgver/${j#${pkgbase}-} -name *.desktop))
-					fuzzy=true
+					if [[ "$desktop" == "" ]]; then
+						desktop=($(find src/$pkgbase-$pkgver/$(echo ${j#${pkgbase}-} | sed -E 's/(\w+)-/\1\//') -name *.desktop))
+						fuzzy=true
+					fi
+				else
+					desktop=($(find src/$pkgbase-$pkgver/ -iname "${j#${pkgbase}-}.desktop"))
+
+					fuzzy=false
+
+					if [[ "$desktop" == "" ]]; then
+						desktop=($(find src/$pkgbase-$pkgver/${j#${pkgbase}-} -name *.desktop))
+						fuzzy=true
+					fi
 				fi
 
 				if [[ -f $desktop ]]; then

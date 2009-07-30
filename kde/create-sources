@@ -20,8 +20,6 @@ for i in ${depPkgName} ${optPkgName}; do
 		src="kdesupport/oxygen-icons"
 	elif [ "$i" == "kdepim-runtime" ]; then
 		src="KDE/kdepim/akonadi"
-	elif [ "$i" == "kde-meta" ]; then
-		continue
 	else
 		src="KDE/$i"
 	fi
