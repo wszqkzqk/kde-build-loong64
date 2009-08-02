@@ -11,7 +11,7 @@ if [[ ! -d build ]]; then
 fi
 
 l10nPkgName=''
-if $l10n; then
+if $l10n || $any; then
 	while read i; do
 		if $(echo "${i}" | grep -q -v '^#'); then
 			l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
@@ -24,7 +24,13 @@ optPkgName=''
 if $core; then
 	while read i; do
 		if $(echo "${i}" | grep -q -v '^#'); then
-			depPkgName="${depPkgName} ${i}"
+			if [ "$i" == "oxygen-icons" ]; then
+				if $any; then
+					depPkgName="${depPkgName} ${i}"
+				fi
+			else
+				depPkgName="${depPkgName} ${i}"
+			fi
 		fi
 	done < kde-dep-packages
 

@@ -4,6 +4,7 @@ debug=false
 branch=stable
 core=true
 l10n=true
+any=true
 svnbranch=trunk
 repo=kde-unstable
 installall=true
