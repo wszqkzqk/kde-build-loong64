@@ -6,9 +6,5 @@ core=true
 l10n=true
 any=true
 svnbranch=trunk
-repo=kde-unstable
+repo=extra
 installall=true
-
-makepkg() {
-	makepkg-git "${@}"
-}
