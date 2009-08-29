@@ -11,7 +11,7 @@ if [[ ! -d build ]]; then
 fi
 
 l10nPkgName=''
-if $l10n || $any; then
+if $l10n && $any; then
 	while read i; do
 		if $(echo "${i}" | grep -q -v '^#'); then
 			l10nPkgName="${l10nPkgName} kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
