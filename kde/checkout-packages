@@ -3,7 +3,7 @@
 . common
 
 copkg() {
-	svn co svn+ssh://svn.archlinux.org/srv/svn-packages/${1} ${2}
+	svn co svn+ssh://gerolde.archlinux.org/srv/svn-packages/${1} ${2}
 }
 
 

@@ -14,8 +14,6 @@ for i in ${l10nPkgName}; do
 	_popd
 done
 
-# FIXME: this wont work with splitted packages
-#ssh archlinux.org /arch/db-update $repo $CARCH
-#ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
-#ssh archlinux.org /arch/db-update $repo any
-#ssh archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo any
+#ssh gerolde.archlinux.org /arch/db-update $repo
+#ssh gerolde.archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
+#ssh gerolde.archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo any
