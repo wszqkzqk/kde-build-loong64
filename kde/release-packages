@@ -2,15 +2,12 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName}; do
+for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
 	_pushd build/${i}/$svnbranch
-	archrelease $repo-$CARCH
-	_popd
-done
-
-for i in ${l10nPkgName}; do
-	_pushd build/${i}/$svnbranch
-	archrelease $repo-any
+	if [ -f ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
+		archrelease $repo-$CARCH
+	else
+		archrelease $repo-any
 	_popd
 done
 

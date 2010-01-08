@@ -2,26 +2,20 @@
 
 . common
 
-upload() {
+for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD
 	for i in ${pkgname[@]}; do
-		pkgfile=${i}-${pkgver}-${pkgrel}-${1}${PKGEXT}
+		if [ -f ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
+			pkgfile=${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		else
+			pkgfile=${i}-${pkgver}-${pkgrel}-any${PKGEXT}
+		fi
 		scp "${pkgfile}" gerolde.archlinux.org:staging/${repo}/
 		if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh gerolde.archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
 			echo "${pkgfile} got corrupted during upload!"
 		fi
 	done
-}
-
-for i in ${depPkgName} ${optPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	upload ${CARCH}
-	_popd
-done
-
-for i in ${l10nPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	upload any
 	_popd
 done
