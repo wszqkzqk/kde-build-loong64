@@ -8,7 +8,7 @@ for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD
-	for i in ${pkgname[@]}; do
+	for j in ${pkgname[@]}; do
 		pkglist="${pkglist} ${j}"
 	done
 	_popd

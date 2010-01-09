@@ -9,10 +9,10 @@ for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
 	unset pkgname
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
-		if [ -f ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
-			pkgfile=${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		if [ -f ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
+			pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
 		else
-			pkgfile=${i}-${pkgver}-${pkgrel}-any${PKGEXT}
+			pkgfile=${j}-${pkgver}-${pkgrel}-any${PKGEXT}
 		fi
 		pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log build/${i}/${svnbranch}/namcap-${pkgfile}.log"
 	done
