@@ -4,10 +4,11 @@
 
 for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
 	_pushd build/${i}/$svnbranch
-	if [ -f ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
-		archrelease $repo-$CARCH
-	else
-		archrelease $repo-any
+	for a in ${arch[@]}; do
+		if [ -f ${i}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
+			archrelease ${repo}-${a}
+		fi
+	done
 	_popd
 done
 
