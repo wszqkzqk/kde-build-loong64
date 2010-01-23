@@ -12,7 +12,7 @@ fi
 source=$1
 target=$2
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	svn rm --force build/${i}/${target}
 	svn cp build/${i}/${source} build/${i}/${target}
 done

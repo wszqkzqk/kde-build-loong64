@@ -4,7 +4,7 @@
 
 pkglist=''
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD

@@ -16,9 +16,4 @@ for i in ${depPkgName} ${optPkgName}; do
 done
 
 
-#for i in ${l10nPkgName}; do
-#	pkglist="${pkglist} build/${i}/${svnbranch}/${i}-*.pkg.tar.gz"
-#done
-
-
 sudo pacman -U ${pkglist}

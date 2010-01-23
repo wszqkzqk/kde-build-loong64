@@ -12,7 +12,7 @@ for i in ${depPkgName}; do
 	_popd
 done
 
-for i in ${optPkgName} ${l10nPkgName}; do
+for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	#mkdir pkg
 	#tar -xzf ${i}-*.pkg.tar.gz -C pkg

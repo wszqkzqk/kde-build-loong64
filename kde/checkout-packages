@@ -7,6 +7,6 @@ copkg() {
 }
 
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	copkg ${i} build/${i}
 done

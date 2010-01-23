@@ -31,17 +31,3 @@ for i in ${depPkgName} ${optPkgName}; do
 	_popd
 done
 
-if $l10n; then
-	for i in `cat kde-l10n-names`; do
-		if [ ! -f ${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2 ]; then
-			echo "kde-l10n-${i}-${kdever}.tar.bz2 not found!"
-			exit 1
-		fi
-
-		pkglang=$(echo "${i}" | tr [:upper:] [:lower:])
-		_pushd build/kde-l10n-${pkglang}/${svnbranch}
-		sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
-		$pwd/../common/updpkg ${kdever}
-		_popd
-	done
-fi

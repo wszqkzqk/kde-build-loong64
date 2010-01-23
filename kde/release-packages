@@ -2,7 +2,7 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
 	for a in ${arch[@]}; do
 		if [ -f ${i}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then

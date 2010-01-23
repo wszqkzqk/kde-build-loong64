@@ -23,18 +23,3 @@ for i in ${depPkgName} ${optPkgName}; do
 		exit 1
 	fi
 done
-
-if $l10n; then
-	for i in `cat kde-l10n-names`; do
-		if [ ! -f "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" ]; then
-			scp ktown.kde.org:~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/
-		fi
-
-		if checkIntegrity "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2"; then
-			echo "kde-l10n-${i}-${kdever}.tar.bz2 ok"
-		else
-			echo "kde-l10n-${i}-${kdever}.tar.bz2 corrupted"
-			exit 1
-		fi
-	done
-fi

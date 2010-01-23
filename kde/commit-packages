@@ -8,7 +8,7 @@ if [ "$1" = "" ]; then
 fi
 
 
-for i in ${depPkgName} ${optPkgName} ${l10nPkgName}; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	svn commit -m"${1}" || exit 1
 	_popd
