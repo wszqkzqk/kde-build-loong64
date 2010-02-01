@@ -8,7 +8,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD
-	pkglist="build/${i}/${svnbranch}/namcap-PKGBUILD.log"
+	pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log"
 	for j in ${pkgname[@]}; do
 		for a in ${arch[@]}; do
 			if [ -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
