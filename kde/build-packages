@@ -16,7 +16,15 @@ done
 
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
+	if ${usechroot}; then
+		if ${installall}; then
+			sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+		else
+			sudo makechrootpkg -u -r ${chroot} -- --noconfirm || broken="${broken} ${i}"
+		fi
+	else
+		makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
+	fi
 	_popd
 done
 
