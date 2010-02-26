@@ -1,12 +1,12 @@
 Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Requrements ==
-* separate chroot build environment for extra and testing
-* usage of schroot is recommend
+* separate chroot build environment for extra and testing (usage of schroot is recommend)
 * ssh access to archlinux.org and ktown.kde.org without user interaction
-* setup sudo to allow running pacman without password
-* get the scripts: git clone http://git.archlinux.de/~pierre/build-scripts.git
+* setup sudo to allow running pacman and makechrootpkg without password
+* get the scripts: git clone git://projects.archlinux.org/kde-build.git
 * set SRCDEST in makepkg.conf
+* edit ${chroot}/root/etc/pacman.conf to use [repo] Server = file:///home/repo/ (top [testing])
 
 == Usage by file ==
 * build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages
@@ -27,12 +27,16 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Sample workflow ==
 * edit config to your needs
+* create a file named local into kde-build/kde dir and put into:
+  arch('any' 'x86_64') # if you want to build any and x86_64 packages
+  usechroot=true # false, to use the standard build
+  chroot="/PATH/TO/YOUR/CHROOT"
 * run download-packages to get all sources
 * run checkout-packages to get the abs working tree
 * run update-pkgbuilds to update all PKGBUILDs
 * optional edit PKGBUILDs (e.g. remove old patches etc.)
-* build-packages build all packages. It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
+* build all packages using build-packages. It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
-* upload-packages to your staging dir
-* release-packages will finally move all packages to the repo
+* run upload-packages to upload package into your staging dir
+* run release-packages to move all packages to the repo

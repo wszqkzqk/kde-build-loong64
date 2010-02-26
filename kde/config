@@ -5,4 +5,4 @@ branch=stable
 svnbranch=trunk
 repo=extra
 installall=true
-arch=('any' 'x86_64')
+arch=('any' 'i686' 'x86_64')

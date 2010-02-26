@@ -6,7 +6,11 @@ broken=''
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	makepkg -isL --noconfirm || exit 1
+	if ${usechroot}; then
+		sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+	else
+		makepkg -isL --noconfirm || exit 1
+	fi
 	_popd
 done
 
@@ -15,7 +19,6 @@ for i in ${optPkgName}; do
 	makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
 	_popd
 done
-
 
 if [ "${broken}" != "" ]; then
 	echo "Broken packages: ${broken}"

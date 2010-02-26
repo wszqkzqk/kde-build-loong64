@@ -5,6 +5,7 @@ if [ -r ~/.makepkg.conf ]; then
 fi
 
 . config
+. local
 
 if [[ ! -d build ]]; then
 	mkdir build

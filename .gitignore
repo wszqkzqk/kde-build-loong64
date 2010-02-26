@@ -5,3 +5,4 @@ pkg/
 repos/
 *.tar.*
 *.log*
+local
