@@ -1,8 +1,8 @@
-kdever=4.4.0
+kdever=4.4.1
 dirver=${kdever%svn*}
 debug=false
 branch=stable
 svnbranch=trunk
-repo=testing
+repo=extra
 installall=true
 arch=('any' 'x86_64')
