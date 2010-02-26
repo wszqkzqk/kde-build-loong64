@@ -4,14 +4,8 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
-	for a in ${arch[@]}; do
-		if [ -f ${i}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
-			archrelease ${repo}-${a}
-		fi
-	done
+	[[ -f ${i}-${pkgver}-${pkgrel}-any${PKGEXT} ]] && archrelease ${repo}-any
+	[[ -f ${i}-${pkgver}-${pkgrel}-i686${PKGEXT} ]] && archrelease ${repo}-i686
+	[[ -f ${i}-${pkgver}-${pkgrel}-x86_64${PKGEXT} ]] && archrelease ${repo}-x86_64
 	_popd
 done
-
-#ssh gerolde.archlinux.org /arch/db-update $repo
-#ssh gerolde.archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo $CARCH
-#ssh gerolde.archlinux.org /arch/misc-scripts/ftpdir-cleanup $repo any

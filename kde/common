@@ -11,11 +11,6 @@ if [[ ! -d build ]]; then
 	mkdir build
 fi
 
-for a in ${arch[@]}; do
-	[ "${a}" == "any" ] && any=true
-done
-
-
 depPkgName=''
 optPkgName=''
 

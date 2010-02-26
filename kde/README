@@ -9,7 +9,8 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 * edit ${chroot}/root/etc/pacman.conf to use [repo] Server = file:///home/repo/ (top [testing])
 
 == Usage by file ==
-* build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages
+* build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages.
+  It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.  
 * checkout-packages: checkout the working tree from svn.archlinux.org
 * cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
 * commit-packages: commit all changes to the svn branch (usually trunk). This does not release any package
@@ -28,14 +29,14 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 == Sample workflow ==
 * edit config to your needs
 * create a file named local into kde-build/kde dir and put into:
-  arch('any' 'x86_64') # if you want to build any and x86_64 packages
+  arch=true # false, if you do not want to upload any packages
   usechroot=true # false, to use the standard build
   chroot="/PATH/TO/YOUR/CHROOT"
 * run download-packages to get all sources
 * run checkout-packages to get the abs working tree
 * run update-pkgbuilds to update all PKGBUILDs
 * optional edit PKGBUILDs (e.g. remove old patches etc.)
-* build all packages using build-packages. It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
+* build all packages using build-packages. Add i686 as args if you are on x86_64 and you want to build i686 packages in a chroot.
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
 * run upload-packages to upload package into your staging dir

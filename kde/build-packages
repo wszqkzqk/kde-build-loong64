@@ -4,10 +4,14 @@
 
 broken=''
 
+arch=$1
+[[ -z $arch ]] && arch=$CARCH
+
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
-		sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+		[[ $arch == "i686" ]] && linux32 sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+		[[ $arch == "x86_64" ]] && sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
 	else
 		makepkg -isL --noconfirm || exit 1
 	fi
@@ -18,7 +22,8 @@ for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
 		if ${installall}; then
-			sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+			[[ $arch == "i686" ]] && linux32 sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
+			[[ $arch == "x86_64" ]] && sudo makechrootpkg -u -d -r ${chroot} -- --noconfirm || exit 1
 		else
 			sudo makechrootpkg -u -r ${chroot} -- --noconfirm || broken="${broken} ${i}"
 		fi
