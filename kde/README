@@ -15,7 +15,7 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 * cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
 * commit-packages: commit all changes to the svn branch (usually trunk). This does not release any package
 * config: set version, branch and if l10n packages should be build. Also the target repo can be set.
-* create-l10n: this create a splitted PKGBUILD for l10n packages; remember to download l10n packages before.
+* create-l10n: this create a splitted PKGBUILD for l10n packages; remember to enable l10n in config.
 * download-packages: Load the sources from KDE server. If they are already downloaded just check integrity.
 * install-packages: install all kde packages from the build dir
 * release-packages: run archrelease, the db- and cleanup-scripts. This acutally releases the packages. Note: You have tu run upload-packages before.

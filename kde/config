@@ -5,3 +5,4 @@ branch=stable
 svnbranch=trunk
 repo=extra
 installall=false
+l10n=true

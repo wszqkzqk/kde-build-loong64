@@ -13,6 +13,7 @@ fi
 
 depPkgName=''
 optPkgName=''
+l10nPkgName=''
 
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
@@ -32,6 +33,16 @@ while read i; do
 	fi
 done < kde-opt-packages
 
+if [ "${l10n}" == "true" ]; then
+	_tmp=$(mktemp -d)
+
+	svn export -q svn://anonsvn.kde.org/home/kde/tags/KDE/${kdever}/kde-l10n/subdirs ${_tmp}/subdirs
+	for i in $(cat ${_tmp}/subdirs|sort -u); do
+		l10nPkgName="${l10nPkgName} ${i}"
+	done
+
+	rm -rf {_tmp}
+fi
 
 pwd=$(pwd)
 
