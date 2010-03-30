@@ -18,7 +18,7 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 * create-l10n: this create a splitted PKGBUILD for l10n packages; remember to enable l10n in config.
 * download-packages: Load the sources from KDE server. If they are already downloaded just check integrity.
 * install-packages: install all kde packages from the build dir
-* release-packages: run archrelease, the db- and cleanup-scripts. This acutally releases the packages. Note: You have tu run upload-packages before.
+* release-packages: run archrelease. This actually releases the packages. Note: You have tu run upload-packages before.
 * repackage: repackage all packages. Usefull for changes to the PKGBUILD that do not require a rebuild
 * run-namcap: run namcap on all packages and store the result to namcap.log
 * show-namcap: show namcap.log for all packages.
@@ -41,4 +41,4 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
 * run upload-packages to upload package into your staging dir
-* run release-packages to move all packages to the repo
+* run release-packages to move all packages to the repo. Add i686 as args if you want to release i686 packages too

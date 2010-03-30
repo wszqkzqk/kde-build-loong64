@@ -2,10 +2,23 @@
 
 . common
 
+arch=$1
+[[ -z ${arch} ]] && arch=${CARCH}
+
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
-	[[ -f ${i}-${pkgver}-${pkgrel}-any${PKGEXT} ]] && archrelease ${repo}-any
-	[[ -f ${i}-${pkgver}-${pkgrel}-i686${PKGEXT} ]] && archrelease ${repo}-i686
-	[[ -f ${i}-${pkgver}-${pkgrel}-x86_64${PKGEXT} ]] && archrelease ${repo}-x86_64
+	archrelease ${repo}-${arch}
 	_popd
 done
+
+if [ "${any}" == "true" ]; then
+	_pushd build/oxygen-icons/$svnbranch
+	archrelease ${repo}-any
+	_popd
+fi
+
+if [ "${l10n}" == "true" ]; then
+	_pushd build/kde-l10n/$svnbranch
+	archrelease ${repo}-any
+	_popd
+fi
