@@ -7,18 +7,10 @@ arch=$1
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
-	archrelease ${repo}-${arch}
+	if [ "$i" == "oxygen-icons" -a "${any}" == "true" ] || [ "${l10n}" == "true" ]; then
+		archrelease ${repo}-any
+	else
+		archrelease ${repo}-${arch}
+	fi
 	_popd
 done
-
-if [ "${any}" == "true" ]; then
-	_pushd build/oxygen-icons/$svnbranch
-	archrelease ${repo}-any
-	_popd
-fi
-
-if [ "${l10n}" == "true" ]; then
-	_pushd build/kde-l10n/$svnbranch
-	archrelease ${repo}-any
-	_popd
-fi
