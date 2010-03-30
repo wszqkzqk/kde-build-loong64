@@ -6,7 +6,10 @@ copkg() {
 	svn co svn+ssh://gerolde.archlinux.org/srv/svn-packages/${1} ${2}
 }
 
-
 for i in ${depPkgName} ${optPkgName}; do
 	copkg ${i} build/${i}
 done
+
+if [ "${l10n}" == "true" ]; then
+	copkg kde-l10n build/kde-l10n
+fi
