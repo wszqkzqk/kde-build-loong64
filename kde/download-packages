@@ -10,19 +10,19 @@ checkIntegrity() {
 	fi
 }
 
-#for i in ${depPkgName} ${optPkgName}; do
-#
-#	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
-#		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
-#	fi
-#
-#	if checkIntegrity "${SRCDEST}/${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2"; then
-#		echo "${i}-${kdever}.tar.bz2 ok"
-#	else
-#		echo "${i}-${kdever}.tar.bz2 corrupted"
-#		exit 1
-#	fi
-#done
+for i in ${depPkgName} ${optPkgName}; do
+
+	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
+		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
+	fi
+
+	if checkIntegrity "${SRCDEST}/${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2"; then
+		echo "${i}-${kdever}.tar.bz2 ok"
+	else
+		echo "${i}-${kdever}.tar.bz2 corrupted"
+		exit 1
+	fi
+done
 
 if [ "${l10n}" == "true" ]; then
 	for i in ${l10nPkgName}; do
