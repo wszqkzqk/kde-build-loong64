@@ -11,10 +11,10 @@ for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
 		if [ ${arch} = "i686" ]; then
-			linux32 sudo makechrootpkg -c -u -d -r ${chroot} -- --noconfirm || exit
+			linux32 sudo makechrootpkg -c -r ${chroot} -- --noconfirm -i || exit
 		else
 			if [ ${arch} = "x86_64" ]; then
-				sudo makechrootpkg -c -u -d -r ${chroot} -- --noconfirm || exit
+				sudo makechrootpkg -c -r ${chroot} -- --noconfirm -i || exit
 			fi
 		fi
 	else
@@ -23,14 +23,14 @@ for i in ${depPkgName}; do
 	_popd
 done
 
-[[ ${installall} ]] && OPTS="-d"
+[[ ${installall} ]] && OPTS="-i"
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
-		[[ ${arch} = "i686" ]] && linux32 sudo makechrootpkg -c -u ${OPTS} -r ${chroot} -- --noconfirm || broken="${broken} ${i}"
-		[[ ${arch} = "x86_64" ]] && sudo makechrootpkg -c -u ${OPTS} -r ${chroot} -- --noconfirm || broken="${broken} ${i}"
+		[[ ${arch} = "i686" ]] && linux32 sudo makechrootpkg -c -r ${chroot} -- --noconfirm ${OPTS} || broken="${broken} ${i}"
+		[[ ${arch} = "x86_64" ]] && sudo makechrootpkg -c -r ${chroot} -- --noconfirm ${OPTS} || broken="${broken} ${i}"
 	else
-		makepkg -$(${installall} && echo 'i')sL --noconfirm || broken="${broken} ${i}"
+		makepkg -sL ${OPTS} --noconfirm || broken="${broken} ${i}"
 	fi
 	_popd
 done
