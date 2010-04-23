@@ -1,4 +1,4 @@
-Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
+Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Requrements ==
 * separate chroot build environment for extra and testing (usage of schroot is recommend)
@@ -30,7 +30,7 @@ Welcome to my simple and stupid scripts to semi-automate the maintaince of KDE!
 == Sample workflow ==
 * edit config to your needs
 * create a file named local into kde-build/kde dir and put into:
-  arch=true # false, if you do not want to upload any packages
+  any=true # false, if you do not want to upload any packages
   usechroot=true # false, to use the standard build
   chroot="/PATH/TO/YOUR/CHROOT"
 * run download-packages to get all sources

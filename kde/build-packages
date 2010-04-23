@@ -5,9 +5,11 @@
 broken=''
 MAKEPKG_OPTS="--noconfirm -iL"
 
+linux32=''
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
-arch=$1
-[[ -z ${arch} ]] && arch=${CARCH}
+if [ "$1" == "i686" ]; then
+  linux32="linux32"
+fi
 
 if ${usechroot}; then
 	echo -n 'creating clean working copy...'
@@ -18,13 +20,7 @@ fi
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
-		if [ ${arch} = "i686" ]; then
-			linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || exit 1
-		else
-			if [ ${arch} = "x86_64" ]; then
-				sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || exit 1
-			fi
-		fi
+		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || exit 1
 	else
 		makepkg -s ${MAKEPKG_OPTS} || exit 1
 	fi
@@ -38,8 +34,7 @@ fi
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if ${usechroot}; then
-		[[ ${arch} = "i686" ]] && linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
-		[[ ${arch} = "x86_64" ]] && sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
 	else
 		makepkg -s ${MAKEPKG_OPTS} || broken="${broken} ${i}"
 	fi
