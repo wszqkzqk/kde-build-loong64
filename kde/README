@@ -29,10 +29,6 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 
 == Sample workflow ==
 * edit config to your needs
-* create a file named local into kde-build/kde dir and put into:
-  any=true # false, if you do not want to upload any packages
-  usechroot=true # false, to use the standard build
-  chroot="/PATH/TO/YOUR/CHROOT"
 * run download-packages to get all sources
 * run checkout-packages to get the abs working tree
 * run update-pkgbuilds to update all PKGBUILDs

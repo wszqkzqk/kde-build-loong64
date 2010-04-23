@@ -1,15 +1,9 @@
 . /etc/makepkg.conf
-
-if [ -r ~/.makepkg.conf ]; then
-	. ~/.makepkg.conf
-fi
+[[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
 
 . config
-. local
 
-if [[ ! -d build ]]; then
-	mkdir build
-fi
+[[ ! -d build ]] && mkdir build
 
 depPkgName=''
 optPkgName=''
