@@ -2,7 +2,6 @@
 
 . common
 
-
 for i in ${depPkgName} ${optPkgName}; do
 
 	if [ ! -f ${SRCDEST}/${i}-${kdever}.tar.bz2 ]; then
@@ -31,3 +30,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	_popd
 done
 
+if ${l10n}; then
+	echo "creating kde-l10n PKGBUILD..."
+	./create-l10n > build/kde-l10n/${svnbranch}/PKGBUILD
+fi
