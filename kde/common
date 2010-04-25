@@ -27,7 +27,7 @@ while read i; do
 	fi
 done < kde-opt-packages
 
-if [ "${l10n}" == "true" ]; then
+if ${l10n}; then
 	_tmp=$(mktemp -d)
 
 	svn export -q svn://anonsvn.kde.org/home/kde/tags/KDE/${kdever}/kde-l10n/subdirs ${_tmp}/subdirs

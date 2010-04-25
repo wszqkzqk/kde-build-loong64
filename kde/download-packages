@@ -24,7 +24,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	fi
 done
 
-if [ "${l10n}" == "true" ]; then
+if ${l10n}; then
 	for i in ${l10nPkgName}; do
 
 		if [ ! -f "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" ]; then
