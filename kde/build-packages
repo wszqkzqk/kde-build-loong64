@@ -41,6 +41,16 @@ for i in ${optPkgName}; do
 	_popd
 done
 
+if ${l10n}; then
+	_pushd build/kde-l10n/${svnbranch}
+	if ${usechroot}; then
+		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+	else
+		makepkg -s ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+	fi
+	_popd
+fi
+
 if [ "${broken}" != "" ]; then
 	echo "Broken packages: ${broken}"
 fi

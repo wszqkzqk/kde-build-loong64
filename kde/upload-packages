@@ -19,3 +19,16 @@ for i in ${depPkgName} ${optPkgName}; do
 	done
 	_popd
 done
+
+if ${l10n}; then
+	_pushd build/kde-l10n/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	for i in ${pkgname[@]}; do
+		pkgfile=${i}-${pkgver}-${pkgrel}-any${PKGEXT}
+		scp "${pkgfile}" gerolde.archlinux.org:staging/${repo}/
+		if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh gerolde.archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
+			echo "${pkgfile} got corrupted during upload!"
+		fi
+	done
+fi
