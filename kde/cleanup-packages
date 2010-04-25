@@ -10,7 +10,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	_popd
 done
 
-if [ -d kde-l10n ]; then
+if ${l10n}; then
 	_pushd kde-l10n/${svnbranch}
 	rm -rf pkg src *.log* *${PKGEXT} *.part
 	_popd
