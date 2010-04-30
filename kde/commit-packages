@@ -7,9 +7,14 @@ if [ "$1" = "" ]; then
 	exit 1
 fi
 
-
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	svn commit -m"${1}" || exit 1
 	_popd
 done
+
+if ${l10n}; then
+	_pushd build/${i}/${svnbranch}
+	svn commit -m"${1}" || exit 1
+	_popd
+fi
