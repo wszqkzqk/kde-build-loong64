@@ -3,7 +3,7 @@
 . common
 
 checkIntegrity() {
-	if [ "$(md5sum "${1}" | cut -d' ' -f1)" != "$(ssh ktown.kde.org md5sum "${2}" | cut -d' ' -f1)" ]; then
+	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ktown.kde.org sha1sum "${2}" | cut -d' ' -f1)" ]; then
 		return 1
 	else
 		return 0

@@ -13,4 +13,4 @@ fi
 
 sed -r "s|pkgver=.*|pkgver=${1}|g" -i PKGBUILD
 sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
-{ rm PKGBUILD; awk '$0 ~ /^md5sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD
+{ rm PKGBUILD; awk '$0 ~ /^sha1sums/ {i = 1; system("makepkg -g 2>/dev/null")}; !i {print}; $0 ~ /\)/ {i = 0}' > PKGBUILD; } < PKGBUILD

@@ -35,11 +35,11 @@ for k in ${l10nPkgName}; do
 done
 echo    ')'
 
-echo -en 'md5sums=('
+echo -en 'sha1sums=('
 ct=0
 for l in ${l10nPkgName}; do
 	[ $ct -gt 0 ] && echo -en "\n         "
-	echo -n "'$(md5sum ${SRCDEST}/kde-l10n-${l}-${kdever}.tar.bz2 | awk '{print $1};')'"
+	echo -n "'$(sha1sum ${SRCDEST}/kde-l10n-${l}-${kdever}.tar.bz2 | awk '{print $1};')'"
 	ct=$(($ct+1))
 done
 echo -e ')\n'

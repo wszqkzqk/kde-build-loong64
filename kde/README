@@ -3,9 +3,9 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 == Requrements ==
 * separate chroot build environment for extra and testing (usage of schroot is recommend)
 * ssh access to archlinux.org and ktown.kde.org without user interaction
-* setup sudo to allow running pacman and/or makechrootpkg without password
+* set sudo to allow running pacman and/or makechrootpkg without password
 * get the scripts: git clone git://projects.archlinux.org/kde-build.git
-* set SRCDEST in makepkg.conf
+* set SRCDEST and INTEGRITY_CHECK=(sha1) in makepkg.conf
 * update your chroot
 
 == Usage by file ==
@@ -24,7 +24,7 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * show-namcap: show namcap.log for all packages.
 * syncrepo: was used to keep i686 and x86_64 kde-unstable in sync
 * uninstall-packages: uninstall all KDE packages. Should be done before building.
-* update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the md5sum array.
+* update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the checksum array.
 * upload-packages: upload all packages to your staging dir
 
 == Sample workflow ==
