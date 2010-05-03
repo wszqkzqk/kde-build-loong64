@@ -3,7 +3,7 @@
 . common
 
 echo     '# $Id: $'
-echo -e  '# Maintainer: Andrea Scarpino <andrea@archlinux.org>\n'
+echo -e  '# Maintainer: Andrea Scarpino <andrea@archlinux.org>'
 echo -e  '# Contributor: Pierre Schmitz <pierre@archlinux.de>\n'
 echo     'pkgbase=kde-l10n'
 
@@ -45,7 +45,7 @@ done
 echo -e ')\n'
 
 echo     'build() {'
-echo     '	cd $srcdir'
+echo     '	cd ${srcdir}'
 for m in ${l10nPkgName}; do
 echo     "	mkdir -p build/${m}"
 echo     "	cd build/${m}"
