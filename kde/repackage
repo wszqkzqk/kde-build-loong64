@@ -3,23 +3,49 @@
 . common
 
 broken=''
+MAKEPKG_OPTS="-Rif --noconfirm"
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	#mkdir pkg
-	#tar -xzf ${i}-*.pkg.tar.gz -C pkg
-	makepkg -Rif --noconfirm || exit 1
+	if ${usechroot}; then
+		unset pkgname
+		. PKGBUILD
+		if [ ${#pkgname[@]} -gt 1 ]; then
+			for j in ${pkgname[@]}; do
+				mkdir -p pkg/${j}
+				tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
+			done
+		else
+			mkdir pkg
+			tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
+		fi
+	fi
+	makepkg ${MAKEPKG_OPTS} || exit 1
 	_popd
 done
+
+if ! ${installall}; then
+  MAKEPKG_OPTS="-Rf --noconfirm"
+fi
 
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	#mkdir pkg
-	#tar -xzf ${i}-*.pkg.tar.gz -C pkg
-	makepkg -R$(${installall} && echo 'i')f --noconfirm || broken="${broken} ${i}"
+	if ${usechroot}; then
+		unset pkgname
+		. PKGBUILD
+		if [ ${#pkgname[@]} -gt 1 ]; then
+			for j in ${pkgname[@]}; do
+				mkdir -p pkg/${j}
+				tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
+			done
+		else
+			mkdir pkg
+			tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
+		fi
+	fi
+	makepkg ${MAKEPKG_OPTS} || broken="${broken} ${i}"
 	_popd
 done
-
 
 if [ "${broken}" != "" ]; then
 	echo "Broken packages: ${broken}"
