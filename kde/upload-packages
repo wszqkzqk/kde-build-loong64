@@ -10,7 +10,7 @@ for i in ${depPkgName} ${optPkgName}; do
 		for a in ${arch[@]}; do
 			if [ -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
 				pkgfile=${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}
-				scp "${pkgfile}" gerolde.archlinux.org:staging/${repo}/
+				rsync -p --chmod 'ug=rw,o=r' -c -h -L --progress "${pkgfile}" -e ssh gerolde.archlinux.org:staging/${repo}/
 				if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh gerolde.archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
 					echo "${pkgfile} got corrupted during upload!"
 				fi
@@ -26,7 +26,7 @@ if ${l10n}; then
 	. PKGBUILD
 	for i in ${pkgname[@]}; do
 		pkgfile=${i}-${pkgver}-${pkgrel}-any${PKGEXT}
-		scp "${pkgfile}" gerolde.archlinux.org:staging/${repo}/
+		rsync -p --chmod 'ug=rw,o=r' -c -h -L --progress "${pkgfile}" -e ssh gerolde.archlinux.org:staging/${repo}/
 		if [ "$(md5sum "${pkgfile}" | cut -d' ' -f1)" != "$(ssh gerolde.archlinux.org md5sum "staging/${repo}/${pkgfile}" | cut -d' ' -f1)" ]; then
 			echo "${pkgfile} got corrupted during upload!"
 		fi
