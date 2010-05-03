@@ -41,32 +41,36 @@ for i in ${depPkgName} ${optPkgName}; do
 		unset srcdir
 		. PKGBUILD
 		[ "$pkgbase" == "" ] && pkgbase=$pkgname
-
 		srcdir=src/$pkgbase-$pkgver/
-		if [ "$pkgbase" == 'kdebase' ]; then
-			srcdir=$srcdir/apps
+		
+		if [[ ! -d ${srcdir} ]]; then
+			if [ -f ${SRCDEST}/${pkgbase}-${pkgver}.tar.bz2 ]; then
+				mkdir src
+				tar -xjf ${SRCDEST}/${pkgbase}-${pkgver}.tar.bz2 -C src/
+			else
+				echo "source tarball for $pkgbase not found!"
+				exit 1
+			fi
 		fi
 
- 		if [[ -d $srcdir ]]; then
-			subdirs=($(checkSrcDir $srcdir $pkgbase))
+		[ "$pkgbase" == 'kdebase' ] && srcdir=$srcdir/apps
 
-			for j in ${pkgname[@]}; do
-				if in_array "${j#${pkgbase}-}" ${subdirs[@]}; then
-					continue
-				else
-					echo -e "(removed)\t${pkgbase}:\t${j#${pkgbase}-}"
-				fi
-			done
+ 		subdirs=($(checkSrcDir $srcdir $pkgbase))
 
-			for j in ${subdirs[@]}; do
-				if in_array "${pkgbase}-${j}" ${pkgname[@]}; then
-					continue
-				else
-					echo -e "(new)\t\t${pkgbase}:\t${j}"
-				fi
-			done
-		else
-			echo "src for $pkgbase not found: $srcdir"
-		fi
+		for j in ${pkgname[@]}; do
+			if in_array "${j#${pkgbase}-}" ${subdirs[@]}; then
+				continue
+			else
+				echo -e "(removed)\t${pkgbase}:\t${j#${pkgbase}-}"
+			fi
+		done
+
+		for j in ${subdirs[@]}; do
+			if in_array "${pkgbase}-${j}" ${pkgname[@]}; then
+				continue
+			else
+				echo -e "(new)\t\t${pkgbase}:\t${j}"
+			fi
+		done
 	_popd
 done
