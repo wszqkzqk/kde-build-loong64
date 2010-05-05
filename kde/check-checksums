@@ -1,0 +1,31 @@
+#!/bin/bash
+
+. common
+
+checkIntegrity() {
+	unset checksum
+	checksum=`grep ${1}-${kdever} /tmp/kde-${kdever}.php`
+	checksum=`echo ${checksum%</tt>*}`
+	checksum=`echo ${checksum#*<tt>}`
+  
+	if [ "$checksum" != "$2" ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+wget http://www.kde.org/info/${kdever}.php -O /tmp/kde-${kdever}.php &> /dev/null
+
+for i in ${depPkgName} ${optPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	unset sha1sums
+	. PKGBUILD
+	if checkIntegrity $i "${sha1sums[0]}"; then
+		echo "${i} checksum ok"
+	else
+		echo "${i} checksum is wrong"
+		exit 1
+	fi
+	_popd
+done
