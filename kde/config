@@ -1,4 +1,4 @@
-kdever=4.4.80
+kdever=4.4.85
 dirver=${kdever%svn*}
 debug=false
 branch=unstable
@@ -8,4 +8,4 @@ installall=false
 l10n=false #build l10n package
 any=true #upload -any packages?
 usechroot=true #build packages in a chroot
-chroot="/home/<user>/chroots/${repo}"
+chroot="/home/bash/chroots/chroot-testing64"
