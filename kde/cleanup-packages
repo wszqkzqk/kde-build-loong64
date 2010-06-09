@@ -6,7 +6,7 @@ _pushd build
 
 for i in ${depPkgName} ${optPkgName} kde-l10n; do
 	_pushd ${i}/${svnbranch}
-	rm -rf pkg src *.log* *${PKGEXT} *.part
+	rm -rf pkg src *.log* *${PKGEXT} *.part *~
 	_popd
 done
 
