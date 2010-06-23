@@ -2,6 +2,8 @@
 
 . common
 
+pkgver=4.5
+
 pkgs=('kdeaccessibility'
          'kdeadmin'
          'kdeartwork'
@@ -32,15 +34,12 @@ for k in ${pkgs[@]}; do
 	ct=$(($ct+1))
 done
 echo    ')'
-echo     "pkgver=${kdever}"
+echo     "pkgver=${pkgver}"
 echo     "pkgrel=1"
 echo     "arch=('any')"
 echo     "url='http://www.archlinux.org/'"
 echo     "license=('GPL')"
 echo -e  "groups=('kde-meta')\n"
-echo     'build() {'
-echo     '	return 0'
-echo -e  '}\n'
 
 for i in ${pkgs[@]}; do
 	_pushd build/${i}/${svnbranch}
