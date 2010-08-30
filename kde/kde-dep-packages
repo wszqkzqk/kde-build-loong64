@@ -1,9 +1,8 @@
 kdelibs
 oxygen-icons
-kdebase-runtime
-kdepim-runtime
-kdegraphics
 kdepimlibs
+kdebase-runtime
+kdegraphics
 kdebindings
 kdebase-workspace
 kdebase
