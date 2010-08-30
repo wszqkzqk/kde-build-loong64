@@ -1,9 +1,9 @@
-kdever=4.4.92
+kdever=4.5.1
 dirver=${kdever%svn*}
 debug=false
-branch=unstable
+branch=stable
 svnbranch=trunk
-repo=kde-unstable
+repo=extra
 installall=false
 l10n=false #build l10n package
 any=true #upload -any packages?
