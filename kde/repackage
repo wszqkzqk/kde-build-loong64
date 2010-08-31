@@ -3,47 +3,36 @@
 . common
 
 broken=''
-MAKEPKG_OPTS="-Rif --noconfirm"
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	if ${usechroot}; then
-		unset pkgname
-		. PKGBUILD
-		if [ ${#pkgname[@]} -gt 1 ]; then
-			for j in ${pkgname[@]}; do
-				mkdir -p pkg/${j}
-				tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
-			done
-		else
-			mkdir pkg
-			tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
-		fi
+	unset pkgname
+	. PKGBUILD
+	if [ ${#pkgname[@]} -gt 1 ]; then
+		for j in ${pkgname[@]}; do
+			mkdir -p pkg/${j}
+			tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
+		done
+	else
+		mkdir pkg
+		tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
 	fi
-	makepkg ${MAKEPKG_OPTS} || exit 1
 	_popd
 done
 
-if ! ${installall}; then
-  MAKEPKG_OPTS="-Rf --noconfirm"
-fi
-
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	if ${usechroot}; then
-		unset pkgname
-		. PKGBUILD
-		if [ ${#pkgname[@]} -gt 1 ]; then
-			for j in ${pkgname[@]}; do
-				mkdir -p pkg/${j}
-				tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
-			done
-		else
-			mkdir pkg
-			tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
-		fi
+	unset pkgname
+	. PKGBUILD
+	if [ ${#pkgname[@]} -gt 1 ]; then
+		for j in ${pkgname[@]}; do
+			mkdir -p pkg/${j}
+			tar -xJf ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/${j}
+		done
+	else
+		mkdir pkg
+		tar -xJf ${i}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} -C pkg/
 	fi
-	makepkg ${MAKEPKG_OPTS} || broken="${broken} ${i}"
 	_popd
 done
 

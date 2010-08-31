@@ -5,49 +5,24 @@
 broken=''
 MAKEPKG_OPTS="--noconfirm -iL"
 
-linux32=''
-# Pass i686 as argument if you want to build i686 packages on a x86_64 system
-if [ "$1" == "i686" ]; then
-  linux32="linux32"
-fi
-
-if ${usechroot}; then
-	echo -n 'creating clean working copy...'
-	sudo mkdir -p "${chroot}/copy"
-	sudo rsync -a --delete -q -W -x "${chroot}/root/" "${chroot}/copy"
-fi
+arch=$1
+[ -z ${arch} ] && arch=$(uname -m)
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	if ${usechroot}; then
-		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || exit 1
-	else
-		makepkg -s ${MAKEPKG_OPTS} || exit 1
-	fi
+	${repo}-${arch}-build || exit 1
 	_popd
 done
 
-if ! ${installall}; then
-  MAKEPKG_OPTS="--noconfirm -L"
-fi
-
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	if ${usechroot}; then
-		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
-	else
-		makepkg -s ${MAKEPKG_OPTS} || broken="${broken} ${i}"
-	fi
+	${repo}-${arch}-build || broken="${broken} ${i}"
 	_popd
 done
 
 if ${l10n}; then
 	_pushd build/kde-l10n/${svnbranch}
-	if ${usechroot}; then
-		$linux32 sudo makechrootpkg -r ${chroot} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
-	else
-		makepkg -s ${MAKEPKG_OPTS} || broken="${broken} ${i}"
-	fi
+	${repo}-${arch}-build || broken="${broken} ${i}"
 	_popd
 fi
 

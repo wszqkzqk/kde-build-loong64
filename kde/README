@@ -1,12 +1,10 @@
 Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Requrements ==
-* separate chroot build environment for extra and testing (usage of schroot is recommend)
+* devtools >= 0.9.9
 * ssh access to archlinux.org and ktown.kde.org without user interaction
 * set sudo to allow running pacman and/or makechrootpkg without password
-* get the scripts: git clone git://projects.archlinux.org/kde-build.git
 * set SRCDEST and INTEGRITY_CHECK=(sha1) in makepkg.conf
-* update your chroot
 
 == Usage by file ==
 * build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages.
@@ -36,8 +34,8 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * run update-pkgbuilds to update all PKGBUILDs
 * optional edit PKGBUILDs (e.g. remove old patches etc.)
 * build all packages using build-packages.
-  Add i686 as args if you are on x86_64 and you want to build i686 packages in a chroot
+  Add i686 as args if you are on x86_64 and you want to build i686 packages
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
 * run upload-packages to upload package into your staging dir
-* run release-packages to move all packages to the repo. Add i686 as args if you want to release i686 packages too
+* run release-packages to move all packages to the repo. Add i686 as args if you want to release i686 packages
