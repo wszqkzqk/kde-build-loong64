@@ -4,7 +4,7 @@
 
 # Pass i686 as argument if you want to release i686 packages
 arch=$1
-[[ -z ${arch} ]] && arch=${CARCH}
+[[ -z ${arch} ]] && arch=$(uname -m)
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch

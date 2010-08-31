@@ -45,7 +45,7 @@ for i in ${depPkgName} ${optPkgName}; do
 		
 		if [[ ! -d ${srcdir} ]]; then
 			if [ -f ${SRCDEST}/${pkgbase}-${kdever}.tar.bz2 ]; then
-				mkdir src
+				[ -d src ] && mkdir src
 				tar -xjf ${SRCDEST}/${pkgbase}-${kdever}.tar.bz2 -C src/
 			else
 				echo "source tarball for $pkgbase not found!"
