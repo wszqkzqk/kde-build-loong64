@@ -23,7 +23,7 @@ echo     "arch=('any')"
 echo     "url='http://www.kde.org'"
 echo     "license=('GPL')"
 echo     "groups=('kde-l10n')"
-echo     "makedepends=('pkgconfig' 'cmake' 'automoc4' 'kdelibs')"
+echo     "makedepends=('pkgconfig' 'cmake' 'automoc4' 'kdelibs' 'docbook-xsl')"
 echo     "options=('docs')"
 
 echo -en 'source=('
