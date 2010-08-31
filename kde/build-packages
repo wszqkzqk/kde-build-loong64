@@ -11,6 +11,9 @@ arch=$1
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	${repo}-${arch}-build || exit 1
+	sudo cp ${i}*${arch}${PKGEXT} /var/tmp/archbuild/${repo}-${arch}/copy
+	sudo mkarchroot -r "pacman -U ${i}*${arch}${PKGEXT} --noconfirm" /var/tmp/archbuild/${repo}-${arch}/copy
+	sudo rm /var/tmp/archbuild/${repo}-${arch}/copy/${i}*${arch}${PKGEXT}
 	_popd
 done
 
