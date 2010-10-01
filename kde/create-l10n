@@ -50,7 +50,7 @@ for m in ${l10nPkgName}; do
 echo     "	mkdir -p build/${m}"
 echo     "	cd build/${m}"
 echo     "	[ -d \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/kdepim ] && sed -i '2i add_subdirectory( kdepim )' \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/CMakeLists.txt"
-echo     "	[ -d \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/messages ] && sed -i '2i add_subdirectory( kdepim )' \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/CMakeLists.txt"
+echo     "	[ -d \${srcdir}/kde-l10n-${m}-\${pkgver}/messages/kdepim ] && sed -i '2i add_subdirectory( kdepim )' \${srcdir}/kde-l10n-${m}-\${pkgver}/messages/CMakeLists.txt"
 echo     "	cmake \${srcdir}/kde-l10n-${m}-\${pkgver} \\"
 echo     '		-DCMAKE_BUILD_TYPE=Release \'
 echo     '		-DCMAKE_INSTALL_PREFIX=/usr'
