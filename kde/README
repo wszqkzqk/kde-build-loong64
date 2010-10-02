@@ -1,13 +1,13 @@
 Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Requrements ==
-* devtools >= 0.9.9
+* devtools (these scripts use the chroots in /var/tmp/archbuild/)
 * ssh access to archlinux.org and ktown.kde.org without user interaction
-* set sudo to allow running pacman and/or makechrootpkg without password
-* set SRCDEST and INTEGRITY_CHECK=(sha1) in makepkg.conf
+* set sudo to allow running makechrootpkg without password
+* set SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf
 
 == Usage by file ==
-* build-packages: run makepkg for all packages and install those that are defined in kde-dep-packages.
+* build-packages: run makechrootpkg for all packages and install those that are defined in kde-dep-packages.
   It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
 * check-checksum: check officials checksums released by KDE with ours into PKGBUILDs
 * checkout-packages: checkout the working tree from svn.archlinux.org
@@ -38,4 +38,5 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
 * run upload-packages to upload package into your staging dir
-* run release-packages to move all packages to the repo. Add i686 as args if you want to release i686 packages
+* run release-packages to move all packages to the repo.
+  Add i686 as args if you want to release i686 packages

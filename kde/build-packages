@@ -9,6 +9,9 @@ MAKEPKG_OPTS="--noconfirm -iL"
 arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
+echo -n 'updating chroot...'
+setarch ${arch} sudo mkarchroot -u /var/tmp/archbuild/${repo}-${arch}/root
+
 echo -n 'creating clean working copy...'
 sudo mkdir -p "/var/tmp/archbuild/${repo}-${arch}/copy"
 sudo rsync -a --delete -q -W -x "/var/tmp/archbuild/${repo}-${arch}/root/" "/var/tmp/archbuild/${repo}-${arch}/copy"
