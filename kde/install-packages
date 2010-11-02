@@ -5,15 +5,24 @@
 pkglist=''
 
 for i in ${depPkgName} ${optPkgName}; do
+	_pushd build/oxygen-icons/${svnbranch}
+	unset pkgname
+	. PKGBUILD
+	pkgfile="build/oxygen-icons/${svnbranch}/oxygen-icons-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}"
+	pkglist="${pkglist} ${pkgfile}"
+	pkgfile="build/oxygen-icons/${svnbranch}/oxygen-icons-svg-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}"
+	pkglist="${pkglist} ${pkgfile}"
+	_popd
+
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
-		pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
+		pkgfile="build/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}"
 		pkglist="${pkglist} ${pkgfile}"
 	done
 	_popd
-done
 
+done
 
 sudo pacman -U ${pkglist}
