@@ -3,7 +3,7 @@
 . common
 
 
-if [ "$1" = "" -o "$2" = "" ]; then
+if [ "$#" -eq 2 ]; then
 	echo "Usage: ${0} <source> <target>"
 	echo "Example: ${0} trunk kde-unstable"
 	exit 1
