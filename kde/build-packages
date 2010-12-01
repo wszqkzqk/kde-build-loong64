@@ -8,17 +8,14 @@ MAKEPKG_OPTS="--noconfirm -iL"
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
-echo "Building in chroot for [${repo}] (${arch})..."
-echo -n 'Updating chroot...'
-setarch ${arch} sudo mkarchroot -u /var/tmp/archbuild/${repo}-${arch}/root
-
-echo -n 'creating clean working copy...'
-sudo mkdir -p "/var/tmp/archbuild/${repo}-${arch}/copy"
-sudo rsync -a --delete -q -W -x "/var/tmp/archbuild/${repo}-${arch}/root/" "/var/tmp/archbuild/${repo}-${arch}/copy"
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
+    if [ "i" == "kdelibs" ]; then
+        sudo ${repo}-${arch}-build -c || exit 1
+    else
+        setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
+    fi
 	_popd
 done
 
