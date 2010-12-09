@@ -24,14 +24,14 @@ for i in ${depPkgName} ${optPkgName}; do
 		src="KDE/$i"
 	fi
 
-	svn co -q -r "${revision}" "svn://websvn.kde.org:443/home/kde/trunk/${src}" "${i}-${kdever}"
+	svn co -q -r "${revision}" "svn://anonsvn.kde.org/home/kde/trunk/${src}" "${i}-${kdever}"
 
 	if [ "$i" == "kdebase-workspace" ]; then
 		svn propset svn:externals \
-			"lib svn://websvn.kde.org:443/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
+			"lib svn://anonsvn.kde.org/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
 			"${i}-${kdever}/kwin/clients/oxygen"
 		svn propset svn:externals \
-			"lib svn://websvn.kde.org:443/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
+			"lib svn://anonsvn.kde.org/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
 			"${i}-${kdever}/kwin/clients/ozone"
 		svn up -q -r "${revision}" "${i}-${kdever}"
 	elif [ "$i" == "kdelibs" ]; then
