@@ -8,6 +8,7 @@ arch=$1
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
+	echo -n "$i: "
 	if [ "$i" == "oxygen-icons" -a "${any}" == "true" ]; then
 		archrelease ${repo}-any
 	else
