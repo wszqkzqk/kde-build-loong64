@@ -11,7 +11,7 @@ arch=$1
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-    if [ "i" == "kdelibs" ]; then
+    if [ "$i" == "kdelibs" ]; then
         sudo ${repo}-${arch}-build -c || exit 1
     else
         setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
