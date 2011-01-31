@@ -11,16 +11,16 @@ for i in ${depPkgName} ${optPkgName}; do
 	echo "$i"
 
 	if [ "$i" == "kdebase" ]; then
-		src="kdebase/kde-baseapps"
+		src="kde-baseapps"
 	if [ "$i" == "kdebase-runtime" ]; then
-		src="kdebase/kde-runtime"
+		src="kde-runtime"
 	elif [ "$i" == "kdebase-workspace" ]; then
-		src="kdebase/kde-workspace"
+		src="kde-workspace"
 	else
 		src="$i"
 	fi
 
-	git clone -q "git://anongit.kde.org/${src}/repository" "${i}-${kdever}"
+	git clone -q "git://anongit.kde.org/${src}" "${i}-${kdever}"
 
 	rm -rf $(find "${i}-${kdever}" -type d -name .git*)
 
