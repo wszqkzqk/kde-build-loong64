@@ -12,7 +12,7 @@ for i in ${depPkgName} ${optPkgName}; do
 
 	if [ "$i" == "kdebase" ]; then
 		src="kde-baseapps"
-	if [ "$i" == "kdebase-runtime" ]; then
+	elif [ "$i" == "kdebase-runtime" ]; then
 		src="kde-runtime"
 	elif [ "$i" == "kdebase-workspace" ]; then
 		src="kde-workspace"
