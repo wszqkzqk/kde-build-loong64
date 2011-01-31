@@ -2,7 +2,7 @@
 
 . common
 
-revision=${kdever#*svn}
+revision=${kdever#*git}
 tmp=$(mktemp -d)
 
 _pushd $tmp
@@ -10,40 +10,19 @@ _pushd $tmp
 for i in ${depPkgName} ${optPkgName}; do
 	echo "$i"
 
+	if [ "$i" == "kdebase" ]; then
+		src="kdebase/kde-baseapps"
 	if [ "$i" == "kdebase-runtime" ]; then
-		src="KDE/kdebase/runtime"
+		src="kdebase/kde-runtime"
 	elif [ "$i" == "kdebase-workspace" ]; then
-		src="KDE/kdebase/workspace"
-	elif [ "$i" == "kdelibs-experimental" ]; then
-		src="KDE/kdelibs/experimental"
-	elif [ "$i" == "oxygen-icons" ]; then
-		src="kdesupport/oxygen-icons"
-	elif [ "$i" == "kdepim-runtime" ]; then
-		src="KDE/kdepim/akonadi"
+		src="kdebase/kde-workspace"
 	else
-		src="KDE/$i"
+		src="$i"
 	fi
 
-	svn co -q -r "${revision}" "svn://anonsvn.kde.org/home/kde/trunk/${src}" "${i}-${kdever}"
+	git clone -q "git://anongit.kde.org/${src}/repository" "${i}-${kdever}"
 
-	if [ "$i" == "kdebase-workspace" ]; then
-		svn propset svn:externals \
-			"lib svn://anonsvn.kde.org/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
-			"${i}-${kdever}/kwin/clients/oxygen"
-		svn propset svn:externals \
-			"lib svn://anonsvn.kde.org/home/kde/trunk/KDE/kdebase/runtime/kstyles/oxygen/lib" \
-			"${i}-${kdever}/kwin/clients/ozone"
-		svn up -q -r "${revision}" "${i}-${kdever}"
-	elif [ "$i" == "kdelibs" ]; then
-		rm -rf "${i}-${kdever}/experimental"
-	elif [ "$i" == "kdebase" ]; then
-		rm -rf "${i}-${kdever}/workspace"
-		rm -rf "${i}-${kdever}/runtime"
-	elif [ "$i" == "kdepim" ]; then
-		rm -rf "${i}-${kdever}/akonadi"
-	fi
-
-	rm -rf $(find "${i}-${kdever}" -type d -name .svn)
+	rm -rf $(find "${i}-${kdever}" -type d -name .git*)
 
 	bsdtar -cjf "${SRCDEST}/${i}-${kdever}.tar.bz2" "${i}-${kdever}"
 	rm -rf "${i}-${kdever}"
