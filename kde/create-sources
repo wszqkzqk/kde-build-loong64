@@ -10,17 +10,33 @@ _pushd $tmp
 for i in ${depPkgName} ${optPkgName}; do
 	echo "$i"
 
+	unset src
+	unset subrepo
+
 	if [ "$i" == "kdebase" ]; then
 		src="kde-baseapps"
+		subrepo="konsole"
 	elif [ "$i" == "kdebase-runtime" ]; then
 		src="kde-runtime"
 	elif [ "$i" == "kdebase-workspace" ]; then
 		src="kde-workspace"
+	elif [ "$i" == "kdebindings" ]; then
+		src=""
+		subrepo="kimono kross-interpreters korundum pykde4 qtruby qyoto smokekde smokeqt"
+	elif [ "$i" == "kdesdk" ]; then
+		subrepo="kate"
 	else
 		src="$i"
 	fi
 
-	git clone -q "git://anongit.kde.org/${src}" "${i}-${kdever}"
+	mkdir ${i}-${kdever}
+
+	[ ! -z ${src} ] && git clone -q "git://anongit.kde.org/${src}.git" "${i}-${kdever}"
+
+	for repo in ${subrepo}; do
+		git clone -q "git://anongit.kde.org/${repo}.git" "${i}-${kdever}/${repo}"
+		echo "add_subdirectory( ${repo} )" >> "${i}-${kdever}/CMakeLists.txt"
+	done
 
 	rm -rf $(find "${i}-${kdever}" -type d -name .git*)
 
