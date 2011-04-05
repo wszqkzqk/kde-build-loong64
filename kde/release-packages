@@ -2,23 +2,23 @@
 
 . common
 
-# Pass i686 as argument if you want to release i686 packages
-arch=$1
-[[ -z ${arch} ]] && arch=$(uname -m)
-
-for i in ${depPkgName} ${optPkgName}; do
+for i in ${depPkgName} ${optPkgName} kde-l10n; do
 	_pushd build/${i}/$svnbranch
 	echo -n "$i: "
-	if [ "$i" == "oxygen-icons" -a "${any}" == "true" ]; then
+	if [ -f "oxygen-icons-${pkgver}-${pkgrel}-any${PKGEXT}" ]; then
 		archrelease ${repo}-any
-	else
-		archrelease ${repo}-${arch}
+		continue
+	elif [ "$i" = "kde-l10n" -a ${l10n} ]; then
+		archrelease ${repo}-any
+		continue
 	fi
+
+	for a in i686 x86_64; do
+		if [ -f "${i}-${pkgver}-${pkgrel}-${a}${PKGEXT}" ]; then
+			archrelease ${repo}-${a}
+		else
+			echo "skipping ${a}"
+		fi
+	done
 	_popd
 done
-
-if ${l10n}; then
-	_pushd build/kde-l10n/$svnbranch
-	archrelease ${repo}-any
-	_popd
-fi

@@ -40,4 +40,3 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
 * run upload-packages to upload package into your staging dir
 * run release-packages to move all packages to the repo.
-  Add i686 as args if you want to release i686 packages
