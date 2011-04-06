@@ -7,5 +7,11 @@ copkg() {
 }
 
 for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	copkg ${i} build/${i}
+    if [ -d "build/${i}" ]; then
+        cd build/${i}
+        svn update
+        cd ../../
+    else
+	    copkg ${i} build/${i}
+    fi
 done
