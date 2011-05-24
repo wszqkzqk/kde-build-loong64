@@ -4,11 +4,6 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 
-	if [ ! -f ${SRCDEST}/${i}-${kdever}.tar.bz2 ]; then
-		echo "${i}-${kdever}.tar.bz2 not found!"
-		exit 1
-	fi
-
 	_pushd build/${i}/${svnbranch}
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
 
