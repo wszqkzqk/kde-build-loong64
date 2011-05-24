@@ -9,13 +9,11 @@ MAKEPKG_OPTS="--noconfirm -iL"
 arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
+sudo ${repo}-${arch}-build -c
+
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-    if [ "${i}" = "kdelibs" ]; then
-        setarch ${arch} sudo makechrootpkg -c -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
-    else
-        setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
-    fi
+	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
 	_popd
 done
 
