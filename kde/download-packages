@@ -10,31 +10,31 @@ checkIntegrity() {
 	fi
 }
 
-for i in ${depPkgName} ${optPkgName}; do
+for i in `ssh ktown.kde.org ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`; do
 
-	if [ ! -f "${SRCDEST}/${i}-${kdever}.tar.bz2" ]; then
-		scp ktown.kde.org:~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2 ${SRCDEST}/
+	if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
+		scp ktown.kde.org:~/${i} ${SRCDEST}/
 	fi
 
-	if checkIntegrity "${SRCDEST}/${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/${i}-${kdever}.tar.bz2"; then
-		echo "${i}-${kdever}.tar.bz2 ok"
+	if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
+		echo "$(basename ${i}) ok"
 	else
-		echo "${i}-${kdever}.tar.bz2 corrupted"
+		echo "$(basename ${i}) corrupted"
 		exit 1
 	fi
 done
 
 if ${l10n}; then
-	for i in ${l10nPkgName}; do
+	for i in `ssh ktown.kde.org ls ${branch}/${dirver}/src/kde-l10n/*-${kdever}.tar.bz2`; do
 
-		if [ ! -f "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" ]; then
-			scp ktown.kde.org:~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2 ${SRCDEST}/
+		if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
+			scp ktown.kde.org:~/${i} ${SRCDEST}/
 		fi
 
-		if checkIntegrity "${SRCDEST}/kde-l10n-${i}-${kdever}.tar.bz2" "~/${branch}/${dirver}/src/kde-l10n/kde-l10n-${i}-${kdever}.tar.bz2"; then
-			echo "kde-l10n-${i}-${kdever}.tar.bz2 ok"
+		if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
+			echo "$(basename ${i}) ok"
 		else
-			echo "kde-l10n-${i}-${kdever}.tar.bz2 corrupted"
+			echo "$(basename ${i}) corrupted"
 			exit 1
 		fi
 	done
