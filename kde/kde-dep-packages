@@ -3,9 +3,10 @@ kdepimlibs
 oxygen-icons
 kdebase-runtime
 kdepim-runtime
-kdegraphics
 kdebindings-smokegen
 kdebindings-smokeqt
+kdegraphics
+kdesdk-kate
 kdebindings-smokekde
 kdebindings-perlqt
 kdebindings-python
