@@ -8,6 +8,9 @@ for i in ${depPkgName} ${optPkgName} kde-l10n; do
 	if [ -f "oxygen-icons-${pkgver}-${pkgrel}-any${PKGEXT}" ]; then
 		archrelease ${repo}-any
 		continue
+	elif [ -f "kde-wallpapers-${pkgver}-${pkgrel}-any${PKGEXT}" ]; then
+		archrelease ${repo}-any
+		continue
 	elif [ "$i" = "kde-l10n" -a ${l10n} ]; then
 		archrelease ${repo}-any
 		continue

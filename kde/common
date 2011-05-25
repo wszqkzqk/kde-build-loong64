@@ -11,7 +11,7 @@ l10nPkgName=''
 
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
-		if [ "$i" == "oxygen-icons" ]; then
+		if [ "$i" == "oxygen-icons" -o "$i" == "kde-wallpapers" ]; then
 			if $any; then
 				depPkgName="${depPkgName} ${i}"
 			fi
