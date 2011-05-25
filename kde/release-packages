@@ -5,19 +5,19 @@
 for i in ${depPkgName} ${optPkgName} kde-l10n; do
 	_pushd build/${i}/$svnbranch
 	echo -n "$i: "
-	if [ -f "oxygen-icons-${pkgver}-${pkgrel}-any${PKGEXT}" ]; then
+	if [ -f "oxygen-icons-${kdever}-*-any${PKGEXT}" ]; then
 		archrelease ${repo}-any
 		continue
-	elif [ -f "kde-wallpapers-${pkgver}-${pkgrel}-any${PKGEXT}" ]; then
+	elif [ -f "kde-wallpapers-${kdever}-*-any${PKGEXT}" ]; then
 		archrelease ${repo}-any
 		continue
-	elif [ "$i" = "kde-l10n" -a ${l10n} ]; then
+	elif [ "$i" == "kde-l10n" -a ${l10n} ]; then
 		archrelease ${repo}-any
 		continue
 	fi
 
 	for a in i686 x86_64; do
-		if [ -f "${i}-${pkgver}-${pkgrel}-${a}${PKGEXT}" ]; then
+		if [ -f "${i}-${kdever}-*-${a}${PKGEXT}" ]; then
 			archrelease ${repo}-${a}
 		else
 			echo "skipping ${a}"
