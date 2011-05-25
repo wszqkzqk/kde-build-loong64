@@ -5,10 +5,10 @@
 for i in ${depPkgName} ${optPkgName} kde-l10n; do
 	_pushd build/${i}/$svnbranch
 	echo -n "$i: "
-	if [ -f "oxygen-icons-${kdever}-*-any${PKGEXT}" ]; then
+	if [ -f oxygen-icons-${kdever}-*-any${PKGEXT} ]; then
 		archrelease ${repo}-any
 		continue
-	elif [ -f "kde-wallpapers-${kdever}-*-any${PKGEXT}" ]; then
+	elif [ -f kde-wallpapers-${kdever}-*-any${PKGEXT} ]; then
 		archrelease ${repo}-any
 		continue
 	elif [ "$i" == "kde-l10n" -a ${l10n} ]; then
