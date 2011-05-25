@@ -10,7 +10,6 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 == Usage by file ==
 * build-packages: run makechrootpkg for all packages and install those that are defined in kde-dep-packages.
   It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
-* check-checksum: check officials checksums released by KDE with ours into PKGBUILDs
 * checkout-packages: checkout the working tree from svn.archlinux.org
 * cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
 * commit-packages: commit all changes to the svn branch (usually trunk). This does not release any package
