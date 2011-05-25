@@ -14,16 +14,15 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
 * commit-packages: commit all changes to the svn branch (usually trunk). This does not release any package
 * config: set version, branch and if l10n packages should be build. Also the target repo can be set.
-* create-kdemeta: this create a splitted PKGBUILD for kde-meta packages
 * create-l10n: this create a splitted PKGBUILD for l10n packages; remember to enable l10n in config.
 * download-packages: Load the sources from KDE server. If they are already downloaded just check integrity.
 * install-packages: install all kde packages from the build dir
+* move-packages: move packages between two repos
 * release-packages: run archrelease. This actually releases the packages. Note: You have tu run upload-packages before.
 * repackage: repackage all packages. Usefull for changes to the PKGBUILD that do not require a rebuild
 * run-namcap: run namcap on all packages and store the result to namcap.log
 * show-namcap: show namcap.log for all packages.
 * syncrepo: was used to keep i686 and x86_64 kde-unstable in sync
-* uninstall-packages: uninstall all KDE packages. Should be done before building.
 * update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the checksum array.
 * upload-packages: upload all packages to your staging dir
 

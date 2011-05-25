@@ -1,0 +1,20 @@
+#!/bin/bash
+
+. common
+
+if [ "$#" -lt 2 ]; then
+	echo "Usage: ${0} <repo-from> <repo-to>"
+	echo "Example: ${0} staging extra"
+	exit 1
+fi
+
+repofrom=$1
+repoto=$2
+
+for i in ${depPkgName} ${optPkgName}; do
+	ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto ${i}
+done
+
+if ${l10n}; then
+	ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto kde-l10n
+fi
