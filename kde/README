@@ -3,7 +3,7 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 == Requrements ==
 * devtools (these scripts use the chroots in /var/tmp/archbuild/)
 ** To build packages for kde-unstable create the kde-unstable-{i686,x86_64}-build symlink to archbuild
-* ssh access to archlinux.org and ktown.kde.org without user interaction
+* ssh access to archlinux.org and ftpmaster.kde.org without user interaction
 * set sudo to allow running makechrootpkg without password
 * set SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf
 
