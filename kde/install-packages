@@ -4,17 +4,13 @@
 
 pkglist=''
 
-_pushd build/oxygen-icons/${svnbranch}
-. PKGBUILD
-pkgfile="build/oxygen-icons/${svnbranch}/oxygen-icons-${pkgver}-${pkgrel}-any${PKGEXT}"
-pkglist="${pkglist} ${pkgfile}"
-_popd
-
-_pushd build/kde-wallpapers/${svnbranch}
-. PKGBUILD
-pkgfile="build/kde-wallpapers/${svnbranch}/kde-wallpapers-${pkgver}-${pkgrel}-any${PKGEXT}"
-pkglist="${pkglist} ${pkgfile}"
-_popd
+for i in oxygen-icons kde-wallpapers; do
+	_pushd build/${i}/${svnbranch}
+	. PKGBUILD
+	pkgfile="build/${i}/${svnbranch}/${i}-${pkgver}-${pkgrel}-any${PKGEXT}"
+	pkglist="${pkglist} ${pkgfile}"
+	_popd
+done
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}

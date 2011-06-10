@@ -2,7 +2,6 @@
 
 . common
 
-
 if [ "$#" -lt 2 ]; then
 	echo "Usage: ${0} <source> <target>"
 	echo "Example: ${0} trunk kde-unstable"
