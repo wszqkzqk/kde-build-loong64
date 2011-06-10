@@ -2,7 +2,7 @@
 
 . common
 
-echo     '# $Id: $'
+echo     '# $Id$'
 echo -e  '# Maintainer: Andrea Scarpino <andrea@archlinux.org>'
 echo -e  '# Contributor: Pierre Schmitz <pierre@archlinux.de>\n'
 echo     'pkgbase=kde-l10n'
@@ -22,7 +22,6 @@ echo     "pkgrel=1"
 echo     "arch=('any')"
 echo     "url='http://www.kde.org'"
 echo     "license=('GPL')"
-echo     "groups=('kde-l10n')"
 echo     "makedepends=('pkgconfig' 'cmake' 'automoc4' 'kdelibs' 'docbook-xsl')"
 echo     "options=('docs')"
 
@@ -49,8 +48,6 @@ echo     '	cd ${srcdir}'
 for m in ${l10nPkgName}; do
 echo     "	mkdir -p build/${m}"
 echo     "	cd build/${m}"
-echo     "	[ -d \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/kdepim ] && sed -i '2i add_subdirectory( kdepim )' \${srcdir}/kde-l10n-${m}-\${pkgver}/docs/CMakeLists.txt"
-echo     "	[ -d \${srcdir}/kde-l10n-${m}-\${pkgver}/messages/kdepim ] && sed -i '2i add_subdirectory( kdepim )' \${srcdir}/kde-l10n-${m}-\${pkgver}/messages/CMakeLists.txt"
 echo     "	cmake \${srcdir}/kde-l10n-${m}-\${pkgver} \\"
 echo     '		-DCMAKE_BUILD_TYPE=Release \'
 echo     '		-DCMAKE_INSTALL_PREFIX=/usr'
