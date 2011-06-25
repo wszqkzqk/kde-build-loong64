@@ -2,12 +2,14 @@
 
 . common
 
-_pushd build
-
-for i in ${depPkgName} ${optPkgName} kde-l10n; do
-	_pushd ${i}/${svnbranch}
+for i in ${depPkgName} ${optPkgName}; do
+	_pushd build/${i}/${svnbranch}
 	rm -rf pkg src *.log* *${PKGEXT} *.part *~
 	_popd
 done
 
-_popd
+if ${l10n}; then
+	_pushd build/${i}/${svnbranch}
+	rm -rf pkg src *.log* *${PKGEXT} *.part *~
+	_popd
+fi
