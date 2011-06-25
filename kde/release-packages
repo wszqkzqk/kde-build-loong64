@@ -2,25 +2,14 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName} kde-l10n; do
+for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/$svnbranch
-	echo -n "$i: "
-	if [ -f oxygen-icons-${kdever}-*-any${PKGEXT} ]; then
-		archrelease ${repo}-any
-        _popd
-		continue
-	elif [ -f kde-wallpapers-${kdever}-*-any${PKGEXT} ]; then
-		archrelease ${repo}-any
-        _popd
-		continue
-	elif [ "$i" == "kde-l10n" -a ${l10n} ]; then
-		archrelease ${repo}-any
-        _popd
-		continue
-	fi
-
-	for a in i686 x86_64; do
-		archrelease ${repo}-${a}
-	done
+	${repo}pkg || exit 1
 	_popd
 done
+
+if ${l10n}; then
+	_pushd build/kde-l10n/$svnbranch
+	${repo}pkg || exit 1
+	_popd
+fi
