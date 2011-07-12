@@ -1,4 +1,4 @@
-kdever=4.6.80
+kdever=4.6.95
 dirver=${kdever%git*}
 debug=false
 branch=unstable
