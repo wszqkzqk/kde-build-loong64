@@ -3,7 +3,7 @@
 . common
 
 broken=''
-MAKEPKG_OPTS="--noconfirm -iL"
+MAKEPKG_OPTS="--noconfirm -L"
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
@@ -12,14 +12,13 @@ arch=$1
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if [ "${i}" = "kdelibs" ]; then
-		setarch ${arch} sudo makechrootpkg -u -c -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
+		sudo ${repo}-${arch}-build || exit 1
+		setarch ${arch} sudo makechrootpkg -I ${i}-${kdever}-*-${arch}${PKGEXT} -r /var/tmp/archbuild/${repo}-${arch} || exit 1
 	else
 		setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
-	 fi
+	fi
 	_popd
 done
-
-MAKEPKG_OPTS="--noconfirm -L"
 
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
