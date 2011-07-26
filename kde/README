@@ -6,6 +6,7 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * ssh access to archlinux.org and ftpmaster.kde.org without user interaction
 * set sudo to allow running makechrootpkg without password
 * set SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf
+* set the default-key in ~/.gnupg/gpg.conf
 
 == Usage by file ==
 * build-packages: run makechrootpkg for all packages and install those that are defined in kde-dep-packages.
