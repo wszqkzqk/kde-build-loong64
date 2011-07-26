@@ -4,12 +4,12 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	rm -rf pkg src *.log* *${PKGEXT} *.part *~
+	rm -rf pkg src *.log* *${PKGEXT} *.part *~ *.sig
 	_popd
 done
 
 if ${l10n}; then
 	_pushd build/${i}/${svnbranch}
-	rm -rf pkg src *.log* *${PKGEXT} *.part *~
+	rm -rf pkg src *.log* *${PKGEXT} *.part *~ *.sig
 	_popd
 fi
