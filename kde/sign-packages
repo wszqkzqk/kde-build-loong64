@@ -18,17 +18,17 @@ for i in ${depPkgName} ${optPkgName}; do
 	unset $pkgname $pkgver $pkgrel
 	. PKGBUILD
 	for j in ${pkgname}; do
-		scp ${host}:"~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
+		scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
 	
 		echo "Checking packages integrity..."
-		if ! checkIntegrity {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
+		if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
 			echo "${j} corrupted"
 			exit 1
 		fi
 
 		echo "Signing and uploading signatures..."
-		gpg --detach-sign --use-agent {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
-		scp {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+		gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
+		scp ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
 	done
 	_popd
 done
@@ -38,17 +38,17 @@ if ${l10n}; then
 	unset $pkgname $pkgver $pkgrel
 	. PKGBUILD
 	for j in ${pkgname}; do
-		scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
+		scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
 
 		echo "Checking packages integrity..."
-		if ! checkIntegrity {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
+		if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
 			echo "${j} corrupted"
 			exit 1
 		fi
 
 		echo "Signing and uploading signatures..."
-		gpg --detach-sign --use-agent {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
-		scp {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+		gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
+		scp ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
 	done
 	_popd
 fi
