@@ -1,0 +1,54 @@
+#!/bin/bash
+
+host="pkgbuild.com"
+
+. common
+
+checkIntegrity() {
+	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} sha1sum "${2}" | cut -d' ' -f1)" ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+echo "Downloading packages from $host..."
+for i in ${depPkgName} ${optPkgName}; do
+	_pushd build/${i}/${svnbranch}
+	unset $pkgname $pkgver $pkgrel
+	. PKGBUILD
+	for j in ${pkgname}; do
+		scp ${host}:"~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
+	
+		echo "Checking packages integrity..."
+		if ! checkIntegrity {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
+			echo "${j} corrupted"
+			exit 1
+		fi
+
+		echo "Signing and uploading signatures..."
+		gpg --detach-sign --use-agent {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
+		scp {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+	done
+	_popd
+done
+
+if ${l10n}; then
+	_pushd build/kde-l10n/${svnbranch}
+	unset $pkgname $pkgver $pkgrel
+	. PKGBUILD
+	for j in ${pkgname}; do
+		scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
+
+		echo "Checking packages integrity..."
+		if ! checkIntegrity {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
+			echo "${j} corrupted"
+			exit 1
+		fi
+
+		echo "Signing and uploading signatures..."
+		gpg --detach-sign --use-agent {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
+		scp {j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+	done
+	_popd
+fi

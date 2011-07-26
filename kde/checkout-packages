@@ -12,6 +12,6 @@ for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
         svn update
         cd ../../
     else
-	    copkg ${i} build/${i}
+	copkg ${i} build/${i}
     fi
 done

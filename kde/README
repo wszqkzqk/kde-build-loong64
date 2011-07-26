@@ -22,6 +22,7 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * repackage: repackage all packages. Usefull for changes to the PKGBUILD that do not require a rebuild
 * run-namcap: run namcap on all packages and store the result to namcap.log
 * show-namcap: show namcap.log for all packages.
+* sign-packages: to add signatures files to the packages built on some external server like pkgbuild.com
 * syncrepo: was used to keep i686 and x86_64 kde-unstable in sync
 * update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the checksum array.
 
@@ -35,4 +36,5 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
   Add i686 as args if you are on x86_64 and you want to build i686 packages
 * run-namcap and have a look at the logs with show-namcap
 * maybe you want to repackage after some meta changes; make sure to run-namcap again
-* run release-packages to upload and release all packages to the repo.
+* to add signature files to the packages built not locally, run sign-packages
+* run release-packages to upload and release all packages to the repo

@@ -2,18 +2,19 @@
 
 . common
 
+host="ftpmaster.kde.org"
+
 checkIntegrity() {
-	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ftpmaster.kde.org sha1sum "${2}" | cut -d' ' -f1)" ]; then
+	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} sha1sum "${2}" | cut -d' ' -f1)" ]; then
 		return 1
 	else
 		return 0
 	fi
 }
 
-for i in `ssh ftpmaster.kde.org ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`; do
-
+for i in `ssh ${host} ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`; do
 	if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
-		scp ftpmaster.kde.org:~/${i} ${SRCDEST}/
+		scp ${host}:~/${i} ${SRCDEST}/
 	fi
 
 	if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
@@ -25,10 +26,9 @@ for i in `ssh ftpmaster.kde.org ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`;
 done
 
 if ${l10n}; then
-	for i in `ssh ftpmaster.kde.org ls ${branch}/${dirver}/src/kde-l10n/*-${kdever}.tar.bz2`; do
-
+	for i in `ssh ${host} ls ${branch}/${dirver}/src/kde-l10n/*-${kdever}.tar.bz2`; do
 		if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
-			scp ftpmaster.kde.org:~/${i} ${SRCDEST}/
+			scp ${host}:~/${i} ${SRCDEST}/
 		fi
 
 		if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
