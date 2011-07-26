@@ -17,7 +17,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname pkgver pkgrel arch
 	. PKGBUILD
-	for a in ${arch}; do
+	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
 			[ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}" .
 		
