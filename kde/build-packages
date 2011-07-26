@@ -20,6 +20,8 @@ for i in ${depPkgName}; do
 	_popd
 done
 
+MAKEPKG_OPTS="--noconfirm -L"
+
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
