@@ -15,30 +15,32 @@ checkIntegrity() {
 echo "Downloading packages from $host..."
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	unset $pkgname $pkgver $pkgrel
+	unset pkgname pkgver pkgrel arch
 	. PKGBUILD
-	for j in ${pkgname}; do
-		scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
-	
-		echo "Checking packages integrity..."
-		if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
-			echo "${j} corrupted"
-			exit 1
-		fi
+	for a in ${arch}; do
+		for j in ${pkgname}; do
+			[ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}" .
+		
+			echo "Checking packages integrity..."
+			if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}"; then
+				echo "${j} ${a} corrupted"
+				exit 1
+			fi
 
-		echo "Signing and uploading signatures..."
-		gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}
-		scp ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+			echo "Signing and uploading signatures..."
+			gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}
+			scp ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+		done
 	done
 	_popd
 done
 
 if ${l10n}; then
 	_pushd build/kde-l10n/${svnbranch}
-	unset $pkgname $pkgver $pkgrel
+	unset pkgname pkgver pkgrel arch
 	. PKGBUILD
 	for j in ${pkgname}; do
-		scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
+		[ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}" .
 
 		echo "Checking packages integrity..."
 		if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${arch}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/{j}-${pkgver}-${pkgrel}-${arch}${PKGEXT}"; then
