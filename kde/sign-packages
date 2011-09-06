@@ -15,21 +15,21 @@ checkIntegrity() {
 echo "Downloading packages from $host..."
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	unset pkgname pkgver pkgrel arch
+	unset pkgname pkgrel arch
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
-			[ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}" .
+			[ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
 		
 			echo "Checking packages integrity..."
-			if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}"; then
+			if ! checkIntegrity ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}"; then
 				echo "${j} ${a} corrupted"
 				exit 1
 			fi
 
 			echo "Signing and uploading signatures..."
-			gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}
-			scp ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+			gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}
+			scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
 		done
 	done
 	_popd
@@ -38,20 +38,20 @@ done
 if ${l10n}; then
 	echo "Downloading packages from $host..."
 	_pushd build/kde-l10n/${svnbranch}
-	unset pkgname pkgver pkgrel
+	unset pkgname pkgrel
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
-		[ ! -f ${j}-${pkgver}-${pkgrel}-any${PKGEXT} ] && scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${pkgver}-${pkgrel}-any${PKGEXT}" .
+		[ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ] && scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
 
 		echo "Checking packages integrity..."
-		if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-any${PKGEXT} "~/svn-packages/kde-l10n/${svnbranch}/${j}-${pkgver}-${pkgrel}-any${PKGEXT}"; then
+		if ! checkIntegrity ${j}-${kdever}-${pkgrel}-any${PKGEXT} "~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}"; then
 			echo "${j} corrupted"
 			exit 1
 		fi
 
 		echo "Signing and uploading signatures..."
-		gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-any${PKGEXT}
-		scp ${j}-${pkgver}-${pkgrel}-any${PKGEXT}.sig ${host}:"~/svn-packages/kde-l10n/${svnbranch}/"
+		gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-any${PKGEXT}
+		scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${host}:"~/svn-packages/kde-l10n/${svnbranch}/"
 	done
 	_popd
 fi
