@@ -1,8 +1,8 @@
-kdever=4.7.0
+kdever=4.7.1
 dirver=${kdever%git*}
 debug=false
 branch=stable
 svnbranch=trunk
-repo=testing
+repo=extra
 l10n=true #build l10n package
 any=true #upload -any packages?
