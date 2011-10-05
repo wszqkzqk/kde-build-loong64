@@ -11,9 +11,7 @@ fi
 repofrom=$1
 repoto=$2
 
-for i in ${depPkgName} ${optPkgName}; do
-	ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto ${i}
-done
+ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto ${depPkgName} ${optPkgName}
 
 if ${l10n}; then
 	ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto kde-l10n
