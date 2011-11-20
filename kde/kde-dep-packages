@@ -12,6 +12,7 @@ kdebindings-perlqt
 kdebindings-python
 kdebindings-qyoto
 kdebindings-qtruby
+kactivities
 kdebase-workspace
 kdebase
 libkdeedu
