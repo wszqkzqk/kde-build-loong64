@@ -4,14 +4,15 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	namcap PKGBUILD > namcap-PKGBUILD.log
 	unset pkgname
+    unset pkgver
+    unset pkgrel
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
 		if [ -f ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
 			pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
 			echo "checking ${pkgfile}..."
-			namcap ${pkgfile} > namcap-${pkgfile}.log
+			namcap ${pkgfile} > ${pkgfile}-namcap.log
 		fi
 	done
 	_popd
