@@ -1,0 +1,35 @@
+#!/bin/bash
+
+. common
+
+declare -a uploads
+
+for pkg in ${depPkgName} ${optPkgName} kde-1l0n; do
+	_pushd build/${pkg}/${svnbranch}
+	unset pkgname
+	unset pkgver
+	unset pkgrel
+	unset arch
+	. PKGBUILD
+	for _arch in ${arch[@]}; do
+		for _pkgname in ${pkgname[@]}; do
+			pkgfile=${_pkgname}-${pkgver}-${pkgrel}-${_arch}${PKGEXT}
+			if [ -f "${pkgfile}" ]; then
+				echo "found ${pkgfile}..."
+				uploads+=("$pkgfile")
+
+				sigfile="${pkgfile}.sig"
+				if [ -f "${pkgfile}" ]; then
+					uploads+=("$sigfile")
+				fi
+			fi
+		done
+	done
+	_popd
+done
+
+rsyncopts=(-e ssh -p --chmod=ug=rw,o=r -c -h -L --progress --partial -y)
+if [[ ${#uploads[*]} -gt 0 ]]; then
+	msg 'Uploading all package and signature files'
+	rsync "${rsyncopts[@]}" "${uploads[@]}" "gerolde.archlinux.org:staging/$repo/" || die
+fi

@@ -34,6 +34,6 @@ if ${l10n}; then
 	_popd
 fi
 
-if [ ! -z "${broken}" ]; then
+if [ -n "${broken}" ]; then
 	echo "Broken packages: ${broken}"
 fi

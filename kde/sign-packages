@@ -1,25 +1,25 @@
 #!/bin/bash
 
-host="pkgbuild.com"
+server="pkgbuild.com"
 
 . common
 
 checkIntegrity() {
-	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} sha1sum "${2}" | cut -d' ' -f1)" ]; then
+	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ${server} sha1sum "${2}" | cut -d' ' -f1)" ]; then
 		return 1
 	else
 		return 0
 	fi
 }
 
-echo "Downloading packages from $host..."
+echo "Downloading packages from $server..."
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname pkgrel arch
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
-			[ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ] && scp ${host}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
+			[ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ] && scp ${server}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
 		
 			echo "Checking packages integrity..."
 			if ! checkIntegrity ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}"; then
@@ -29,19 +29,19 @@ for i in ${depPkgName} ${optPkgName}; do
 
 			echo "Signing and uploading signatures..."
 			gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}
-			scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${host}:"~/svn-packages/${i}/${svnbranch}/"
+			scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/svn-packages/${i}/${svnbranch}/"
 		done
 	done
 	_popd
 done
 
 if ${l10n}; then
-	echo "Downloading packages from $host..."
+	echo "Downloading packages from $server..."
 	_pushd build/kde-l10n/${svnbranch}
 	unset pkgname pkgrel
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
-		[ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ] && scp ${host}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
+		[ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ] && scp ${server}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
 
 		echo "Checking packages integrity..."
 		if ! checkIntegrity ${j}-${kdever}-${pkgrel}-any${PKGEXT} "~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}"; then
@@ -51,7 +51,7 @@ if ${l10n}; then
 
 		echo "Signing and uploading signatures..."
 		gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-any${PKGEXT}
-		scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${host}:"~/svn-packages/kde-l10n/${svnbranch}/"
+		scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${server}:"~/svn-packages/kde-l10n/${svnbranch}/"
 	done
 	_popd
 fi

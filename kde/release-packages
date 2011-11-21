@@ -2,7 +2,7 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName}; do
+for i in ${depPkgName} ${optPkgName} kde-meta; do
 	_pushd build/${i}/$svnbranch
 	${repo}pkg || exit 1
 	_popd

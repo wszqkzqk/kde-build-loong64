@@ -4,22 +4,25 @@
 
 pkglist=''
 
+# no need to display both arches
+arch=x86_64
+
 for i in ${depPkgName} ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	unset pkgname
+	unset pkgver
+	unset pkgrel
 	. PKGBUILD
-	pkglist="${pkglist} build/${i}/${svnbranch}/namcap-PKGBUILD.log"
-	for j in ${pkgname[@]}; do
-		if [ -f ${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT} ]; then
-			pkgfile=${j}-${pkgver}-${pkgrel}-${CARCH}${PKGEXT}
-			pkglist="${pkglist} build/${i}/${svnbranch}/namcap-${pkgfile}.log"
+	for _pkgname in ${pkgname[@]}; do
+		logfile="${_pkgname}-${pkgver}-${pkgrel}-${arch}${PKGEXT}-namcap.log"
+		if [ -f "${logfile}" ]; then
+			pkglist="${pkglist} ${logfile}"
 		fi
 	done
 	_popd
 done
 
 cat ${pkglist} | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
-		         -e 'hicolor-icon-theme' \
 		         -e 'on your system is a testing release' \
 		         -e 'points to non-existing /usr/share/doc/' \
 		         -e 'kdebase-runtime E: Dependency detected and not included (xine-lib)' \

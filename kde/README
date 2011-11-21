@@ -19,13 +19,13 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * download-packages: Load the sources from KDE server. If they are already downloaded just check integrity.
 * install-packages: install all kde packages from the build dir
 * move-packages: move packages between two repos
-* release-packages: run archrelease. This actually releases the packages. Note: You have tu run upload-packages before.
-* repackage: repackage all packages. Usefull for changes to the PKGBUILD that do not require a rebuild
+* release-packages: run archrelease. This actually releases and upload the packages
 * run-namcap: run namcap on all packages and store the result to namcap.log
 * show-namcap: show namcap.log for all packages.
 * sign-packages: to add signatures files to the packages built on some external server like pkgbuild.com
 * syncrepo: was used to keep i686 and x86_64 kde-unstable in sync
 * update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the checksum array.
+* upload-packages: upload the packages to gerolde (commit the changes before)
 
 == Sample workflow ==
 * edit config to your needs
