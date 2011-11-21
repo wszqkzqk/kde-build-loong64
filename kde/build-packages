@@ -3,7 +3,7 @@
 . common
 
 broken=''
-MAKEPKG_OPTS="--noconfirm -iL"
+MAKEPKG_OPTS="-iL"
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
@@ -15,16 +15,16 @@ for i in ${depPkgName}; do
 		sudo ${repo}-${arch}-build || exit 1
 		setarch ${arch} sudo makechrootpkg -I ${i}-${kdever}-*-${arch}${PKGEXT} -r /var/tmp/archbuild/${repo}-${arch} || exit 1
 	else
-		setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || exit 1
+		setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n -- ${MAKEPKG_OPTS} || exit 1
 	fi
 	_popd
 done
 
-MAKEPKG_OPTS="--noconfirm -L"
+MAKEPKG_OPTS="-L"
 
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
 	_popd
 done
 
