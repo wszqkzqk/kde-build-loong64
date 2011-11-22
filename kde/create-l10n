@@ -22,7 +22,7 @@ echo     "pkgrel=1"
 echo     "arch=('any')"
 echo     "url='http://www.kde.org'"
 echo     "license=('GPL')"
-echo     "makedepends=('pkgconfig' 'cmake' 'automoc4' 'kdelibs' 'docbook-xsl')"
+echo     "makedepends=('cmake' 'automoc4' 'kdelibs')"
 echo     "options=('docs')"
 
 echo -en 'source=('
