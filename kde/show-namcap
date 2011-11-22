@@ -24,8 +24,10 @@ done
 
 cat ${pkglist} | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
 		         -e 'on your system is a testing release' \
+                 -e 'hicolor-icon-theme' \
+                 -e 'gcc-libs' \
+                 -e 'shared-mime-info' \
 		         -e 'points to non-existing /usr/share/doc/' \
-		         -e 'kdebase-runtime E: Dependency detected and not included (xine-lib)' \
 		         -e 'Potential non-FHS man page (usr/share/doc' \
 		         -e 'Potential non-FHS info page (usr/share/doc' \
 		         -e "Dependency included and not needed ('kdebase-runtime')" \

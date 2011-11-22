@@ -2,8 +2,6 @@
 
 . common
 
-declare -a uploads
-
 for pkg in ${depPkgName} ${optPkgName}; do
 	_pushd build/${pkg}/${svnbranch}
 	unset pkgname
@@ -14,8 +12,10 @@ for pkg in ${depPkgName} ${optPkgName}; do
 	for _arch in ${arch[@]}; do
 		for _pkgname in ${pkgname[@]}; do
 			pkgfile=${_pkgname}-${pkgver}-${pkgrel}-${_arch}${PKGEXT}
-			echo "checking ${pkgfile}..."
-			namcap ${pkgfile} > ${pkgfile}-namcap.log
+            if [ -f "${pkgfile}" ]; then
+    			echo "checking ${pkgfile}..."
+	    		namcap ${pkgfile} > ${pkgfile}-namcap.log
+            fi
 		done
 	done
 	_popd
