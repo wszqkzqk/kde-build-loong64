@@ -1,8 +1,8 @@
-kdever=4.7.80
+kdever=4.7.90
 dirver=${kdever}
 debug=false
 branch=unstable
 svnbranch=trunk
-repo=kde-unstable
+repo=staging
 l10n=false #build l10n package
 any=true #upload -any packages?
