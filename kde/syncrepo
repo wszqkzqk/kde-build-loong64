@@ -12,9 +12,9 @@ source=$1
 target=$2
 
 for i in ${depPkgName} ${optPkgName}; do
-	svn rm --force build/${i}/repos/${target}
+	[ -d build/${i}/repos/${target}-* ] && svn rm --force build/${i}/repos/${target}-*
 
-	if [ "$i" -e "oxygen-icons" -o "$i" -e "kde-wallpapers" ]; then
+	if [ "$i" = "oxygen-icons" -o "$i" = "kde-wallpapers" ]; then
 		svn cp build/${i}/repos/${source}-any build/${i}/repos/${target}-any
 	else
 		svn cp build/${i}/repos/${source}-i686 build/${i}/repos/${target}-i686
@@ -23,6 +23,6 @@ for i in ${depPkgName} ${optPkgName}; do
 done
 
 if ${l10n}; then
-    svn rm --force build/kde-l10n/repos/${target}
-    svn cp build/kde-l10n/repos/${source}-any build/kde-l10n/repos/${target}-any
+	[ -d build/${i}/repos/${target}-any ] svn rm --force build/kde-l10n/repos/${target}-any
+	svn cp build/kde-l10n/repos/${source}-any build/kde-l10n/repos/${target}-any
 fi

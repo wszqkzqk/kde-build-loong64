@@ -20,7 +20,7 @@ echo    ')'
 echo     "pkgver=${kdever}"
 echo     "pkgrel=1"
 echo     "arch=('any')"
-echo     "url='http://www.kde.org'"
+echo     "url='http://www.kde.org/'"
 echo     "license=('GPL')"
 echo     "makedepends=('cmake' 'automoc4' 'kdelibs')"
 echo     "options=('docs')"

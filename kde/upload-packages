@@ -4,7 +4,7 @@
 
 declare -a uploads
 
-for pkg in ${depPkgName} ${optPkgName} kde-1l0n; do
+for pkg in ${depPkgName} ${optPkgName}; do
 	_pushd build/${pkg}/${svnbranch}
 	unset pkgname
 	unset pkgver
@@ -19,7 +19,7 @@ for pkg in ${depPkgName} ${optPkgName} kde-1l0n; do
 				uploads+=("build/${pkg}/${svnbranch}/$pkgfile")
 
 				sigfile="${pkgfile}.sig"
-				if [ -f "${pkgfile}" ]; then
+				if [ -f "${sigfile}" ]; then
 					uploads+=("build/${pkg}/${svnbranch}/$sigfile")
 				fi
 			fi
@@ -28,8 +28,30 @@ for pkg in ${depPkgName} ${optPkgName} kde-1l0n; do
 	_popd
 done
 
+if {l10n}; then
+	_pushd build/kde-l10n/${svnbranch}
+	unset pkgname
+	unset pkgver
+	unset pkgrel
+	unset arch
+	. PKGBUILD
+	for _pkgname in ${pkgname[@]}; do
+		pkgfile=${_pkgname}-${pkgver}-${pkgrel}-${_arch}${PKGEXT}
+		if [ -f "${pkgfile}" ]; then
+			echo "found ${pkgfile}..."
+			uploads+=("build/${pkg}/${svnbranch}/$pkgfile")
+
+			sigfile="${pkgfile}.sig"
+			if [ -f "${sigfile}" ]; then
+				uploads+=("build/${pkg}/${svnbranch}/$sigfile")
+			fi
+		fi
+	done
+	_popd
+fi
+
 rsyncopts=(-e ssh -p --chmod=ug=rw,o=r -c -h -L --progress --partial -y)
 if [[ ${#uploads[*]} -gt 0 ]]; then
-	msg 'Uploading all package and signature files'
+	echo 'Uploading all package and signature files'
 	rsync "${rsyncopts[@]}" "${uploads[@]}" "gerolde.archlinux.org:staging/$repo/" || die
 fi
