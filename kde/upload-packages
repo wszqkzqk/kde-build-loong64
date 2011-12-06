@@ -16,11 +16,11 @@ for pkg in ${depPkgName} ${optPkgName} kde-1l0n; do
 			pkgfile=${_pkgname}-${pkgver}-${pkgrel}-${_arch}${PKGEXT}
 			if [ -f "${pkgfile}" ]; then
 				echo "found ${pkgfile}..."
-				uploads+=("$pkgfile")
+				uploads+=("build/${pkg}/${svnbranch}/$pkgfile")
 
 				sigfile="${pkgfile}.sig"
 				if [ -f "${pkgfile}" ]; then
-					uploads+=("$sigfile")
+					uploads+=("build/${pkg}/${svnbranch}/$sigfile")
 				fi
 			fi
 		done
