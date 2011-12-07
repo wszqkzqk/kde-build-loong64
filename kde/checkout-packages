@@ -9,6 +9,7 @@ copkg() {
 for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
 	if [ -d "build/${i}" ]; then
 		_pushd build/${i}
+		echo "${i}..."
 		svn update
 		_popd
 	else
