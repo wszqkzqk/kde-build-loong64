@@ -11,7 +11,7 @@ fi
 repofrom=$1
 repoto=$2
 
-ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto ${depPkgName} ${optPkgName} kde-meta
+ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto ${depPkgName} ${optPkgName}
 
 if ${l10n}; then
 	ssh gerolde.archlinux.org /arch/db-move $repofrom $repoto kde-l10n
