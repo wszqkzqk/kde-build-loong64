@@ -11,25 +11,25 @@ for i in ${depPkgName} ${optPkgName}; do
 	unset pkgname
 	unset pkgver
 	unset pkgrel
-    unset arch
+	unset arch
 	. PKGBUILD
 	for _pkgname in ${pkgname[@]}; do
 		logfile="${_pkgname}-${pkgver}-${pkgrel}-${arch}${PKGEXT}-namcap.log"
 
-        if [ -f "${logfile}" ]; then
-            cat $(pwd)/$logfile >> $tmp
-        fi
+		if [ -f "${logfile}" ]; then
+			cat $(pwd)/$logfile >> $tmp
+		fi
 	done
 	_popd
 done
 
 less $tmp | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
-		    -e 'on your system is a testing release' \
-            -e 'hicolor-icon-theme' \
-            -e 'gcc-libs' \
-            -e 'shared-mime-info' \
-		    -e 'points to non-existing /usr/share/doc/' \
-		    -e 'Potential non-FHS man page (usr/share/doc' \
-		    -e 'Potential non-FHS info page (usr/share/doc' \
-		    -e "Dependency included and not needed ('kdebase-runtime')" \
-		    -e "Dependency included and not needed ('kdepim-runtime')"
+			-e 'on your system is a testing release' \
+			-e 'hicolor-icon-theme' \
+			-e 'gcc-libs' \
+			-e 'shared-mime-info' \
+			-e 'points to non-existing /usr/share/doc/' \
+			-e 'Potential non-FHS man page (usr/share/doc' \
+			-e 'Potential non-FHS info page (usr/share/doc' \
+			-e "Dependency included and not needed ('kdebase-runtime')" \
+			-e "Dependency included and not needed ('kdepim-runtime')"
