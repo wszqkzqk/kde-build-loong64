@@ -1,4 +1,4 @@
-kdever=4.7.95
+kdever=4.7.97
 dirver=${kdever}
 debug=false
 branch=unstable
