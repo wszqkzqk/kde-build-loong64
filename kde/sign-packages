@@ -19,18 +19,23 @@ for i in ${depPkgName} ${optPkgName}; do
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
-			[ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ] && scp ${server}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
+			if [ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
+				scp ${server}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
+			fi
             
 			if [ -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
-				echo "Checking packages integrity..."
+				echo "Checking ${j} ${a} integrity..."
     			if ! checkIntegrity ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} "~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}"; then
 					echo "ERROR: ${j} ${a} corrupted"
+					rm ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
 					exit 1
 				fi
 
-				echo "Signing and uploading signatures..."
-				gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}
-				scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/svn-packages/${i}/${svnbranch}/"
+				if [ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ]; then
+					echo "Signing and uploading signatures..."
+					gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}
+					scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/svn-packages/${i}/${svnbranch}/"
+				fi
 			else
 				echo "WARNING: ${j} ${a} not found"
 			fi
@@ -45,18 +50,22 @@ if ${l10n}; then
 	unset pkgname pkgrel
 	. PKGBUILD
 	for j in ${pkgname[@]}; do
-		[ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ] && scp ${server}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
+		if [ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ]; then
+			scp ${server}:"~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
+		fi
 
 		if [ -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ]; then
-			echo "Checking packages integrity..."
+			echo "Checking ${j} integrity..."
 			if ! checkIntegrity ${j}-${kdever}-${pkgrel}-any${PKGEXT} "~/svn-packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}"; then
 				echo "ERROR: ${j} corrupted"
 				exit 1
 			fi
 
-			echo "Signing and uploading signatures..."
-			gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-any${PKGEXT}
-			scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${server}:"~/svn-packages/kde-l10n/${svnbranch}/"
+			if [ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ]; then
+				echo "Signing and uploading signatures..."
+				gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-any${PKGEXT}
+				scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${server}:"~/svn-packages/kde-l10n/${svnbranch}/"
+			fi
 		else
 			echo "WARNING: ${j} ${a} not found"
 		fi
