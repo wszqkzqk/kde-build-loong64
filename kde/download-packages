@@ -12,7 +12,7 @@ checkIntegrity() {
 	fi
 }
 
-for i in `ssh ${host} ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`; do
+for i in `ssh ${host} ls ${branch}/${dirver}/src/xz/*-${kdever}.tar.xz`; do
 	if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
 		scp ${host}:~/${i} ${SRCDEST}/
 	fi
@@ -26,7 +26,7 @@ for i in `ssh ${host} ls ${branch}/${dirver}/src/*-${kdever}.tar.bz2`; do
 done
 
 if ${l10n}; then
-	for i in `ssh ${host} ls ${branch}/${dirver}/src/kde-l10n/*-${kdever}.tar.bz2`; do
+	for i in `ssh ${host} ls ${branch}/${dirver}/src/xz/kde-l10n/*-${kdever}.tar.xz`; do
 		if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
 			scp ${host}:~/${i} ${SRCDEST}/
 		fi

@@ -6,3 +6,4 @@ repos/
 *.tar.*
 *.log*
 *.part
+build/
