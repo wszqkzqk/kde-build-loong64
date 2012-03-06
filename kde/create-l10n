@@ -29,7 +29,7 @@ echo -en 'source=('
 ct=0
 for k in ${l10nPkgName}; do
 	[ $ct -gt 0 ] && echo -en "\n        "
-	echo -n '"http://download.kde.org/stable/${pkgver}/src/xz/kde-l10n/${pkgbase}-'${k}'-${pkgver}.tar.xz"'
+	echo -n '"http://download.kde.org/stable/${pkgver}/src/kde-l10n/${pkgbase}-'${k}'-${pkgver}.tar.xz"'
 	ct=$(($ct+1))
 done
 echo    ')'
