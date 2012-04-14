@@ -29,7 +29,7 @@ echo -en 'source=('
 ct=0
 for k in ${l10nPkgName}; do
 	[ $ct -gt 0 ] && echo -en "\n        "
-	echo -n '"http://download.kde.org/stable/${pkgver}/src/kde-l10n/${pkgbase}-'${k}'-${pkgver}.tar.xz"'
+	echo -n '"http://download.kde.org/stable/${pkgver}/src/${pkgbase}/${pkgbase}-'${k}'-${pkgver}.tar.xz"'
 	ct=$(($ct+1))
 done
 echo    ')'
@@ -44,17 +44,19 @@ done
 echo -e ')\n'
 
 echo     'build() {'
-echo     '	cd ${srcdir}'
-for m in ${l10nPkgName}; do
-echo     "	mkdir -p build/${m}"
-echo     "	cd build/${m}"
-echo     "	cmake \${srcdir}/kde-l10n-${m}-\${pkgver} \\"
-echo     '		-DCMAKE_BUILD_TYPE=Release \'
-echo     '		-DCMAKE_INSTALL_PREFIX=/usr'
-echo     '	make'
-echo  -e '	cd ../..\n'
-done
-echo -e '}\n'
+echo -e   '  cd ${srcdir}\n'
+echo -en  '  for lang in'
+for m in ${l10nPkgName}; do echo -en " ${m}"; done
+echo -e '; do'
+echo     '    mkdir -p build/${lang}'
+echo     '    cd build/${lang}'
+echo     '    cmake ${srcdir}/${pkgbase}-${lang}-${pkgver} \'
+echo     '      -DCMAKE_BUILD_TYPE=Release \'
+echo     '      -DCMAKE_INSTALL_PREFIX=/usr'
+echo     '    make'
+echo     '    cd ../..'
+echo     '  done'
+echo -e  '}\n'
 
 _tmp=$(mktemp -d)
 svn export -q svn://anonsvn.kde.org/home/kde/tags/KDE/${kdever}/kde-l10n/teamnames ${_tmp}/teamnames
@@ -65,10 +67,8 @@ for i in ${l10nPkgName}; do
 	_l10nName=${_l10nName#${i}=}
 	echo    "package_${_l10nPkgName}() {"
 	echo -e "\tpkgdesc=('${_l10nName} Localization for KDE')"
-	echo -e "\treplaces=('${_l10nPkgName/l10n/i18n}')"
-	echo -e "\tprovides=('${_l10nPkgName/l10n/i18n}')"
-	echo -e "\tcd \$srcdir/build/${i}"
-	echo -e '\tmake DESTDIR=$pkgdir install'
+	echo -e "\tcd \${srcdir}/build/${i}"
+	echo -e '\tmake DESTDIR=${pkgdir} install'
 	echo -e  "}\n"
 done
 rm -rf ${_tmp}
