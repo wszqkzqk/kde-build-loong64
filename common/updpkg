@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$1" = "" ]; then
+if [ "$#" -eq 0 ]; then
 	echo "Usage: ${0} <pkgver>"
 	exit 1
 fi
@@ -10,6 +10,8 @@ if [ ! -f PKGBUILD ]; then
 	exit 1
 fi
 
+# Be sure we've the sources
+makepkg -g &>/dev/null || exit 1
 
 sed -r "s|pkgver=.*|pkgver=${1}|g" -i PKGBUILD
 sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
