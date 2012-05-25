@@ -4,25 +4,14 @@
 
 if [ "$#" -lt 2 ]; then
 	echo "Usage: ${0} <source> <target>"
-	echo "Example: ${0} extra staging"
+	echo "Example: ${0} trunk kde-unstable"
 	exit 1
 fi
 
 source=$1
 target=$2
 
-for i in ${depPkgName} ${optPkgName}; do
-	[ -d build/${i}/repos/${target}-* ] && svn rm --force build/${i}/repos/${target}-*
-
-	if [ "$i" = "oxygen-icons" -o "$i" = "kde-wallpapers" ]; then
-		svn cp build/${i}/repos/${source}-any build/${i}/repos/${target}-any
-	else
-		svn cp build/${i}/repos/${source}-i686 build/${i}/repos/${target}-i686
-		svn cp build/${i}/repos/${source}-x86_64 build/${i}/repos/${target}-x86_64
-	fi
+for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
+	[ -d build/${i}/${target} ] && svn rm --force build/${i}/${target}
+	svn cp build/${i}/${source} build/${i}/${target}
 done
-
-if ${l10n}; then
-	[ -d build/${i}/repos/${target}-any ] svn rm --force build/kde-l10n/repos/${target}-any
-	svn cp build/kde-l10n/repos/${source}-any build/kde-l10n/repos/${target}-any
-fi
