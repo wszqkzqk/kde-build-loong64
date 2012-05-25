@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
+	dirs="build/${i}/${svnbranch}"
+done
+
+svn diff ${dirs} | less
