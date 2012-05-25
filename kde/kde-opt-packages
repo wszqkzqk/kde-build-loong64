@@ -42,7 +42,14 @@ kdegraphics-mobipocket
 kdegraphics-strigi-analyzer
 kdegraphics-svgpart
 kdegraphics-thumbnailers
-kdemultimedia
+#kdemultimedia
+kdemultimedia-audiocd-kio
+kdemultimedia-dragonplayer
+kdemultimedia-ffmpegthumbs
+kdemultimedia-juk
+kdemultimedia-kmix
+kdemultimedia-kscd
+kdemultimedia-mplayerthumbs
 kdenetwork
 kdepim
 kdeplasma-addons
@@ -56,7 +63,7 @@ kdeutils-kdf
 kdeutils-kfloppy
 kdeutils-kgpg
 kdeutils-kremotecontrol
-kdeutils-ksecrets
+#kdeutils-ksecrets
 kdeutils-ktimer
 kdeutils-kwallet
 kdeutils-printer-applet

@@ -1,6 +1,8 @@
 kdelibs
 kdepimlibs
 oxygen-icons
+nepomuk-core
+kactivities
 kdebase-runtime
 kdepim-runtime
 kdebindings-smokegen
@@ -12,7 +14,6 @@ kdebindings-perlqt
 kdebindings-python
 kdebindings-qyoto
 kdebindings-qtruby
-kactivities
 kdebase-workspace
 kdebase
 libkdeedu
@@ -22,3 +23,5 @@ libkexiv2
 libkipi
 libksane
 kdeedu-analitza
+libkcddb
+libkcompactdisc
