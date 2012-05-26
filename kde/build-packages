@@ -3,7 +3,6 @@
 . common
 
 broken=''
-MAKEPKG_OPTS="-iL"
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
@@ -13,24 +12,21 @@ for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
 	if [ "${i}" = "kdelibs" ]; then
 		sudo ${repo}-${arch}-build || exit 1
-		setarch ${arch} sudo makechrootpkg -I ${i}-${kdever}-*-${arch}${PKGEXT} -r /var/tmp/archbuild/${repo}-${arch} || exit 1
 	else
-		setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n -- ${MAKEPKG_OPTS} || exit 1
+		setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n || exit 1
 	fi
 	_popd
 done
 
-MAKEPKG_OPTS="-L"
-
 for i in ${optPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -n || broken="${broken} ${i}"
 	_popd
 done
 
 if ${l10n}; then
 	_pushd build/kde-l10n/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} -- ${MAKEPKG_OPTS} || broken="${broken} ${i}"
+	setarch ${arch} sudo makechrootpkg -r /var/tmp/archbuild/${repo}-${arch} || broken="${broken} ${i}"
 	_popd
 fi
 
