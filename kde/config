@@ -1,8 +1,8 @@
-kdever=4.8.97
+kdever=4.9.0
 dirver=${kdever}
 debug=false
-branch=unstable
-svnbranch=kde-unstable
+branch=stable
+svnbranch=trunk
 repo=kde-unstable
-l10n=false #build l10n package
+l10n=true #build l10n package
 any=true #upload -any packages?
