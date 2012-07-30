@@ -28,9 +28,13 @@ while read i; do
 done < kde-opt-packages
 
 if ${l10n}; then
+	_tmp=$(mktemp -d)
+
+	svn export -q svn://anonsvn.kde.org/home/kde/trunk/kde-common/release/language_list ${_tmp}/languages
+
 	while read i; do
 		l10nPkgName="${l10nPkgName} ${i}"
-	done < languages.txt
+	done < ${_tmp}/languages
 fi
 
 pwd=$(pwd)

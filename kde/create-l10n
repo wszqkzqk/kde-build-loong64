@@ -59,7 +59,7 @@ echo     '  done'
 echo -e  '}\n'
 
 _tmp=$(mktemp -d)
-svn export -q svn://anonsvn.kde.org/home/kde/tags/KDE/${kdever}/kde-l10n/teamnames ${_tmp}/teamnames
+svn export -q svn://anonsvn.kde.org/home/kde/trunk/KDE/l10n-kde4/teamnames ${_tmp}/teamnames
 
 for i in ${l10nPkgName}; do
 	_l10nPkgName="kde-l10n-$(echo "${i}" | tr [:upper:] [:lower:])"
