@@ -30,7 +30,6 @@ kdeedu-pairs
 kdeedu-parley
 kdeedu-rocs
 kdeedu-step
-kdegames
 kdegraphics-gwenview
 kdegraphics-kamera
 kdegraphics-kcolorchooser
@@ -65,8 +64,9 @@ kdeutils-kgpg
 kdeutils-kremotecontrol
 kdeutils-ktimer
 kdeutils-kwallet
-kdeutils-printer-applet
+kdeutils-print-manager
 kdeutils-superkaramba
 kdeutils-sweeper
 kdewebdev
 kde-wallpapers
+nepomuk-widgets
