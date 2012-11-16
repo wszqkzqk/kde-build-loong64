@@ -11,7 +11,16 @@ fi
 source=$1
 target=$2
 
-for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	[ -d build/${i}/${target} ] && svn rm --force build/${i}/${target}
-	svn cp build/${i}/${source} build/${i}/${target}
+for pkg in ${depPkgName} ${optPkgName} kde-meta; do
+	_pushd build/${pkg}
+	[ -d ${target} ] && svn rm --force ${target}
+	svn cp ${source} ${target}
+	_popd
 done
+
+if ${l10n}; then
+	_pushd build/kde-l10n
+	[ -d ${target} ] && svn rm --force ${target}
+	svn cp ${source} ${target}
+	_popd
+fi
