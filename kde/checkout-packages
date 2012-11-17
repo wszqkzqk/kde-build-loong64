@@ -11,6 +11,6 @@ for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
 	else
 		_pushd build
 		archco ${i}
-		_popd ../
+		_popd
 	fi
 done
