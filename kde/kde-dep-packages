@@ -26,6 +26,6 @@ libksane
 kdeedu-analitza
 libkcddb
 libkcompactdisc
-#libkdegames
-#libkmahjongg
-#nepomuk-widgets
+libkdegames
+libkmahjongg
+nepomuk-widgets
