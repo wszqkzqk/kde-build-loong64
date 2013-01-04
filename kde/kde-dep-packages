@@ -16,6 +16,7 @@ kdebindings-qyoto
 kdebindings-qtruby
 kde-base-artwork
 kdebase-workspace
+nepomuk-widgets
 kdebase
 libkdeedu
 kdeedu-marble
@@ -28,4 +29,3 @@ libkcddb
 libkcompactdisc
 libkdegames
 libkmahjongg
-nepomuk-widgets
