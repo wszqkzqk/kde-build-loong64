@@ -30,7 +30,7 @@ done < kde-opt-packages
 if ${l10n}; then
 	_tmp=$(mktemp -d)
 
-	svn export -q svn://anonsvn.kde.org/home/kde/trunk/kde-common/release/language_list ${_tmp}/languages
+	wget -q https://projects.kde.org/projects/sysadmin/release-tools/repository/revisions/master/raw/language_list -O ${_tmp}/languages
 
 	while read i; do
 		l10nPkgName="${l10nPkgName} ${i}"
