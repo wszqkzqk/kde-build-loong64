@@ -2,9 +2,12 @@
 
 . common
 
-unset dirs
+tmp=$(mktemp --tmpdir)
+
 for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	dirs="${dirs} build/${i}/${svnbranch}"
+	_pushd build/${i}/${svnbranch}
+	svn diff >> ${tmp}
+	_popd
 done
 
-svn diff ${dirs} | less
+less ${tmp}
