@@ -1,6 +1,5 @@
 kdever=4.10.1
 dirver=${kdever}
-debug=false
 branch=stable
 svnbranch=trunk
 repo=staging
