@@ -1,32 +1,44 @@
-Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
+Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince
+of KDE!
 
 == Requirements ==
-* devtools (these scripts use the chroots in /var/tmp/archbuild/)
-** To build packages for kde-unstable create the kde-unstable-{i686,x86_64}-build symlinks to archbuild
+* devtools (these scripts use the chroots in /var/lib/archbuild/)
+** to build packages for kde-unstable create the
+   kde-unstable-{i686,x86_64}-build symlinks to archbuild
 ** also add the kde-unstablepkg symlink to commitpkg
-* ssh access to archlinux.org and ftpmaster.kde.org without user interaction
+* ssh access to nymeria.archlinux.org and ftpmaster.kde.org without user
+  interaction
 * set sudo to allow running makechrootpkg without password
 * set your SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf
 * set your gpg-key in makepkg.conf
 
 == Usage by file ==
-* build-packages: run makechrootpkg for all packages and install those that are defined in kde-dep-packages.
-** It will fail if a packages from kde-dep-packages will fail. Other broken packages will be just skipped and shown at the end.
-* checkout-packages: checkout the working tree from svn.archlinux.org
-* cleanup-packages: remove any logs, packages, src and pkg dirs from the working copy
-* commit-packages: commit all changes to the svn branch. This does NOT release any package
-* config: set version, branch and if l10n packages should be build. Also a target repo can be set.
-* create-l10n: this create a split PKGBUILD for the l10n packages. Remember to enable l10n in config.
-* download-packages: download the sources from KDE server. If they are already downloaded just check integrity.
-* install-packages: install all kde packages from the build dir
-* move-packages: move packages between two repos
-* release-packages: run archrelease. This actually releases and upload the packages
-* run-namcap: run namcap on all packages and store the result to namcap.log
+* build-packages: run makechrootpkg for all packages and install those that are
+  defined in kde-dep-packages.
+** it will fail if a package from kde-dep-packages will fail. Other broken
+   packages will be just skipped and shown at the end.
+* checkout-packages: checkout the working tree from SVN.
+* cleanup-packages: remove any logs, packages, signatures, src and pkg dirs
+  from the working copy.
+* commit-packages: commit all changes to the SVN branch. This does NOT release
+  any package.
+* config: set version, branch and if l10n packages should be build. Also a
+  target repo can be set.
+* create-l10n: this create a split PKGBUILD for the l10n packages. Remember to
+  enable l10n in config.
+* download-packages: download the sources from KDE server. If they are already
+  downloaded just check integrity.
+* install-packages: install all KDE packages from the build dir.
+* move-packages: move packages between two repos.
+* release-packages: run commitpkg. This actually commit, release and upload
+  the packages.
+* run-namcap: run namcap on all packages and store the result to namcap.log.
 * show-namcap: show namcap.log for all packages.
-* sign-packages: to add signatures files to the packages built on some external server like pkgbuild.com
-* svndiff: displays all local changes for the svn branch
-* syncrepo: used to sync kde-unstable from trunk
-* update-pkgbuids: updates pkgver to the one configured in config; resets pkgrel to 1. It also updates the checksum array.
+* sign-packages: add signatures files to the packages in the build dir.
+* svndiff: displays all local changes for the SVN branch.
+* syncrepo: used to sync kde-unstable from trunk.
+* update-pkgbuids: updates pkgver to the one configured in config; resets
+  pkgrel to 1. It also updates the checksum array.
 
 == Sample workflow ==
 * edit config to your needs
@@ -34,8 +46,11 @@ Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of
 * run checkout-packages to get the abs working tree
 * run update-pkgbuilds to update all PKGBUILDs
 * optional edit PKGBUILDs (e.g. remove old patches etc.)
-* build all packages using build-packages
-** add i686 as args to build i686 packages
-* run-namcap and have a look at the logs with show-namcap
-* to add signature files to the packages built not locally, run sign-packages
-* run release-packages to upload and release all packages to the repo
+* build all packages for x86_64 using build-packages
+** run again 'build-packages i686' to build i686 packages
+* run run-namcap and have a look at the logs with show-namcap
+* run sign-packages to add signatures files to the packages built on remote
+  (e.g. on pkgbuild.com)
+* run release-packages 'Upstream release' to upload and release all packages to
+  the repo
+
