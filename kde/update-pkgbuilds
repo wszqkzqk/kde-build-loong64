@@ -21,8 +21,10 @@ for i in ${depPkgName} ${optPkgName}; do
 		sed -r 's|-DCMAKE_BUILD_TYPE=RelWithDebInfo|-DCMAKE_BUILD_TYPE=Release|g' -i PKGBUILD
 	fi
 
-	$pwd/../common/updpkg ${kdever}
-	_popd
+    sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
+    sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+    updpkgsums
+    _popd
 done
 
 if ${l10n}; then
