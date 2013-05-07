@@ -3,13 +3,11 @@
 . common
 
 if [ "$1" = "" ]; then
-	echo "Usage: ${0} <comment>"
-	exit 1
+    echo "Usage: ${0} <comment>"
+    exit 1
 fi
 
-for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	_pushd build/${i}/${svnbranch}
-	echo "${i}..."
-	svn commit -m "${1}" || exit 1
-	_popd
-done
+if [ -d build ]; then
+    cd build
+    svn commit -m "${1}"
+fi

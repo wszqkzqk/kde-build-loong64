@@ -2,15 +2,10 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	if [ -d "build/${i}" ]; then
-		_pushd build/${i}
-		echo "${i}..."
-		svn update
-		_popd
-	else
-		_pushd build
-		archco ${i}
-		_popd
-	fi
-done
+if [ ! -d build ]; then
+    svn checkout -N svn+ssh://svn-packages@nymeria.archlinux.org/srv/repos/svn-packages/svn build
+fi
+
+pushd build
+svn update ${depPkgName} ${optPkgName} kde-l10n kde-meta
+popd

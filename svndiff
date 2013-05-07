@@ -2,12 +2,7 @@
 
 . common
 
-tmp=$(mktemp --tmpdir)
-
-for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
-	_pushd build/${i}/${svnbranch}
-	svn diff >> ${tmp}
-	_popd
-done
-
-less ${tmp}
+if [ -d build ]; then
+    cd build
+    svn diff
+fi

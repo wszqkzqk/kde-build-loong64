@@ -2,40 +2,5 @@
 
 . common
 
-host="ftparchlinux@ftpmaster.kde.org"
-
-checkIntegrity() {
-	if [ "$(sha1sum "${1}" | cut -d' ' -f1)" != "$(ssh ${host} sha1sum "${2}" | cut -d' ' -f1)" ]; then
-		return 1
-	else
-		return 0
-	fi
-}
-
-for i in `ssh ${host} ls ${branch}/${dirver}/src/*-${kdever}.tar.xz`; do
-	if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
-		scp ${host}:~/${i} ${SRCDEST}/
-	fi
-
-	if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
-		echo "$(basename ${i}) ok"
-	else
-		echo "$(basename ${i}) corrupted"
-		exit 1
-	fi
-done
-
-if ${l10n}; then
-	for i in `ssh ${host} ls ${branch}/${dirver}/src/kde-l10n/*-${kdever}.tar.xz`; do
-		if [ ! -f "${SRCDEST}/$(basename ${i})" ]; then
-			scp ${host}:~/${i} ${SRCDEST}/
-		fi
-
-		if checkIntegrity "${SRCDEST}/$(basename ${i})" "~/${i}"; then
-			echo "$(basename ${i}) ok"
-		else
-			echo "$(basename ${i}) corrupted"
-			exit 1
-		fi
-	done
-fi
+rsync -e ssh -c -h -L --progress --partial ftparchlinux@ftpmaster.kde.org:${branch}/${dirver}/src/*.xz ${SRCDEST}/
+rsync -e ssh -c -h -L --progress --partial ftparchlinux@ftpmaster.kde.org:${branch}/${dirver}/src/kde-l10n/*.xz ${SRCDEST}/

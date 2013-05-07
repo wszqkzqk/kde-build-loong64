@@ -2,7 +2,7 @@
 
 . common
 
-broken=''
+unset broken
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1

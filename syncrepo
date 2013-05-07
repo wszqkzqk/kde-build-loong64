@@ -12,15 +12,19 @@ source=$1
 target=$2
 
 for pkg in ${depPkgName} ${optPkgName} kde-meta; do
-	_pushd build/${pkg}
-	[ -d ${target} ] && svn rm --force ${target}
-	svn cp ${source} ${target}
-	_popd
+    if [ -d build/${pkg} ]; then
+        _pushd build/${pkg}
+        [ -d ${target} ] && svn rm --force ${target}
+        svn cp ${source} ${target}
+        _popd
+    fi
 done
 
 if ${l10n}; then
-	_pushd build/kde-l10n
-	[ -d ${target} ] && svn rm --force ${target}
-	svn cp ${source} ${target}
-	_popd
+    if [ -d build/kdel-10n ]; then
+        _pushd build/kde-l10n
+        [ -d ${target} ] && svn rm --force ${target}
+        svn cp ${source} ${target}
+        _popd
+    fi
 fi

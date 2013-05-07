@@ -3,12 +3,7 @@
 
 . config
 
-[[ ! -d build ]] && mkdir build
-
-depPkgName=''
-optPkgName=''
-l10nPkgName=''
-
+unset depPkgName
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
 		if [ "$i" = "oxygen-icons" -o "$i" = "kde-wallpapers" ]; then
@@ -21,12 +16,14 @@ while read i; do
 	fi
 done < kde-dep-packages
 
+unset optPkgName
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
 		optPkgName="${optPkgName} ${i}"
 	fi
 done < kde-opt-packages
 
+unset l10nPkgName
 if ${l10n}; then
 	_tmp=$(mktemp -d)
 
