@@ -20,7 +20,7 @@ for i in ${depPkgName} ${optPkgName}; do
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
 			if [ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
-				scp ${server}:"~/svn-packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
+				scp ${server}:"~/packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
 			fi
             
 			if [ -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
