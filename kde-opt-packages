@@ -3,7 +3,6 @@ kdeaccessibility-kaccessible
 kdeaccessibility-kmag
 kdeaccessibility-kmousetool
 kdeaccessibility-kmouth
-#kdeadmin
 kdeadmin-kcron
 kdeadmin-ksystemlog
 kdeadmin-kuser
@@ -91,7 +90,6 @@ kdemultimedia-juk
 kdemultimedia-kmix
 kdemultimedia-kscd
 kdemultimedia-mplayerthumbs
-#kdenetwork
 kdenetwork-filesharing
 kdenetwork-kdnssd
 kdenetwork-kget
@@ -102,7 +100,6 @@ kdenetwork-krfb
 kdenetwork-strigi-analyzers
 kdepim
 kdeplasma-addons
-#kdesdk
 kdesdk-cervisia
 kdesdk-dev-utils
 kdesdk-dev-scripts
@@ -117,7 +114,6 @@ kdesdk-poxml
 kdesdk-strigi-analyzers
 kdesdk-thumbnailers
 kdesdk-umbrello
-#kdetoys
 kdetoys-amor
 kdetoys-kteatime
 kdetoys-ktux
