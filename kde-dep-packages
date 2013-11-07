@@ -15,7 +15,6 @@ kdebindings-perlqt
 kdebindings-qyoto
 kdebindings-qtruby
 kde-base-artwork
-kdebase-workspace
 nepomuk-widgets
 kdebase
 libkdeedu
@@ -29,3 +28,4 @@ libkcddb
 libkcompactdisc
 libkdegames
 libkmahjongg
+libkomparediff2
