@@ -1,29 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 
-. common
-
-pkglist=''
-
-tmp=$(mktemp --tmpdir)
-
-for i in ${depPkgName} ${optPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	unset pkgname
-	unset pkgver
-	unset pkgrel
-	unset arch
-	. PKGBUILD
-	for _pkgname in ${pkgname[@]}; do
-		logfile="${_pkgname}-${pkgver}-${pkgrel}-${arch}${PKGEXT}-namcap.log"
-
-		if [ -f "${logfile}" ]; then
-			cat $(pwd)/$logfile >> $tmp
-		fi
-	done
-	_popd
-done
-
-less $tmp | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
+cat $(find build/*/${svnbranch} -name *-namcap.log) | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
 			-e 'on your system is a testing release' \
 			-e 'hicolor-icon-theme' \
 			-e 'gcc-libs' \
@@ -32,4 +9,4 @@ less $tmp | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
 			-e 'Potential non-FHS man page (usr/share/doc' \
 			-e 'Potential non-FHS info page (usr/share/doc' \
 			-e "Dependency included and not needed ('kdebase-runtime')" \
-			-e "Dependency included and not needed ('kdepim-runtime')"
+			-e "Dependency included and not needed ('kdepim-runtime')" | less
