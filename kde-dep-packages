@@ -1,6 +1,8 @@
 kdelibs
 kdegraphics-mobipocket
-nepomuk-core
+kfilemetadata
+baloo
+#nepomuk-core
 kdepimlibs
 oxygen-icons
 kactivities
@@ -17,7 +19,8 @@ kdebindings-perlqt
 kdebindings-qyoto
 kdebindings-qtruby
 kde-base-artwork
-nepomuk-widgets
+baloo-widgets
+#nepomuk-widgets
 kdebase
 libkdeedu
 kdeedu-marble
@@ -30,3 +33,4 @@ libkcompactdisc
 libkdegames
 libkmahjongg
 libkomparediff2
+kqtquickcharts
