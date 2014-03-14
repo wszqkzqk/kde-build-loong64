@@ -4,7 +4,6 @@ kfilemetadata
 kdepimlibs
 baloo
 oxygen-icons
-nepomuk-core
 kactivities
 kdebase-runtime
 kdepim-runtime
@@ -33,4 +32,3 @@ libkdegames
 libkmahjongg
 libkomparediff2
 kqtquickcharts
-nepomuk-widgets
