@@ -91,13 +91,13 @@ kdemultimedia-kmix
 kdemultimedia-kscd
 kdemultimedia-mplayerthumbs
 kdenetwork-filesharing
-kdenetwork-kdnssd
 kdenetwork-kget
 kdenetwork-kopete
 kdenetwork-kppp
 kdenetwork-krdc
 kdenetwork-krfb
 kdenetwork-strigi-analyzers
+kdenetwork-zeroconf-ioslave
 kdepim
 kdeplasma-addons
 kdesdk-cervisia
