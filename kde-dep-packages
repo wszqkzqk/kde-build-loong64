@@ -4,7 +4,7 @@ kfilemetadata
 kdepimlibs
 baloo
 oxygen-icons
-kactivities4
+#kactivities4
 kdebase-runtime
 kdepim-runtime
 kdebindings-smokegen
