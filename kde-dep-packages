@@ -2,7 +2,7 @@ kdelibs
 kdegraphics-mobipocket
 kfilemetadata
 kdepimlibs
-baloo
+baloo4
 oxygen-icons
 #kactivities4
 kdebase-runtime
@@ -18,7 +18,7 @@ kdebindings-perlqt
 kdebindings-qyoto
 kdebindings-qtruby
 kde-base-artwork
-baloo-widgets
+baloo4-widgets
 kdebase
 libkdeedu
 kdeedu-marble
