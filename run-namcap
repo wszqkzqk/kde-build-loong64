@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -d build ]; then
+  exit 1
+fi
+
 . common
 
 for pkg in ${depPkgName} ${optPkgName}; do

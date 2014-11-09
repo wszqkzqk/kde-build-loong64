@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ ! -d build ]; then
+  exit 1
+fi
+
 cat $(find build/*/${svnbranch} -name *-namcap.log) | grep -v -e '/etc/ssl/certs/ca-certificates.crt' \
 			-e 'on your system is a testing release' \
 			-e 'hicolor-icon-theme' \

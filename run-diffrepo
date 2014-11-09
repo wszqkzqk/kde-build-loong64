@@ -1,14 +1,14 @@
 #!/bin/bash
 
+if [ ! -d build ]; then
+  exit 1
+fi
+
 . common
 
-if [ -d build ]; then
-  cd build
-
-  for pkg in ${depPkgName} ${optPkgName}; do
-    _pushd build/${pkg}/${svnbranch}
-    diffrepo
-    _popd
-  done
-fi
+for pkg in ${depPkgName} ${optPkgName}; do
+  _pushd build/${pkg}/${svnbranch}
+  diffrepo
+  _popd
+done
 
