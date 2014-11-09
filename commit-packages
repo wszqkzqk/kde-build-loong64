@@ -10,9 +10,10 @@ fi
 if [ -d build ]; then
   cd build
 
+  unset pkgs
   for i in ${depPkgName} ${optPkgName} kde-l10n kde-meta; do
     [ -d $i ] && pkgs="${pkgs} ${i}"
   done
 
-  svn commit -m "${1}" "${pkgs}"
+  svn commit -m "${1}" ${pkgs}
 fi
