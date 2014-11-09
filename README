@@ -32,6 +32,8 @@ of KDE!
 * move-packages: move packages between two repos.
 * release-packages: run commitpkg. This actually commit, release and upload
   the packages.
+* run-diffrepo: run the diffrepo script (avaiable on pkgbuild.com) to each
+  package.
 * run-namcap: run namcap on all packages and store the result to namcap.log.
 * show-namcap: show namcap.log for all packages.
 * sign-packages: add signatures files to the packages in the build dir.
