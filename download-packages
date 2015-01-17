@@ -2,8 +2,8 @@
 
 . common
 
-rsync -e ssh -c -h -L --progress --partial ftparchlinux@depot.kde.org:${branch}/${dirver}/src/*.xz ${SRCDEST}/
+rsync -e ssh -c -h -L --progress --partial ftparchlinux@depot.kde.org:${branch}/applications/${dirver}/src/*.xz ${SRCDEST}/
 
 if ${l10n}; then
-    rsync -e ssh -c -h -L --progress --partial ftparchlinux@depot.kde.org:${branch}/${dirver}/src/kde-l10n/*.xz ${SRCDEST}/
+    rsync -e ssh -c -h -L --progress --partial ftparchlinux@depot.kde.org:${branch}/applications/${dirver}/src/kde-l10n/*.xz ${SRCDEST}/
 fi
