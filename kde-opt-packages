@@ -8,10 +8,10 @@ kdeadmin-ksystemlog
 kdeadmin-kuser
 kdeartwork
 konsole
-kdebindings-kimono
-kdebindings-korundum
-kdebindings-kross
-kdebindings-perlkde
+#kdebindings-kimono
+#kdebindings-korundum
+#kdebindings-kross
+#kdebindings-perlkde
 kdeedu-artikulate
 kdeedu-blinken
 kdeedu-cantor
@@ -87,6 +87,7 @@ kdemultimedia-audiocd-kio
 kdemultimedia-dragonplayer
 kdemultimedia-ffmpegthumbs
 kdemultimedia-juk
+kmix
 kdemultimedia-kmix
 kdemultimedia-kscd
 kdemultimedia-mplayerthumbs
@@ -98,7 +99,7 @@ kdenetwork-krdc
 kdenetwork-krfb
 kdenetwork-strigi-analyzers
 kdenetwork-zeroconf-ioslave
-kdeplasma-addons
+kdepim
 kdesdk-cervisia
 kdesdk-dev-utils
 kdesdk-dev-scripts
