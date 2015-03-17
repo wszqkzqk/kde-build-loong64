@@ -10,7 +10,7 @@ arch=$1
 
 for i in ${depPkgName}; do
 	_pushd build/${i}/${svnbranch}
-	if [ "${i}" = "kdelibs" ]; then
+	if [ "${i}" = "oxygen-icons" ]; then
 		sudo ${repo}-${arch}-build || exit 1
 	else
 		setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1
