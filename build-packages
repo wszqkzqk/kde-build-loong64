@@ -9,19 +9,23 @@ arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
 for i in ${depPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	if [ "${i}" = "oxygen-icons" ]; then
-		sudo ${repo}-${arch}-build || exit 1
-	else
-		setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1
-	fi
-	_popd
+        _pushd build/${i}/${svnbranch}
+        if [ "${i}" = "oxygen-icons" ] || $clean_chroot ; then
+                sudo ${repo}-${arch}-build || exit 1
+        else
+                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1
+        fi
+        _popd
 done
 
 for i in ${optPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || broken="${broken} ${i}"
-	_popd
+        _pushd build/${i}/${svnbranch}
+        if $clean_chroot ; then
+                sudo ${repo}-${arch}-build || broken="${broken} ${i}"
+        else
+                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || broken="${broken} ${i}"
+        fi
+        _popd
 done
 
 if ${l10n}; then

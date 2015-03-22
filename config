@@ -6,3 +6,4 @@ svnbranch=trunk
 repo=testing
 l10n=true #build l10n package
 any=true #upload -any packages?
+clean_chroot=false # build all packages in a clean chroot
