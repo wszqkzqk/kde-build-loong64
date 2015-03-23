@@ -131,7 +131,7 @@ kdeutils-kdf
 kdeutils-kfloppy
 kdeutils-kgpg
 kdeutils-kremotecontrol
-kdeutils-ktimer
+ktimer
 kdeutils-kwalletmanager
 print-manager
 kdeutils-superkaramba
