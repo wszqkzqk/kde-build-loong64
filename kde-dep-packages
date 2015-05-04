@@ -1,8 +1,9 @@
 oxygen-icons
+#kdelibs
 kdebase-runtime
 kdegraphics-mobipocket
-#kdepimlibs
-#kdepim-runtime
+kdepimlibs
+kdepim-runtime
 libkexiv2
 kdegraphics-okular
 kate
@@ -23,7 +24,7 @@ libkdegames
 libkmahjongg
 libkomparediff2
 kqtquickcharts
+signon-kwallet-extension
 kaccounts-providers
 kaccounts-integration
-signon-kwallet-extension
 telepathy-kde-common-internals

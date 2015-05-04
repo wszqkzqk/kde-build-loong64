@@ -105,10 +105,10 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
-#kdepim
+kdepim
 kdesdk-cervisia
 kdesdk-dev-utils
-kdesdk-dev-scripts
+kde-dev-scripts
 kdesdk-dolphin-plugins
 kapptemplate
 kdesdk-kcachegrind
