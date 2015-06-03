@@ -11,7 +11,7 @@ fi
 source=$1
 target=$2
 
-for pkg in ${depPkgName} ${optPkgName} kde-meta; do
+for pkg in ${depPkgName} ${optPkgName}; do
     if [ -d build/${pkg} ]; then
         _pushd build/${pkg}
         [ -d ${target} ] && svn rm --force ${target}
