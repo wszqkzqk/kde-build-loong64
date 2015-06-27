@@ -2,7 +2,7 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName}; do
+for i in ${depPkgName} ${optPkgName} l10n; do
 
 	_pushd build/${i}/${svnbranch}
 	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
@@ -27,7 +27,3 @@ for i in ${depPkgName} ${optPkgName}; do
     _popd
 done
 
-if ${l10n}; then
-	echo "creating kde-l10n PKGBUILD..."
-	./create-l10n > build/kde-l10n/${svnbranch}/PKGBUILD
-fi
