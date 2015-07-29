@@ -12,7 +12,7 @@ for i in ${depPkgName}; do
         _pushd build/${i}/${svnbranch}
         if $clean_chroot ; then
                 sudo ${repo}-${arch}-build || broken="${broken} ${i}"
-        elif [ "${i}" = "oxygen-icons" ] ; then
+        elif [ "${i}" = "kdebase-runtime" ] ; then
                 sudo ${repo}-${arch}-build || exit 1
         else
                 setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1

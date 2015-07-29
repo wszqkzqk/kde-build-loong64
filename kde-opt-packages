@@ -1,14 +1,20 @@
+### kdeaccessibility
 kdeaccessibility-jovie
 kdeaccessibility-kaccessible
 kdeaccessibility-kmag
 kdeaccessibility-kmousetool
 kdeaccessibility-kmouth
+### kdeadmin
 kcron
 kdeadmin-ksystemlog
 kdeadmin-kuser
+### kdeartwork
 kdeartwork
+### kdebase
+dolphin
 kate
 konsole
+### kdeedu
 kdeedu-artikulate
 blinken
 cantor
@@ -30,6 +36,7 @@ kdeedu-pairs
 parley
 rocs
 step
+### kdegames
 bomber
 bovo
 granatier
@@ -45,7 +52,7 @@ kfourinline
 kdegames-kgoldrunner
 kdegames-kigo
 killbots
-kdegames-kiriki
+kiriki
 kjumpingcube
 kdegames-klickety
 klines
@@ -68,8 +75,9 @@ kdegames-ktuberling
 kdegames-kubrick
 kdegames-lskat
 kdegames-palapeli
-kdegames-picmi
+picmi
 gwenview
+### kdegraphics
 kdegraphics-kamera
 kdegraphics-kcolorchooser
 kdegraphics-kgamma
@@ -77,18 +85,22 @@ kdegraphics-kolourpaint
 kruler
 kdegraphics-ksaneplugin
 kdegraphics-ksnapshot
+libkface
+libkgeomap
 kdegraphics-okular
 kdegraphics-strigi-analyzer
 kdegraphics-svgpart
 kdegraphics-thumbnailers
+### kdemultimedia
 kdemultimedia-audiocd-kio
-kdemultimedia-dragonplayer
+dragon
 kdemultimedia-ffmpegthumbs
 kdemultimedia-juk
 kdenlive
 kdemultimedia-kmix
 kdemultimedia-kscd
 kdemultimedia-mplayerthumbs
+### kdenetwork
 kdenetwork-filesharing
 kdenetwork-kget
 kdenetwork-kopete
@@ -97,6 +109,7 @@ kdenetwork-krdc
 kdenetwork-krfb
 kdenetwork-strigi-analyzers
 kdenetwork-zeroconf-ioslave
+kio-extras
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
 telepathy-kde-auth-handler
@@ -107,11 +120,13 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
+### kdepim
 kdepim
+### kdesdk
 kdesdk-cervisia
 kdesdk-dev-utils
 kde-dev-scripts
-kdesdk-dolphin-plugins
+dolphin-plugins
 kapptemplate
 kdesdk-kcachegrind
 kdesdk-kioslaves
@@ -121,11 +136,13 @@ okteta
 kdesdk-poxml
 kdesdk-strigi-analyzers
 kdesdk-thumbnailers
-kdesdk-umbrello
+umbrello
+### kdetoys
 kdetoys-amor
 kteatime
 kdetoys-ktux
-kdeutils-ark
+### kdeutils
+ark
 filelight
 kcalc
 kcharselect
@@ -134,10 +151,12 @@ kdeutils-kfloppy
 kdeutils-kgpg
 kdeutils-kremotecontrol
 ktimer
-kdeutils-kwalletmanager
+kwalletmanager
 print-manager
 kdeutils-superkaramba
 kdeutils-sweeper
+### kdewebdew
 kdewebdev
+### kde-workspace
 kde-wallpapers
-kdebase-workspace
+#kdebase-workspace
