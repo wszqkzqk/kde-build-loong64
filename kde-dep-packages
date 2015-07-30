@@ -17,10 +17,6 @@ libkdegames
 libkmahjongg
 libkomparediff2
 kqtquickcharts
-signon-kwallet-extension
-kaccounts-integration
-kaccounts-providers
-telepathy-kde-common-internals
 baloo-widgets
 ### PIM
 kcontacts
@@ -45,3 +41,8 @@ kmailtransport
 akonadi-calendar
 kalarmcal
 kdepim-runtime
+### telepathy
+signon-kwallet-extension
+kaccounts-integration
+kaccounts-providers
+telepathy-kde-common-internals
