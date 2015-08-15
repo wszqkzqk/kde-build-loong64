@@ -127,7 +127,7 @@ kde-dev-scripts
 dolphin-plugins
 kapptemplate
 kdesdk-kcachegrind
-kdesdk-kioslaves
+#kdesdk-kioslaves
 kompare
 lokalize
 okteta
