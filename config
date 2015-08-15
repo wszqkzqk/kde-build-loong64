@@ -6,4 +6,4 @@ svnbranch=kde-unstable
 repo=kde-unstable
 l10n=false #build l10n package
 any=true #upload -any packages?
-clean_chroot=true # build all packages in a clean chroot
+clean_chroot=false # build all packages in a clean chroot
