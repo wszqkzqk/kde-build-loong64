@@ -14,6 +14,8 @@ kdeartwork
 dolphin
 kate
 konsole
+### kdebindings
+kross-interpreters
 ### kdeedu
 kdeedu-artikulate
 blinken
@@ -145,6 +147,7 @@ ark
 filelight
 kcalc
 kcharselect
+kdebugsettings
 kdeutils-kdf
 kdeutils-kfloppy
 kdeutils-kgpg
