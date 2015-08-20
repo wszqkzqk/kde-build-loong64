@@ -130,7 +130,7 @@ kde-dev-scripts
 dolphin-plugins
 kapptemplate
 kdesdk-kcachegrind
-#kdesdk-kioslaves
+#kdesdk-kioslaves - doesn't build with svn 1.9
 kompare
 lokalize
 okteta
@@ -161,4 +161,3 @@ kdeutils-sweeper
 kdewebdev
 ### kde-workspace
 kde-wallpapers
-#kdebase-workspace
