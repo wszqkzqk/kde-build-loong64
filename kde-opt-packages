@@ -8,8 +8,6 @@ kdeaccessibility-kmouth
 kcron
 kdeadmin-ksystemlog
 kdeadmin-kuser
-### kdeartwork
-kdeartwork
 ### kdebase
 dolphin
 kate
@@ -159,5 +157,3 @@ kdeutils-superkaramba
 kdeutils-sweeper
 ### kdewebdew
 kdewebdev
-### kde-workspace
-kde-wallpapers
