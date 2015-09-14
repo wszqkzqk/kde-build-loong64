@@ -1,4 +1,4 @@
-kdever=15.08.0
+kdever=15.08.1
 dirver=${kdever}
 debug=false
 branch=stable
@@ -6,4 +6,4 @@ svnbranch=trunk
 repo=testing
 l10n=true #build l10n package
 any=true #upload -any packages?
-clean_chroot=false # build all packages in a clean chroot
+clean_chroot=true # build all packages in a clean chroot
