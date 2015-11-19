@@ -1,10 +1,9 @@
-kdelibs
+#kdelibs
 kdebase-runtime
 kdegraphics-mobipocket
-libkexiv2
 kdebase
 kdeedu-data
-libmarble4
+libkexiv2
 libkdcraw
 libkipi
 libksane
