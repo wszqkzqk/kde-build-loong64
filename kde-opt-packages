@@ -6,7 +6,7 @@ kdeaccessibility-kmousetool
 kdeaccessibility-kmouth
 ### kdeadmin
 kcron
-#ksystemlog
+ksystemlog
 kdeadmin-kuser
 ### kdebase
 dolphin
@@ -15,7 +15,7 @@ konsole
 ### kdebindings
 kross-interpreters
 ### kdeedu
-#artikulate
+artikulate
 blinken
 cantor
 kalgebra
@@ -54,11 +54,11 @@ kdegames-kigo
 killbots
 kiriki
 kjumpingcube
-#klickety
+klickety
 klines
 kdegames-kmahjongg
 kmines
-#knavalbattle
+knavalbattle
 knetwalk
 kdegames-kolf
 kollision
@@ -71,14 +71,14 @@ kdegames-ksnakeduel
 kdegames-kspaceduel
 ksquares
 kdegames-ksudoku
-#ktuberling
+ktuberling
 kdegames-kubrick
 kdegames-lskat
 kdegames-palapeli
 picmi
 gwenview
 ### kdegraphics
-#kamera
+kamera
 kdegraphics-kcolorchooser
 kdegraphics-kolourpaint
 kruler
@@ -86,7 +86,7 @@ kdegraphics-ksaneplugin
 libkface
 libkgeomap
 kdegraphics-okular
-#spectacle
+spectacle
 kdegraphics-strigi-analyzer
 kdegraphics-svgpart
 kdegraphics-thumbnailers
@@ -105,7 +105,7 @@ kdenetwork-kget
 kdenetwork-kopete
 kdenetwork-kppp
 kdenetwork-krdc
-#krfb
+krfb
 kdenetwork-strigi-analyzers
 kdenetwork-zeroconf-ioslave
 kio-extras
@@ -132,7 +132,7 @@ kdesdk-kcachegrind
 kompare
 lokalize
 okteta
-#poxml
+poxml
 kdesdk-strigi-analyzers
 kdesdk-thumbnailers
 umbrello
