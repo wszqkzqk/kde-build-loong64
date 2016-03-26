@@ -39,6 +39,20 @@ kmailtransport
 akonadi-calendar
 kalarmcal
 kdepim-runtime
+libkdepim
+pimcommon
+kdgantt2
+libkleo
+grantleetheme
+kdepim-apps-libs
+calendarsupport
+eventviews
+incidenceeditor
+libgravatar
+libksieve
+messagelib
+mailimporter
+mailcommon
 ### telepathy
 signon-kwallet-extension
 kaccounts-integration

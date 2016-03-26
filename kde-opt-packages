@@ -1,3 +1,4 @@
+khelpcenter
 ### kdeaccessibility
 kdeaccessibility-jovie
 kdeaccessibility-kaccessible
@@ -6,7 +7,7 @@ kdeaccessibility-kmousetool
 kdeaccessibility-kmouth
 ### kdeadmin
 kcron
-#ksystemlog
+ksystemlog
 kdeadmin-kuser
 ### kdebase
 dolphin
@@ -15,7 +16,7 @@ konsole
 ### kdebindings
 kross-interpreters
 ### kdeedu
-#artikulate
+artikulate
 blinken
 cantor
 kalgebra
@@ -33,6 +34,7 @@ kdeedu-ktouch
 kturtle
 kwordquiz
 marble
+minuet
 parley
 rocs
 step
@@ -54,11 +56,11 @@ kdegames-kigo
 killbots
 kiriki
 kjumpingcube
-#klickety
+klickety
 klines
-kdegames-kmahjongg
+kmahjongg
 kmines
-#knavalbattle
+knavalbattle
 knetwalk
 kdegames-kolf
 kollision
@@ -71,22 +73,22 @@ kdegames-ksnakeduel
 kdegames-kspaceduel
 ksquares
 kdegames-ksudoku
-#ktuberling
+ktuberling
 kdegames-kubrick
 kdegames-lskat
 kdegames-palapeli
 picmi
 gwenview
 ### kdegraphics
-#kamera
-kdegraphics-kcolorchooser
+kamera
+kcolorchooser
 kdegraphics-kolourpaint
 kruler
 kdegraphics-ksaneplugin
 libkface
 libkgeomap
 kdegraphics-okular
-#spectacle
+spectacle
 kdegraphics-strigi-analyzer
 kdegraphics-svgpart
 kdegraphics-thumbnailers
@@ -104,14 +106,15 @@ kdenetwork-filesharing
 kdenetwork-kget
 kdenetwork-kopete
 kdenetwork-kppp
-kdenetwork-krdc
-#krfb
+krdc
+krfb
 kdenetwork-strigi-analyzers
 kdenetwork-zeroconf-ioslave
 kio-extras
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
 telepathy-kde-auth-handler
+telepathy-kde-call-ui
 telepathy-kde-contact-list
 telepathy-kde-contact-runner
 telepathy-kde-desktop-applets
@@ -120,7 +123,7 @@ telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
 ### kdepim
-kdepim
+#kdepim
 ### kdesdk
 kdesdk-cervisia
 kdesdk-dev-utils
@@ -132,7 +135,7 @@ kdesdk-kcachegrind
 kompare
 lokalize
 okteta
-#poxml
+poxml
 kdesdk-strigi-analyzers
 kdesdk-thumbnailers
 umbrello
@@ -143,7 +146,7 @@ kcalc
 kcharselect
 kdebugsettings
 kdeutils-kdf
-kdeutils-kfloppy
+kfloppy
 kdeutils-kgpg
 kdeutils-kremotecontrol
 kteatime
@@ -153,3 +156,4 @@ print-manager
 kdeutils-sweeper
 ### kdewebdew
 kdewebdev
+
