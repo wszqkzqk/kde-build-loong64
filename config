@@ -1,9 +1,9 @@
-kdever=16.04.1
+kdever=16.04.2
 dirver=${kdever}
 debug=false
 branch=stable
 svnbranch=trunk
 repo=extra
-l10n=false #build l10n packages
+l10n=true #build l10n packages
 any=true #upload -any packages?
 clean_chroot=false # build all packages in a clean chroot

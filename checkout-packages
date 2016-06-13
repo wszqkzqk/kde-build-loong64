@@ -3,7 +3,7 @@
 . common
 
 if [ ! -d build ]; then
-    svn checkout -N svn+ssh://svn-packages@nymeria.archlinux.org/srv/repos/svn-packages/svn build
+    svn checkout -N svn+ssh://svn-packages@repos.archlinux.org/srv/repos/svn-packages/svn build
 fi
 
 pushd build
