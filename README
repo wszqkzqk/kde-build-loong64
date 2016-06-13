@@ -6,7 +6,7 @@ of KDE!
 ** to build packages for kde-unstable create the
    kde-unstable-{i686,x86_64}-build symlinks to archbuild
 ** also add the kde-unstablepkg symlink to commitpkg
-* ssh access to nymeria.archlinux.org and depot.kde.org without user
+* ssh access to repos.archlinux.org and depot.kde.org without user
   interaction
 * set sudo to allow running makechrootpkg without password
 * set your SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf

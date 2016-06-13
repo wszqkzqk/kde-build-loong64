@@ -11,8 +11,8 @@ fi
 repofrom=$1
 repoto=$2
 
-ssh nymeria.archlinux.org /packages/db-move $repofrom $repoto ${depPkgName} ${optPkgName}
+ssh repos.archlinux.org /packages/db-move $repofrom $repoto ${depPkgName} ${optPkgName}
 
 if ${l10n}; then
-	ssh nymeria.archlinux.org /packages/db-move $repofrom $repoto kde-l10n
+	ssh repos.archlinux.org /packages/db-move $repofrom $repoto kde-l10n
 fi
