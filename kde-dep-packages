@@ -1,4 +1,4 @@
-kdelibs
+#kdelibs
 kdebase-runtime
 kdegraphics-mobipocket
 kdebase
@@ -28,14 +28,16 @@ kde-syndication
 kblog
 kmime
 kimap
-kldap
 kmbox
+kldap
 kontactinterface
 libktnef
 akonadi
-kdepimlibs
-akonadi-search
+akonadi-mime
 kmailtransport
+akonadi-contacts
+akonadi-notes
+akonadi-search
 akonadi-calendar
 kalarmcal
 kdepim-runtime

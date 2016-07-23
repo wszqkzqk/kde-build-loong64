@@ -82,14 +82,13 @@ picmi
 gwenview
 kamera
 kcolorchooser
-kdegraphics-kolourpaint
+kolourpaint
 kruler
 kdegraphics-ksaneplugin
 libkface
 libkgeomap
 kdegraphics-okular
 spectacle
-kdegraphics-strigi-analyzer
 kdegraphics-svgpart
 kdegraphics-thumbnailers
 ### kdemultimedia
@@ -100,7 +99,6 @@ kdemultimedia-juk
 kdenlive
 kdemultimedia-kmix
 kdemultimedia-kscd
-kdemultimedia-mplayerthumbs
 ### kdenetwork
 kdenetwork-filesharing
 kdenetwork-kget
@@ -108,7 +106,6 @@ kdenetwork-kopete
 kdenetwork-kppp
 krdc
 krfb
-kdenetwork-strigi-analyzers
 kdenetwork-zeroconf-ioslave
 kio-extras
 telepathy-kde-accounts-kcm
@@ -127,7 +124,7 @@ kdepim
 kdepim-addons
 kleopatra
 ### kdesdk
-kdesdk-cervisia
+cervisia
 kdesdk-dev-utils
 kde-dev-scripts
 dolphin-plugins
@@ -138,7 +135,6 @@ kompare
 lokalize
 okteta
 poxml
-kdesdk-strigi-analyzers
 kdesdk-thumbnailers
 umbrello
 ### kdeutils
@@ -147,7 +143,7 @@ filelight
 kcalc
 kcharselect
 kdebugsettings
-kdeutils-kdf
+kdf
 kfloppy
 kdeutils-kgpg
 kdeutils-kremotecontrol
