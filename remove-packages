@@ -1,0 +1,18 @@
+#!/bin/bash
+
+. common
+
+if [ "$#" -lt 2 ]; then
+	echo "Usage: ${0} <repo> <arch>"
+	echo "Example: ${0} extra x86_64"
+	exit 1
+fi
+
+_repo=$1
+_arch=$2
+
+ssh repos.archlinux.org /packages/db-remove $_repo $_arch ${depPkgName} ${optPkgName}
+
+if ${l10n}; then
+	ssh repos.archlinux.org /packages/db-remove $_repo any kde-l10n
+fi
