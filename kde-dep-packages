@@ -1,7 +1,6 @@
-kdelibs
+#kdelibs
 kdebase-runtime
 kdegraphics-mobipocket
-kdebase
 kdeedu-data
 libkexiv2
 libkdcraw
@@ -18,7 +17,6 @@ kqtquickcharts
 baloo-widgets
 ### PIM
 kcontacts
-gpgmepp
 kcalcore
 kpimtextedit
 kidentitymanagement
@@ -43,7 +41,6 @@ kalarmcal
 kdepim-runtime
 libkdepim
 pimcommon
-kdgantt2
 libkleo
 grantleetheme
 kdepim-apps-libs

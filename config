@@ -1,7 +1,7 @@
-kdever=16.08.0
+kdever=16.11.80
 dirver=${kdever}
 debug=false
-branch=stable
+branch=unstable
 svnbranch=kde-unstable
 repo=kde-unstable
 l10n=true #build l10n packages

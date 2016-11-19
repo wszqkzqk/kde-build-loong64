@@ -7,11 +7,14 @@ kdeaccessibility-kmouth
 ### kdeadmin
 kcron
 ksystemlog
-kdeadmin-kuser
 ### kdebase
 dolphin
 kate
+kdialog
+keditbookmarks
+kfind
 khelpcenter
+konqueror
 konsole
 ### kdebindings
 kross-interpreters
@@ -20,7 +23,7 @@ artikulate
 blinken
 cantor
 kalgebra
-kdeedu-kalzium
+kalzium
 kanagram
 kbruch
 kgeography
@@ -30,7 +33,7 @@ kiten
 klettres
 kmplot
 kstars
-kdeedu-ktouch
+ktouch
 kturtle
 kwordquiz
 marble
@@ -87,18 +90,19 @@ kruler
 kdegraphics-ksaneplugin
 libkface
 libkgeomap
-kdegraphics-okular
+okular
 spectacle
-kdegraphics-svgpart
+svgpart
 kdegraphics-thumbnailers
 ### kdemultimedia
-kdemultimedia-audiocd-kio
+audiocd-kio
 dragon
 ffmpegthumbs
 kdemultimedia-juk
 kdenlive
 kdemultimedia-kmix
 kdemultimedia-kscd
+kwave
 ### kdenetwork
 kdenetwork-filesharing
 kdenetwork-kget
@@ -120,9 +124,25 @@ telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
 ### kdepim
-kdepim
+akonadi-calendar-tools
+akonadi-import-wizard
+akonadiconsole
+akregator
+blogilo
+grantlee-editor
+kaddressbook
+kalarm
 kdepim-addons
 kleopatra
+kmail
+kmail-account-wizard
+knotes
+kontact
+korganizer
+mbox-importer
+pim-data-exporter
+pim-sieve-editor
+pim-storage-service-manager
 ### kdesdk
 cervisia
 kdesdk-dev-utils
@@ -145,7 +165,7 @@ kcharselect
 kdebugsettings
 kdf
 kfloppy
-kdeutils-kgpg
+kgpg
 kdeutils-kremotecontrol
 kteatime
 ktimer
@@ -153,5 +173,7 @@ kwalletmanager
 print-manager
 kdeutils-sweeper
 ### kdewebdew
-kdewebdev
-
+kdewebdev-kfilereplace
+kdewebdev-kimagemapeditor
+kdewebdev-klinkstatus
+kdewebdev-kommander
