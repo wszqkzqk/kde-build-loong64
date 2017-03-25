@@ -1,4 +1,4 @@
-kdelibs
+#kdelibs
 kdebase-runtime
 kdegraphics-mobipocket
 kdeedu-data
@@ -38,6 +38,8 @@ akonadi-notes
 akonadi-search
 akonadi-calendar
 kalarmcal
+kdav
+libkgapi
 kdepim-runtime
 libkdepim
 pimcommon

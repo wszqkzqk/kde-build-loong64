@@ -45,7 +45,7 @@ step
 bomber
 bovo
 granatier
-kdegames-kajongg
+#kajongg
 kapman
 katomic
 kblackbox
@@ -98,6 +98,7 @@ kdegraphics-thumbnailers
 audiocd-kio
 dragon
 ffmpegthumbs
+k3b
 kdemultimedia-juk
 kdenlive
 kdemultimedia-kmix
@@ -142,15 +143,14 @@ korganizer
 mbox-importer
 pim-data-exporter
 pim-sieve-editor
-pim-storage-service-manager
 ### kdesdk
 cervisia
-kdesdk-dev-utils
+#kde-dev-utils
 kde-dev-scripts
 dolphin-plugins
 kapptemplate
-kdesdk-kcachegrind
-#kdesdk-kioslaves - doesn't build with svn 1.9
+#kcachegrind
+#kdesdk-kioslaves
 kompare
 lokalize
 okteta
@@ -176,4 +176,3 @@ kdeutils-sweeper
 kdewebdev-kfilereplace
 kdewebdev-kimagemapeditor
 kdewebdev-klinkstatus
-kdewebdev-kommander
