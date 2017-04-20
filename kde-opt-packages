@@ -45,7 +45,7 @@ step
 bomber
 bovo
 granatier
-#kajongg
+kajongg
 kapman
 katomic
 kblackbox
@@ -145,12 +145,12 @@ pim-data-exporter
 pim-sieve-editor
 ### kdesdk
 cervisia
-#kde-dev-utils
+kde-dev-utils
 kde-dev-scripts
 dolphin-plugins
 kapptemplate
-#kcachegrind
-#kdesdk-kioslaves
+kcachegrind
+kdesdk-kioslaves
 kompare
 lokalize
 okteta
