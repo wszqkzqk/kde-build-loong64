@@ -1,9 +1,9 @@
-kdever=17.04.0
+kdever=17.04.1
 dirver=${kdever}
 debug=false
 branch=stable
-svnbranch=kde-unstable
-repo=kde-unstable
+svnbranch=trunk
+repo=extra
 l10n=true #build l10n packages
 any=true #upload -any packages?
 clean_chroot=false # build all packages in a clean chroot
