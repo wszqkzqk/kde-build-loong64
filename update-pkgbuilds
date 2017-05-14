@@ -5,7 +5,7 @@
 for i in ${depPkgName} ${optPkgName} kde-l10n; do
 
 	_pushd build/${i}/${svnbranch}
-	sed -r "s|http://download.kde.org/.*stable/|http://download.kde.org/${branch}/|g" -i PKGBUILD
+	sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${branch}/|g" -i PKGBUILD
 
 	# configure debug build; see https://techbase.kde.org/Development/CMake/Addons_for_KDE
 	sed -ie "/options+=('debug')/d" -i PKGBUILD
