@@ -40,4 +40,6 @@ fi
 if [ -s broken-packages ]; then
 	echo "Broken packages:"
 	cat broken-packages
+else
+	echo "All packages built successfully!"
 fi
