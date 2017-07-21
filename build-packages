@@ -2,7 +2,8 @@
 
 . common
 
-unset broken
+rm -f broken-packages
+basedir=${PWD}
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
@@ -11,7 +12,7 @@ arch=$1
 for i in ${depPkgName}; do
         _pushd build/${i}/${svnbranch}
         if $clean_chroot ; then
-                sudo ${repo}-${arch}-build || broken="${broken} ${i}"
+                sudo ${repo}-${arch}-build || ( echo ${i} >> ${basedir}/broken-packages )
         elif [ "${i}" = "kdebase-runtime" ] ; then
                 sudo ${repo}-${arch}-build || exit 1
         else
@@ -23,19 +24,20 @@ done
 for i in ${optPkgName}; do
         _pushd build/${i}/${svnbranch}
         if $clean_chroot ; then
-                sudo ${repo}-${arch}-build || broken="${broken} ${i}"
+                sudo ${repo}-${arch}-build || ( echo ${i} >> ${basedir}/broken-packages )
         else
-                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || broken="${broken} ${i}"
+                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || ( echo ${i} >> ${basedir}/broken-packages )
         fi
         _popd
 done
 
 if ${l10n}; then
 	_pushd build/kde-l10n/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} || broken="${broken} ${i}"
+	setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} || ( echo "kde-l10n" >> ${basedir}/broken-packages )
 	_popd
 fi
 
-if [ -n "${broken}" ]; then
-	echo "Broken packages: ${broken}"
+if [ -s broken-packages ]; then
+	echo "Broken packages:"
+	cat broken-packages
 fi

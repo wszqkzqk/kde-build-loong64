@@ -1,8 +1,8 @@
 ### kdeaccessibility
 kdeaccessibility-jovie
 kdeaccessibility-kaccessible
-kdeaccessibility-kmag
-kdeaccessibility-kmousetool
+kmag
+kmousetool
 kdeaccessibility-kmouth
 ### kdeadmin
 kcron
@@ -54,8 +54,8 @@ kbounce
 kbreakout
 kdiamond
 kfourinline
-kdegames-kgoldrunner
-kdegames-kigo
+kgoldrunner
+kigo
 killbots
 kiriki
 kjumpingcube
@@ -67,18 +67,18 @@ knavalbattle
 knetwalk
 kdegames-kolf
 kollision
-kdegames-konquest
+konquest
 kpatience
-kdegames-kreversi
+kreversi
 kshisen
 kdegames-ksirk
-kdegames-ksnakeduel
-kdegames-kspaceduel
+ksnakeduel
+kspaceduel
 ksquares
-kdegames-ksudoku
+ksudoku
 ktuberling
-kdegames-kubrick
-kdegames-lskat
+kubrick
+lskat
 kdegames-palapeli
 picmi
 ### kdegraphics
