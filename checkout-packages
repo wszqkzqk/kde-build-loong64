@@ -7,5 +7,5 @@ if [ ! -d build ]; then
 fi
 
 pushd build
-svn update ${depPkgName} ${optPkgName} kde-l10n
+svn update ${depPkgName} ${optPkgName}
 popd

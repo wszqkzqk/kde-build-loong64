@@ -12,7 +12,3 @@ _repo=$1
 _arch=$2
 
 ssh repos.archlinux.org /packages/db-remove $_repo $_arch ${depPkgName} ${optPkgName}
-
-if ${l10n}; then
-	ssh repos.archlinux.org /packages/db-remove $_repo any kde-l10n
-fi

@@ -4,6 +4,5 @@ debug=false
 branch=stable
 svnbranch=trunk
 repo=extra
-l10n=true #build l10n packages
 any=true #upload -any packages?
 clean_chroot=false # build all packages in a clean chroot

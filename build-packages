@@ -31,12 +31,6 @@ for i in ${optPkgName}; do
         _popd
 done
 
-if ${l10n}; then
-	_pushd build/kde-l10n/${svnbranch}
-	setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} || ( echo "kde-l10n" >> ${basedir}/broken-packages )
-	_popd
-fi
-
 if [ -s broken-packages ]; then
 	echo "Broken packages:"
 	cat broken-packages

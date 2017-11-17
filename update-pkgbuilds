@@ -2,7 +2,7 @@
 
 . common
 
-for i in ${depPkgName} ${optPkgName} kde-l10n; do
+for i in ${depPkgName} ${optPkgName}; do
 
 	_pushd build/${i}/${svnbranch}
 	sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${branch}/|g" -i PKGBUILD

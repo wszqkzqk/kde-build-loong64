@@ -23,17 +23,6 @@ while read i; do
 	fi
 done < kde-opt-packages
 
-unset l10nPkgName
-if ${l10n}; then
-	_tmp=$(mktemp -d)
-
-	wget -q https://projects.kde.org/projects/sysadmin/release-tools/repository/revisions/master/raw/language_list -O ${_tmp}/languages
-
-	while read i; do
-		l10nPkgName="${l10nPkgName} ${i}"
-	done < ${_tmp}/languages
-fi
-
 pwd=$(pwd)
 
 _pushd() {

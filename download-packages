@@ -3,7 +3,3 @@
 . common
 
 rsync -e ssh -c -h -L --progress --partial ftparchlinux@racnoss.kde.org:${branch}/applications/${dirver}/src/*.xz{,.sig} ${SRCDEST}/
-
-if ${l10n}; then
-    rsync -e ssh -c -h -L --progress --partial ftparchlinux@racnoss.kde.org:${branch}/applications/${dirver}/src/kde-l10n/*.xz{,.sig} ${SRCDEST}/
-fi

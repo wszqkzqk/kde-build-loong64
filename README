@@ -4,7 +4,7 @@ of KDE!
 == Requirements ==
 * devtools (these scripts use the chroots in /var/lib/archbuild/)
 ** to build packages for kde-unstable create the
-   kde-unstable-{i686,x86_64}-build symlinks to archbuild
+   kde-unstable-x86_64-build symlinks to archbuild
 ** also add the kde-unstablepkg symlink to commitpkg
 * ssh access to repos.archlinux.org and depot.kde.org without user
   interaction
@@ -22,10 +22,7 @@ of KDE!
   from the working copy.
 * commit-packages: commit all changes to the SVN branch. This does NOT release
   any package.
-* config: set version, branch and if l10n packages should be build. Also a
-  target repo can be set.
-* create-l10n: this create a split PKGBUILD for the l10n packages. Remember to
-  enable l10n in config.
+* config: set version and branch. Also a target repo can be set.
 * download-packages: download the sources from KDE server. If they are already
   downloaded just check integrity.
 * install-packages: install all KDE packages from the build dir.
@@ -49,7 +46,6 @@ of KDE!
 * run update-pkgbuilds to update all PKGBUILDs
 * optional edit PKGBUILDs (e.g. remove old patches etc.)
 * build all packages for x86_64 using build-packages
-** run again 'build-packages i686' to build i686 packages
 * run run-namcap and have a look at the logs with show-namcap
 * run sign-packages to add signatures files to the packages built on remote
   (e.g. on pkgbuild.com)

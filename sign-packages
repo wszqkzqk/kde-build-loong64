@@ -43,32 +43,3 @@ for i in ${depPkgName} ${optPkgName}; do
 	done
 	_popd
 done
-
-if ${l10n}; then
-	echo "Downloading packages from $server..."
-	_pushd build/kde-l10n/${svnbranch}
-	unset pkgname pkgrel
-	. PKGBUILD
-	for j in ${pkgname[@]}; do
-		if [ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ]; then
-			scp ${server}:"~/packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}" .
-		fi
-
-		if [ -f ${j}-${kdever}-${pkgrel}-any${PKGEXT} ]; then
-			echo "Checking ${j} integrity..."
-			if ! checkIntegrity ${j}-${kdever}-${pkgrel}-any${PKGEXT} "~/packages/kde-l10n/${svnbranch}/${j}-${kdever}-${pkgrel}-any${PKGEXT}"; then
-				echo "ERROR: ${j} corrupted"
-				exit 1
-			fi
-
-			if [ ! -f ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ]; then
-				echo "Signing and uploading signatures..."
-				gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-any${PKGEXT}
-				scp ${j}-${kdever}-${pkgrel}-any${PKGEXT}.sig ${server}:"~/packages/kde-l10n/${svnbranch}/"
-			fi
-		else
-			echo "WARNING: ${j} ${a} not found"
-		fi
-	done
-	_popd
-fi

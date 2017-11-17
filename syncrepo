@@ -19,12 +19,3 @@ for pkg in ${depPkgName} ${optPkgName}; do
         _popd
     fi
 done
-
-if ${l10n}; then
-    if [ -d build/kdel-10n ]; then
-        _pushd build/kde-l10n
-        [ -d ${target} ] && svn rm --force ${target}
-        svn cp ${source} ${target}
-        _popd
-    fi
-fi
