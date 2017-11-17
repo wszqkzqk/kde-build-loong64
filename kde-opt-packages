@@ -1,9 +1,7 @@
 ### kdeaccessibility
-kdeaccessibility-jovie
-kdeaccessibility-kaccessible
 kmag
 kmousetool
-kdeaccessibility-kmouth
+kmouth
 ### kdeadmin
 kcron
 ksystemlog
@@ -32,7 +30,6 @@ kig
 kiten
 klettres
 kmplot
-kstars
 ktouch
 kturtle
 kwordquiz
@@ -65,13 +62,13 @@ kmahjongg
 kmines
 knavalbattle
 knetwalk
-kdegames-kolf
+kolf
 kollision
 konquest
 kpatience
 kreversi
 kshisen
-kdegames-ksirk
+ksirk
 ksnakeduel
 kspaceduel
 ksquares
@@ -79,7 +76,7 @@ ksudoku
 ktuberling
 kubrick
 lskat
-kdegames-palapeli
+palapeli
 picmi
 ### kdegraphics
 gwenview
@@ -87,8 +84,6 @@ kamera
 kcolorchooser
 kolourpaint
 kruler
-kdegraphics-ksaneplugin
-#libkface - doesn't build with opencv 3.2
 libkgeomap
 okular
 spectacle
@@ -99,19 +94,16 @@ audiocd-kio
 dragon
 ffmpegthumbs
 k3b
-kdemultimedia-juk
+juk
 kdenlive
-kdemultimedia-kmix
-kdemultimedia-kscd
+kmix
 kwave
 ### kdenetwork
 kdenetwork-filesharing
-kdenetwork-kget
-kdenetwork-kopete
-kdenetwork-kppp
+kget
 krdc
 krfb
-kdenetwork-zeroconf-ioslave
+zeroconf-ioslave
 kio-extras
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
@@ -129,7 +121,6 @@ akonadi-calendar-tools
 akonadi-import-wizard
 akonadiconsole
 akregator
-blogilo
 grantlee-editor
 kaddressbook
 kalarm
@@ -166,13 +157,10 @@ kdebugsettings
 kdf
 kfloppy
 kgpg
-kdeutils-kremotecontrol
 kteatime
 ktimer
 kwalletmanager
 print-manager
-kdeutils-sweeper
+sweeper
 ### kdewebdew
-kdewebdev-kfilereplace
-kdewebdev-kimagemapeditor
-kdewebdev-klinkstatus
+kimagemapeditor

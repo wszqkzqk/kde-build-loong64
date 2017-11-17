@@ -13,7 +13,7 @@ for i in ${depPkgName}; do
         _pushd build/${i}/${svnbranch}
         if $clean_chroot ; then
                 sudo ${repo}-${arch}-build || ( echo ${i} >> ${basedir}/broken-packages )
-        elif [ "${i}" = "kdebase-runtime" ] ; then
+        elif [ "${i}" = "kdegraphics-mobipocket" ] ; then
                 sudo ${repo}-${arch}-build || exit 1
         else
                 setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1

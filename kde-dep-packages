@@ -1,5 +1,3 @@
-kdelibs
-kdebase-runtime
 kdegraphics-mobipocket
 kdeedu-data
 libkexiv2
@@ -32,6 +30,7 @@ kontactinterface
 libktnef
 akonadi
 akonadi-mime
+ksmtp
 kmailtransport
 akonadi-contacts
 akonadi-notes
