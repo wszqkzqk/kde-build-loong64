@@ -5,35 +5,51 @@
 rm -f broken-packages
 basedir=${PWD}
 
+# Add temporary repository to pacman.conf
+cp /usr/share/devtools/pacman-{extra,testing,staging,kde-unstable}.conf .
+sed '73i[kde-build]\nServer = file:///tmp/kde-build-repo\nSigLevel = Never\n' -i pacman-*.conf
+
+# Create temporary repository
+rm -fr kde-build-repo
+mkdir kde-build-repo
+repo-add -n kde-build-repo/kde-build.db.tar > /dev/null 2>&1
+
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
+# Build packages
 for i in ${depPkgName}; do
-        _pushd build/${i}/${svnbranch}
-        if $clean_chroot ; then
-                sudo ${repo}-${arch}-build || ( echo ${i} >> ${basedir}/broken-packages )
-        elif [ "${i}" = "kdegraphics-mobipocket" ] ; then
-                sudo ${repo}-${arch}-build || exit 1
-        else
-                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || exit 1
-        fi
-        _popd
+  _pushd build/${i}/${svnbranch}
+    arch-nspawn \
+      -C "${basedir}/pacman-${repo}.conf" \
+      -M "/usr/share/devtools/makepkg-${arch}.conf" \
+      "/var/lib/archbuild/${repo}-${arch}/root" --bind-ro=${basedir}/kde-build-repo:/tmp/kde-build-repo \
+      pacman -Syu --noconfirm
+    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
+      -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo || exit 1
+    cp *-${kdever}-1-*.pkg.tar.xz ${basedir}/kde-build-repo
+    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.xz > /dev/null 2>&1
+  _popd
 done
 
 for i in ${optPkgName}; do
-        _pushd build/${i}/${svnbranch}
-        if $clean_chroot ; then
-                sudo ${repo}-${arch}-build || ( echo ${i} >> ${basedir}/broken-packages )
-        else
-                setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -n || ( echo ${i} >> ${basedir}/broken-packages )
-        fi
-        _popd
+  _pushd build/${i}/${svnbranch}
+    arch-nspawn \
+      -C "${basedir}/pacman-${repo}.conf" \
+      -M "/usr/share/devtools/makepkg-${arch}.conf" \
+      "/var/lib/archbuild/${repo}-${arch}/root" --bind-ro=${basedir}/kde-build-repo:/tmp/kde-build-repo \
+      pacman -Syu --noconfirm
+    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
+      -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo || ( echo ${i} >> ${basedir}/broken-packages )
+    cp *-${kdever}-1-*.pkg.tar.xz ${basedir}/kde-build-repo
+    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.xz > /dev/null 2>&1
+  _popd
 done
 
 if [ -s broken-packages ]; then
-	echo "Broken packages:"
-	cat broken-packages
+  echo "Broken packages:"
+  cat broken-packages
 else
-	echo "All packages built successfully!"
+  echo "All packages built successfully!"
 fi

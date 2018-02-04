@@ -5,4 +5,3 @@ branch=stable
 svnbranch=trunk
 repo=extra
 any=true #upload -any packages?
-clean_chroot=false # build all packages in a clean chroot
