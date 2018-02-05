@@ -42,8 +42,6 @@ for i in ${optPkgName}; do
       pacman -Syu --noconfirm
     setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
       -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo || ( echo ${i} >> ${basedir}/broken-packages )
-    cp *-${kdever}-1-*.pkg.tar.xz ${basedir}/kde-build-repo
-    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.xz > /dev/null 2>&1
   _popd
 done
 
