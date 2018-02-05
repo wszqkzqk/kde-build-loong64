@@ -18,6 +18,9 @@ repo-add -n kde-build-repo/kde-build.db.tar > /dev/null 2>&1
 arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
+# Cleanup package cache
+arch-nspawn "/var/lib/archbuild/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
+
 # Build packages
 for i in ${depPkgName}; do
   _pushd build/${i}/${svnbranch}
