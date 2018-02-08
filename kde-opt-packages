@@ -118,7 +118,6 @@ telepathy-kde-send-file
 telepathy-kde-text-ui
 ### kdepim
 akonadi-calendar-tools
-akonadi-import-wizard
 akonadiconsole
 akregator
 grantlee-editor

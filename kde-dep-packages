@@ -19,7 +19,6 @@ kcalcore
 kpimtextedit
 kidentitymanagement
 kcalutils
-kholidays
 kde-syndication
 kblog
 kmime
@@ -53,6 +52,7 @@ libksieve
 messagelib
 mailimporter
 mailcommon
+akonadi-import-wizard
 ### telepathy
 signon-kwallet-extension
 kaccounts-integration
