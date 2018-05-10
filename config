@@ -1,7 +1,7 @@
-kdever=18.04.0
+kdever=18.04.1
 dirver=${kdever}
 debug=false
 branch=stable
 svnbranch=trunk
-repo=kde-unstable
+repo=extra
 any=true #upload -any packages?
