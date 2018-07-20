@@ -53,6 +53,8 @@ messagelib
 mailimporter
 mailcommon
 akonadi-import-wizard
+kpkpass
+kitinerary
 ### telepathy
 signon-kwallet-extension
 kaccounts-integration
