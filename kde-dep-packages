@@ -29,6 +29,7 @@ kontactinterface
 ktnef
 akonadi
 akonadi-mime
+libkgapi
 ksmtp
 kmailtransport
 akonadi-contacts
@@ -37,7 +38,6 @@ akonadi-search
 akonadi-calendar
 kalarmcal
 kdav
-libkgapi
 libkdepim
 pimcommon
 kdepim-runtime
