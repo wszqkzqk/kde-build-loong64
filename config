@@ -1,6 +1,6 @@
-kdever=18.08.3
+kdever=18.11.80
 dirver=${kdever}
 debug=false
-branch=stable
-svnbranch=trunk
-repo=extra
+branch=unstable
+svnbranch=kde-unstable
+repo=kde-unstable
