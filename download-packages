@@ -2,4 +2,4 @@
 
 . common
 
-rsync -e ssh -c -h -L --progress --partial ftparchlinux@racnoss.kde.org:${branch}/applications/${dirver}/src/*.xz{,.sig} ${SRCDEST}/
+rsync -e ssh -c -h -L --progress --partial ftparchlinux@milonia.kde.org:${branch}/applications/${dirver}/src/*.xz{,.sig} ${SRCDEST}/
