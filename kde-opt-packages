@@ -82,6 +82,7 @@ picmi
 gwenview
 kamera
 kcolorchooser
+kipi-plugins
 kolourpaint
 kruler
 libkgeomap
@@ -164,5 +165,6 @@ ktimer
 kwalletmanager
 print-manager
 sweeper
+yakuake
 ### kdewebdew
 kimagemapeditor
