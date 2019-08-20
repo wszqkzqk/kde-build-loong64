@@ -1,6 +1,6 @@
-kdever=19.07.90
+kdever=19.08.0
 dirver=${kdever}
 debug=false
-branch=unstable
-svnbranch=kde-unstable
-repo=kde-unstable
+branch=stable
+svnbranch=trunk
+repo=testing
