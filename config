@@ -1,6 +1,6 @@
-kdever=19.08.0
+kdever=19.08.1
 dirver=${kdever}
 debug=false
 branch=stable
 svnbranch=trunk
-repo=testing
+repo=extra
