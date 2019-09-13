@@ -8,7 +8,7 @@ basedir=${PWD}
 # Add temporary repository to pacman.conf
 rm pacman-*.conf
 cp /usr/share/devtools/pacman-${repo}.conf .
-sed '73i[kde-build]\nServer = file:///tmp/kde-build-repo\nSigLevel = Never\n' -i pacman-${repo}.conf
+sed "73i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
 
 # Create temporary repository
 rm -fr kde-build-repo
@@ -28,10 +28,9 @@ for i in ${depPkgName}; do
     arch-nspawn \
       -C "${basedir}/pacman-${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
-      "/var/lib/archbuild/${repo}-${arch}/root" --bind-ro=${basedir}/kde-build-repo:/tmp/kde-build-repo \
+      "/var/lib/archbuild/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
-      -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo || exit 1
+    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n || exit 1
     cp $(makepkg --packagelist) ${basedir}/kde-build-repo
     repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.xz > /dev/null 2>&1
   _popd
@@ -42,10 +41,9 @@ for i in ${optPkgName}; do
     arch-nspawn \
       -C "${basedir}/pacman-${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
-      "/var/lib/archbuild/${repo}-${arch}/root" --bind-ro=${basedir}/kde-build-repo:/tmp/kde-build-repo \
+      "/var/lib/archbuild/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
-      -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo || ( echo ${i} >> ${basedir}/broken-packages )
+    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n || ( echo ${i} >> ${basedir}/broken-packages )
   _popd
 done
 
