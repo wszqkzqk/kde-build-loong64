@@ -8,7 +8,7 @@ arch=$2
 # Add temporary repository to pacman.conf
 rm pacman-*.conf
 cp /usr/share/devtools/pacman-${repo}.conf .
-sed '73i[kde-build]\nServer = file:///tmp/kde-build-repo\nSigLevel = Never\n' -i pacman-${repo}.conf
+sed '73i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Never\n' -i pacman-${repo}.conf
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 [[ -z ${arch} ]] && arch=$(uname -m)
@@ -21,7 +21,7 @@ _pushd build/${package}/${svnbranch}
   arch-nspawn \
     -C "${basedir}/pacman-${repo}.conf" \
     -M "/usr/share/devtools/makepkg-${arch}.conf" \
-    "/var/lib/archbuild/${repo}-${arch}/root" --bind-ro=${basedir}/kde-build-repo:/tmp/kde-build-repo \
+    "/var/lib/archbuild/${repo}-${arch}/root" \
     pacman -Syu --noconfirm
   setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
     -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo
