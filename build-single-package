@@ -23,6 +23,5 @@ _pushd build/${package}/${svnbranch}
     -M "/usr/share/devtools/makepkg-${arch}.conf" \
     "/var/lib/archbuild/${repo}-${arch}/root" \
     pacman -Syu --noconfirm
-  setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} \
-    -c -n -d ${basedir}/kde-build-repo:/tmp/kde-build-repo
+  setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n
 _popd
