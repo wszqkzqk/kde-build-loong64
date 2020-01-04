@@ -8,7 +8,7 @@ basedir=${PWD}
 # Add temporary repository to pacman.conf
 rm pacman-*.conf
 cp /usr/share/devtools/pacman-${repo}.conf .
-sed "73i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
+sed "72i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
 
 # Create temporary repository
 rm -fr kde-build-repo
@@ -32,7 +32,7 @@ for i in ${depPkgName}; do
       pacman -Syu --noconfirm
     setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n || exit 1
     cp $(makepkg --packagelist) ${basedir}/kde-build-repo
-    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.xz > /dev/null 2>&1
+    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
 done
 
