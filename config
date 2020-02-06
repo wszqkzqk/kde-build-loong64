@@ -1,4 +1,4 @@
-kdever=19.12.1
+kdever=19.12.2
 dirver=${kdever}
 debug=false
 branch=stable
