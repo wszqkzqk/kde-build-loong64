@@ -3,6 +3,8 @@
 
 . config
 
+buildroot="$HOME/buildroot"
+
 unset depPkgName
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then

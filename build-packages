@@ -20,7 +20,7 @@ arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
 # Cleanup package cache
-arch-nspawn "/var/lib/archbuild/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
+arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
 # Build packages
 for i in ${depPkgName}; do
@@ -28,9 +28,9 @@ for i in ${depPkgName}; do
     arch-nspawn \
       -C "${basedir}/pacman-${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
-      "/var/lib/archbuild/${repo}-${arch}/root" \
+      "${buildroot}/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n || exit 1
+    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} -c -n || exit 1
     cp $(makepkg --packagelist) ${basedir}/kde-build-repo
     repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
@@ -41,9 +41,9 @@ for i in ${optPkgName}; do
     arch-nspawn \
       -C "${basedir}/pacman-${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
-      "/var/lib/archbuild/${repo}-${arch}/root" \
+      "${buildroot}/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n || ( echo ${i} >> ${basedir}/broken-packages )
+    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} -c -n || ( echo ${i} >> ${basedir}/broken-packages )
   _popd
 done
 
