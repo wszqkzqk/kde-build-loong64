@@ -30,7 +30,7 @@ for i in ${depPkgName}; do
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} -c -n || exit 1
+    setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || exit 1
     cp $(makepkg --packagelist) ${basedir}/kde-build-repo
     repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
@@ -43,7 +43,7 @@ for i in ${optPkgName}; do
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} -c -n || ( echo ${i} >> ${basedir}/broken-packages )
+    setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || ( echo ${i} >> ${basedir}/broken-packages )
   _popd
 done
 
