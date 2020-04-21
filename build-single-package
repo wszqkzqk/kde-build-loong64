@@ -14,14 +14,14 @@ sed "72i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Neve
 [[ -z ${arch} ]] && arch=$(uname -m)
 
 # Cleanup package cache
-arch-nspawn "/var/lib/archbuild/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
+arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
 # Build package
 _pushd build/${package}/${svnbranch}
   arch-nspawn \
     -C "${basedir}/pacman-${repo}.conf" \
     -M "/usr/share/devtools/makepkg-${arch}.conf" \
-    "/var/lib/archbuild/${repo}-${arch}/root" \
+    "${buildroot}/${repo}-${arch}/root" \
     pacman -Syu --noconfirm
-  setarch ${arch} sudo makechrootpkg -r /var/lib/archbuild/${repo}-${arch} -c -n
+  setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n
 _popd
