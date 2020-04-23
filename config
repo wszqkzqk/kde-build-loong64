@@ -1,6 +1,6 @@
-kdever=20.03.90
+kdever=20.04.0
 dirver=${kdever}
 debug=false
-branch=unstable
-svnbranch=kde-unstable
-repo=kde-unstable
+branch=stable
+svnbranch=trunk
+repo=testing
