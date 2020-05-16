@@ -1,22 +1,9 @@
-### kdeaccessibility
+### kde-accessibility
 kmag
 kmousetool
 kmouth
-### kdeadmin
-kcron
-ksystemlog
-### kdebase
-dolphin
-kate
-kdialog
-keditbookmarks
-kfind
-khelpcenter
-konqueror
-konsole
-### kdebindings
-kross-interpreters
-### kdeedu
+
+### kde-education
 artikulate
 blinken
 cantor
@@ -37,7 +24,8 @@ minuet
 parley
 rocs
 step
-### kdegames
+
+### kde-games
 bomber
 bovo
 granatier
@@ -78,10 +66,12 @@ kubrick
 lskat
 palapeli
 picmi
-### kdegraphics
+
+### kde-graphics
 gwenview
 kamera
 kcolorchooser
+kimagemapeditor
 kipi-plugins
 kolourpaint
 kruler
@@ -90,7 +80,8 @@ okular
 spectacle
 svgpart
 kdegraphics-thumbnailers
-### kdemultimedia
+
+### kde-multimedia
 audiocd-kio
 dragon
 elisa
@@ -101,10 +92,12 @@ kamoso
 kdenlive
 kmix
 kwave
-### kdenetwork
+
+### kde-network
 kdeconnect
 kdenetwork-filesharing
 kget
+konqueror
 kopete
 krdc
 krfb
@@ -121,7 +114,8 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
-### kdepim
+
+### kde-pim
 akonadi-calendar-tools
 akonadiconsole
 akregator
@@ -138,7 +132,8 @@ korganizer
 mbox-importer
 pim-data-exporter
 pim-sieve-editor
-### kdesdk
+
+### kde-sdk
 cervisia
 kde-dev-utils
 kde-dev-scripts
@@ -152,21 +147,33 @@ lokalize
 poxml
 kdesdk-thumbnailers
 umbrello
-### kdeutils
+
+### kde-system
+dolphin
+kcron
+khelpcenter
+ksystemlog
+
+### kde-utilities
 ark
 filelight
+kate
 kbackup
 kcalc
 kcharselect
 kdebugsettings
 kdf
+kdialog
+keditbookmarks
+kfind
 kfloppy
 kgpg
+konsole
 kteatime
 ktimer
 kwalletmanager
 print-manager
 sweeper
 yakuake
-### kdewebdew
-kimagemapeditor
+
+kross-interpreters

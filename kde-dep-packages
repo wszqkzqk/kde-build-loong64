@@ -13,6 +13,7 @@ libkmahjongg
 libkomparediff2
 kqtquickcharts
 baloo-widgets
+
 ### PIM
 kpimtextedit
 kidentitymanagement
@@ -52,6 +53,7 @@ mailcommon
 akonadi-import-wizard
 kpkpass
 kitinerary
+
 ### telepathy
 signon-kwallet-extension
 kaccounts-integration
