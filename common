@@ -1,5 +1,6 @@
 . /etc/makepkg.conf
 [[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
+[[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
 
 . config
 
