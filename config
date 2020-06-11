@@ -1,4 +1,4 @@
-kdever=20.04.1
+kdever=20.04.2
 dirver=${kdever}
 debug=false
 branch=stable
