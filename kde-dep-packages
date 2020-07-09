@@ -14,6 +14,12 @@ libkomparediff2
 kqtquickcharts
 baloo-widgets
 
+### telepathy
+signon-kwallet-extension
+kaccounts-integration
+kaccounts-providers
+telepathy-kde-common-internals
+
 ### PIM
 kpimtextedit
 kidentitymanagement
@@ -54,9 +60,4 @@ akonadi-import-wizard
 kpkpass
 kitinerary
 
-### telepathy
-signon-kwallet-extension
-kaccounts-integration
-kaccounts-providers
-telepathy-kde-common-internals
 marble
