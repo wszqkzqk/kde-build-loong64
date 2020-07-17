@@ -24,7 +24,6 @@ telepathy-kde-common-internals
 kpimtextedit
 kidentitymanagement
 kcalutils
-kblog
 kmime
 kimap
 kmbox
@@ -59,4 +58,5 @@ akonadi-import-wizard
 kpkpass
 kitinerary
 
+dolphin
 marble

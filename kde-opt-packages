@@ -103,6 +103,7 @@ krdc
 krfb
 zeroconf-ioslave
 kio-extras
+kio-gdrive
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
 telepathy-kde-auth-handler
@@ -149,7 +150,6 @@ kdesdk-thumbnailers
 umbrello
 
 ### kde-system
-dolphin
 kcron
 khelpcenter
 ksystemlog
