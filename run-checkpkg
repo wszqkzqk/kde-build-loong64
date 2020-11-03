@@ -8,7 +8,7 @@ fi
 
 for pkg in ${depPkgName} ${optPkgName}; do
   _pushd build/${pkg}/${svnbranch}
-  diffrepo
+  checkpkg
   _popd
 done
 
