@@ -1,7 +1,0 @@
-#!/bin/bash
-
-. common
-
-find build \( -name pkg -o -name src -o -name *${PKGEXT} -o -name *.log \
-    -o -name *.sig -o -name *.part -o -name *~ -o -name *.log.* \) \
-    -exec rm -r {} +
