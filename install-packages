@@ -5,14 +5,9 @@
 pkglist=''
 
 for i in ${depPkgName} ${optPkgName}; do
-	_pushd build/${i}/${svnbranch}
-	unset pkgname
-	. PKGBUILD
-	for j in ${pkgname[@]}; do
-		pkgfile="build/${i}/${svnbranch}/${j}-${pkgver}-${pkgrel}-*${PKGEXT}"
-		pkglist="${pkglist} ${pkgfile}"
-	done
-	_popd
+    _pushd build/${i}/${svnbranch}
+        pkglist="${pkglist} $(makepkg --packagelist)"
+    _popd
 done
 
 sudo pacman -U ${pkglist}
