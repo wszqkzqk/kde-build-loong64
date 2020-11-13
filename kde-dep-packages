@@ -14,7 +14,8 @@ libkomparediff2
 kqtquickcharts
 baloo-widgets
 
-### telepathy
+### kde-network
+libktorrent
 signon-kwallet-extension
 kaccounts-integration
 kaccounts-providers
@@ -35,6 +36,8 @@ akonadi-mime
 libkgapi
 ksmtp
 kmailtransport
+grantleetheme
+libkleo
 akonadi-contacts
 akonadi-notes
 akonadi-search
@@ -43,9 +46,6 @@ kalarmcal
 libkdepim
 pimcommon
 kdepim-runtime
-libkleo
-grantleetheme
-kdepim-apps-libs
 calendarsupport
 eventviews
 incidenceeditor
@@ -57,6 +57,10 @@ mailcommon
 akonadi-import-wizard
 kpkpass
 kitinerary
+kaddressbook
+kpublictransport
+kosmindoormap
 
+# kde-system
 dolphin
-marble
+kpmcore

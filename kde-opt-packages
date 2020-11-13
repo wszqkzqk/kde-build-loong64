@@ -20,6 +20,7 @@ kmplot
 ktouch
 kturtle
 kwordquiz
+marble
 minuet
 parley
 rocs
@@ -96,13 +97,14 @@ kwave
 kdeconnect
 kdenetwork-filesharing
 kget
+kio-extras
+kio-gdrive
 konqueror
+konversation
 kopete
 krdc
 krfb
-zeroconf-ioslave
-kio-extras
-kio-gdrive
+ktorrent
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
 telepathy-kde-auth-handler
@@ -114,13 +116,14 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
+zeroconf-ioslave
 
 ### kde-pim
 akonadi-calendar-tools
 akonadiconsole
 akregator
 grantlee-editor
-kaddressbook
+itinerary
 kalarm
 kdepim-addons
 kleopatra
@@ -152,6 +155,7 @@ umbrello
 kcron
 khelpcenter
 ksystemlog
+partitionmanager
 
 ### kde-utilities
 ark
@@ -171,6 +175,7 @@ konsole
 kteatime
 ktimer
 kwalletmanager
+markdownpart
 print-manager
 sweeper
 yakuake
