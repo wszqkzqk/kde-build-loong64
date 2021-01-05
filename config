@@ -1,6 +1,6 @@
-kdever=20.12.0
+kdever=20.12.1
 dirver=${kdever}
 debug=false
 branch=stable
 svnbranch=trunk
-repo=testing
+repo=extra
