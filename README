@@ -1,15 +1,11 @@
-Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince
-of KDE!
+Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
 
 == Requirements ==
 * devtools (these scripts use the chroots in /var/lib/archbuild/)
-** to build packages for kde-unstable create the
-   kde-unstable-x86_64-build symlinks to archbuild
-** also add the kde-unstablepkg symlink to commitpkg
 * ssh access to repos.archlinux.org and depot.kde.org without user
   interaction
 * set sudo to allow running makechrootpkg without password
-* set your SRCDEST and INTEGRITY_CHECK=('sha1') in makepkg.conf
+* set your SRCDEST and INTEGRITY_CHECK=('sha256') in makepkg.conf
 * set your gpg-key in makepkg.conf
 
 == Usage by file ==
@@ -29,8 +25,7 @@ of KDE!
 * move-packages: move packages between two repos.
 * release-packages: run commitpkg. This actually commit, release and upload
   the packages.
-* run-diffrepo: run the diffrepo script (avaiable on pkgbuild.com) to each
-  package.
+* run-checkpkg: run the checkpkg script on every package.
 * run-namcap: run namcap on all packages and store the result to namcap.log.
 * show-namcap: show namcap.log for all packages.
 * sign-packages: add signatures files to the packages in the build dir.
@@ -51,4 +46,3 @@ of KDE!
   (e.g. on pkgbuild.com)
 * run release-packages 'Upstream release' to upload and release all packages to
   the repo
-
