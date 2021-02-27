@@ -7,5 +7,5 @@ if [ ! -d build ]; then
 fi
 
 pushd build
-svn update ${depPkgName} ${optPkgName}
+    svn update ${depPkgName} ${optPkgName}
 popd
