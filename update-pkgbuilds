@@ -10,7 +10,7 @@ for i in ${depPkgName} ${optPkgName}; do
     sed -ie "/options+=('debug')/d" -i PKGBUILD
     if $debug; then
         echo "options+=('debug')" >> PKGBUILD
-        fi
+    fi
 
     sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD

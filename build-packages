@@ -8,12 +8,12 @@ basedir=${PWD}
 # Add temporary repository to pacman.conf
 rm pacman-*.conf
 cp /usr/share/devtools/pacman-${repo}.conf .
-sed "72i[kde-build]\nServer = file:///${basedir}/kde-build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
+sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
 
 # Create temporary repository
-rm -fr kde-build-repo
-mkdir kde-build-repo
-repo-add -n kde-build-repo/kde-build.db.tar > /dev/null 2>&1
+rm -fr build-repo
+mkdir build-repo
+repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
 arch=$1
@@ -31,8 +31,8 @@ for i in ${depPkgName}; do
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
     setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || exit 1
-    cp $(makepkg --packagelist) ${basedir}/kde-build-repo
-    repo-add -n ${basedir}/kde-build-repo/kde-build.db.tar ${basedir}/kde-build-repo/*.pkg.tar.zst > /dev/null 2>&1
+    cp $(makepkg --packagelist) ${basedir}/build-repo
+    repo-add -n ${basedir}/build-repo/build.db.tar ${basedir}/build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
 done
 
