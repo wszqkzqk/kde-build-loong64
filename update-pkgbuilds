@@ -4,17 +4,13 @@
 
 for i in ${depPkgName} ${optPkgName}; do
 
-	_pushd build/${i}/${svnbranch}
-	sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${branch}/|g" -i PKGBUILD
+    _pushd build/${i}/${svnbranch}
+    sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${branch}/|g" -i PKGBUILD
 
-	# configure debug build; see https://techbase.kde.org/Development/CMake/Addons_for_KDE
-	sed -ie "/options+=('debug')/d" -i PKGBUILD
-	if $debug; then
-		sed -r 's|-DCMAKE_BUILD_TYPE=Release|-DCMAKE_BUILD_TYPE=RelWithDebInfo|g' -i PKGBUILD
-		echo "options+=('debug')" >> PKGBUILD
-	else
-		sed -r 's|-DCMAKE_BUILD_TYPE=RelWithDebInfo|-DCMAKE_BUILD_TYPE=Release|g' -i PKGBUILD
-	fi
+    sed -ie "/options+=('debug')/d" -i PKGBUILD
+    if $debug; then
+        echo "options+=('debug')" >> PKGBUILD
+        fi
 
     sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
