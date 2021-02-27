@@ -14,8 +14,8 @@ of KDE!
 
 == Usage by file ==
 * build-packages: run makechrootpkg for all packages and install those that are
-  defined in kde-dep-packages.
-** it will fail if a package from kde-dep-packages will fail. Other broken
+  defined in packages-dep to a temporary repo.
+** it will fail if a package from packages-dep will fail. Other broken
    packages will be just skipped and shown at the end.
 * checkout-packages: checkout the working tree from SVN.
 * cleanup-packages: remove any logs, packages, signatures, src and pkg dirs
