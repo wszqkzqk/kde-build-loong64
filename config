@@ -1,5 +1,4 @@
 version=20.12.2
-dirver=${version}
 debug=false
 branch=stable
 svnbranch=trunk

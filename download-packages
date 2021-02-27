@@ -2,4 +2,4 @@
 
 . common
 
-rsync -e ssh -rchL --progress --partial ftparchlinux@deino.kde.org:${branch}/release-service/${dirver}/src/ ${SRCDEST}/
+rsync -e ssh -rchL --progress --partial ftparchlinux@deino.kde.org:${branch}/release-service/${version}/src/ ${SRCDEST}/
