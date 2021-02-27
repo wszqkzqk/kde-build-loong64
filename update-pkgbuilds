@@ -16,7 +16,7 @@ for i in ${depPkgName} ${optPkgName}; do
 		sed -r 's|-DCMAKE_BUILD_TYPE=RelWithDebInfo|-DCMAKE_BUILD_TYPE=Release|g' -i PKGBUILD
 	fi
 
-    sed -r "s|pkgver=.*|pkgver=${kdever}|g" -i PKGBUILD
+    sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
     updpkgsums
     _popd

@@ -19,22 +19,22 @@ for i in ${depPkgName} ${optPkgName}; do
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
-			if [ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
-				scp ${server}:"~/packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}" .
+			if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
+				scp ${server}:"~/packages/${i}/${svnbranch}/${j}-${version}-${pkgrel}-${a}${PKGEXT}" .
 			fi
 
-			if [ -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ]; then
+			if [ -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
 				echo "Checking ${j} ${a} integrity..."
-				if ! checkIntegrity ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${svnbranch}/${j}-${kdever}-${pkgrel}-${a}${PKGEXT}"; then
+				if ! checkIntegrity ${j}-${version}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${svnbranch}/${j}-${version}-${pkgrel}-${a}${PKGEXT}"; then
 					echo "ERROR: ${j} ${a} corrupted"
-					rm ${j}-${kdever}-${pkgrel}-${a}${PKGEXT} ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
+					rm ${j}-${version}-${pkgrel}-${a}${PKGEXT} ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
 					exit 1
 				fi
 
-				if [ ! -f ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ]; then
+				if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ]; then
 					echo "Signing and uploading signatures..."
-					gpg --detach-sign --use-agent ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}
-					scp ${j}-${kdever}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/${svnbranch}/"
+					gpg --detach-sign --use-agent ${j}-${version}-${pkgrel}-${a}${PKGEXT}
+					scp ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/${svnbranch}/"
 				fi
 			else
 				echo "WARNING: ${j} ${a} not found"
