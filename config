@@ -1,5 +1,5 @@
-version=21.07.90
+version=21.08.0
 debug=false
-branch=unstable
-svnbranch=kde-unstable
-repo=kde-unstable
+branch=stable
+svnbranch=trunk
+repo=testing
