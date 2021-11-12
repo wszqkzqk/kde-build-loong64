@@ -137,6 +137,7 @@ korganizer
 mbox-importer
 pim-data-exporter
 pim-sieve-editor
+zanshin
 
 ### kde-sdk
 cervisia
@@ -182,4 +183,6 @@ print-manager
 sweeper
 yakuake
 
-kross-interpreters
+### kdevelop
+kdevelop-php
+kdevelop-python
