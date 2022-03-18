@@ -1,5 +1,5 @@
-version=21.12.3
+version=22.03.80
 debug=false
-branch=stable
-svnbranch=trunk
-repo=testing
+branch=unstable
+svnbranch=kde-unstable
+repo=kde-unstable
