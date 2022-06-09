@@ -1,4 +1,4 @@
-version=22.04.1
+version=22.04.2
 branch=stable
 svnbranch=trunk
-repo=testing
+repo=extra
