@@ -101,6 +101,7 @@ kdenetwork-filesharing
 kget
 kio-extras
 kio-gdrive
+kio-zeroconf
 konqueror
 konversation
 kopete
@@ -118,7 +119,6 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
-zeroconf-ioslave
 
 ### kde-pim
 akonadi-calendar-tools
@@ -147,7 +147,7 @@ kde-dev-scripts
 dolphin-plugins
 kapptemplate
 kcachegrind
-kdesdk-kioslaves
+kdesdk-kio
 kirigami-gallery
 kompare
 lokalize
