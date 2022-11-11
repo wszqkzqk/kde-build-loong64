@@ -1,4 +1,4 @@
-version=22.08.3
-branch=stable
-svnbranch=trunk
-repo=extra
+version=22.11.80
+branch=unstable
+svnbranch=kde-unstable
+repo=kde-unstable
