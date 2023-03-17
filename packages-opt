@@ -75,6 +75,7 @@ gwenview
 kamera
 kcolorchooser
 kimagemapeditor
+koko
 kolourpaint
 kruler
 okular
@@ -85,17 +86,22 @@ kdegraphics-thumbnailers
 
 ### kde-multimedia
 audiocd-kio
+audiotube
 dragon
 elisa
 ffmpegthumbs
 juk
 k3b
 kamoso
+kasts
 kdenlive
 kmix
 kwave
+plasmatube
 
 ### kde-network
+alligator
+angelfish
 falkon
 kdeconnect
 kdenetwork-filesharing
@@ -109,6 +115,7 @@ kopete
 krdc
 krfb
 ktorrent
+neochat
 telepathy-kde-accounts-kcm
 telepathy-kde-approver
 telepathy-kde-auth-handler
@@ -120,6 +127,10 @@ telepathy-kde-filetransfer-handler
 telepathy-kde-integration-module
 telepathy-kde-send-file
 telepathy-kde-text-ui
+tokodon
+
+### kde-office
+ghostwriter
 
 ### kde-pim
 akonadi-calendar-tools
@@ -158,33 +169,48 @@ umbrello
 
 ### kde-system
 kcron
+kde-inotify-survey
 khelpcenter
+kio-admin
+kjournald
 ksystemlog
 partitionmanager
 
 ### kde-utilities
 ark
 filelight
+kalk
 kate
 kbackup
 kcalc
 kcharselect
+kclock
 kdebugsettings
 kdf
 kdialog
 keditbookmarks
+keysmith
 kfind
 kfloppy
 kgpg
+kongress
 konsole
+krecorder
 kteatime
 ktimer
+ktrip
 kwalletmanager
+kweather
 markdownpart
 print-manager
 skanpage
 sweeper
+telly-skout
 yakuake
 
 ### kdevelop
 kdevelop-python
+
+### plasma-mobile
+calindori
+qmlkonsole
