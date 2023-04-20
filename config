@@ -1,4 +1,4 @@
-version=23.03.90
-branch=unstable
-svnbranch=kde-unstable
-repo=kde-unstable
+version=23.04.0
+branch=stable
+svnbranch=trunk
+repo=testing
