@@ -6,8 +6,8 @@ package=$1
 arch=$2
 
 # Add temporary repository to pacman.conf
-rm pacman-*.conf
-cp /usr/share/devtools/pacman-${repo}.conf .
+rm extra*.conf
+cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
@@ -17,9 +17,9 @@ sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i 
 arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
 # Build package
-_pushd build/${package}/${svnbranch}
+_pushd build/${package}
   arch-nspawn \
-    -C "${basedir}/pacman-${repo}.conf" \
+    -C "${basedir}/${repo}.conf" \
     -M "/usr/share/devtools/makepkg-${arch}.conf" \
     "${buildroot}/${repo}-${arch}/root" \
     pacman -Syu --noconfirm

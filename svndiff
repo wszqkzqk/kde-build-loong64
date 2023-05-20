@@ -1,8 +1,0 @@
-#!/bin/bash
-
-. common
-
-if [ -d build ]; then
-    cd build
-    svn diff
-fi

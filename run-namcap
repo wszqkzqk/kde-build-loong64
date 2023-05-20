@@ -9,7 +9,7 @@ rm -f namcap.log
 basedir=${PWD}
 
 for pkg in ${depPkgName} ${optPkgName}; do
-    _pushd build/${pkg}/${svnbranch}
+    _pushd build/${pkg}
     for _pkgfile in $(makepkg --packagelist); do
         namcap ${_pkgfile} >> ${basedir}/namcap.log
     done

@@ -2,13 +2,12 @@
 
 . common
 
-if [ "$#" -lt 2 ]; then
-	echo "Usage: ${0} <repo> <arch>"
-	echo "Example: ${0} extra x86_64"
+if [ "$#" -lt 1 ]; then
+       echo "Usage: ${0} <repo>"
+       echo "Example: ${0} extra"
 	exit 1
 fi
 
 _repo=$1
-_arch=$2
 
-ssh repos.archlinux.org /packages/db-remove $_repo $_arch ${depPkgName} ${optPkgName}
+pkgctl db remove $_repo ${depPkgName} ${optPkgName}

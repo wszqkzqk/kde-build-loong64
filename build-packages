@@ -6,9 +6,9 @@ rm -f broken-packages
 basedir=${PWD}
 
 # Add temporary repository to pacman.conf
-rm pacman-*.conf
-cp /usr/share/devtools/pacman-${repo}.conf .
-sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i pacman-${repo}.conf
+rm extra*.conf
+cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
+sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 
 # Create temporary repository
 rm -fr build-repo
@@ -24,9 +24,9 @@ arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
 # Build packages
 for i in ${depPkgName}; do
-  _pushd build/${i}/${svnbranch}
+  _pushd build/${i}
     arch-nspawn \
-      -C "${basedir}/pacman-${repo}.conf" \
+      -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
@@ -37,9 +37,9 @@ for i in ${depPkgName}; do
 done
 
 for i in ${optPkgName}; do
-  _pushd build/${i}/${svnbranch}
+  _pushd build/${i}
     arch-nspawn \
-      -C "${basedir}/pacman-${repo}.conf" \
+      -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg-${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm

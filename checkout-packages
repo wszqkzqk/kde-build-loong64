@@ -2,10 +2,14 @@
 
 . common
 
-if [ ! -d build ]; then
-    svn checkout -N svn+ssh://svn-packages@repos.archlinux.org/srv/repos/svn-packages/svn build
-fi
+mkdir -p build
+cd build
 
-pushd build
-    svn update ${depPkgName} ${optPkgName}
-popd
+for i in ${depPkgName} ${optPkgName}; do
+  if [ ! -d $i ]; then
+    pkgctl repo clone $i
+  fi
+  _pushd $i
+    git pull origin ${gitbranch}
+  _popd
+done

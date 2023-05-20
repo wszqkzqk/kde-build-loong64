@@ -11,4 +11,4 @@ fi
 repofrom=$1
 repoto=$2
 
-ssh repos.archlinux.org /packages/db-move $repofrom $repoto ${depPkgName} ${optPkgName}
+pkgctl db move $repofrom $repoto ${depPkgName} ${optPkgName}

@@ -5,7 +5,7 @@
 pkglist=''
 
 for i in ${depPkgName} ${optPkgName}; do
-    _pushd build/${i}/${svnbranch}
+    _pushd build/${i}
         pkglist="${pkglist} $(makepkg --packagelist)"
     _popd
 done

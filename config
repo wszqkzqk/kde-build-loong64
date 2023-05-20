@@ -1,4 +1,4 @@
 version=23.04.1
 branch=stable
-svnbranch=trunk
-repo=staging
+gitbranch=main # main/kde-unstable
+repo=extra-staging

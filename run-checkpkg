@@ -7,7 +7,7 @@ fi
 . common
 
 for pkg in ${depPkgName} ${optPkgName}; do
-  _pushd build/${pkg}/${svnbranch}
+  _pushd build/${pkg}
   checkpkg
   _popd
 done

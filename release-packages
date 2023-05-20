@@ -2,8 +2,13 @@
 
 . common
 
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ${0} <commit message>"
+  exit 1
+fi
+
 for i in ${depPkgName} ${optPkgName}; do
-	_pushd build/${i}/$svnbranch
-	${repo}pkg "${1}" || exit 1
-	_popd
+  _pushd build/${i}
+    pkgctl release --repo ${repo} --message "${1}" || exit 1
+  _popd
 done

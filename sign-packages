@@ -14,18 +14,18 @@ checkIntegrity() {
 
 echo "Downloading packages from $server..."
 for i in ${depPkgName} ${optPkgName}; do
-	_pushd build/${i}/${svnbranch}
+       _pushd build/${i}
 	unset pkgname pkgrel arch
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
 			if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
-				scp ${server}:"~/packages/${i}/${svnbranch}/${j}-${version}-${pkgrel}-${a}${PKGEXT}" .
+                               scp ${server}:"~/packages/${i}/${j}-${version}-${pkgrel}-${a}${PKGEXT}" .
 			fi
 
 			if [ -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
 				echo "Checking ${j} ${a} integrity..."
-				if ! checkIntegrity ${j}-${version}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${svnbranch}/${j}-${version}-${pkgrel}-${a}${PKGEXT}"; then
+                               if ! checkIntegrity ${j}-${version}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${j}-${version}-${pkgrel}-${a}${PKGEXT}"; then
 					echo "ERROR: ${j} ${a} corrupted"
 					rm ${j}-${version}-${pkgrel}-${a}${PKGEXT} ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
 					exit 1
@@ -34,7 +34,7 @@ for i in ${depPkgName} ${optPkgName}; do
 				if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ]; then
 					echo "Signing and uploading signatures..."
 					gpg --detach-sign --use-agent ${j}-${version}-${pkgrel}-${a}${PKGEXT}
-					scp ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/${svnbranch}/"
+                                       scp ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/"
 				fi
 			else
 				echo "WARNING: ${j} ${a} not found"
