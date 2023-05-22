@@ -20,7 +20,7 @@ arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 _pushd build/${package}
   arch-nspawn \
     -C "${basedir}/${repo}.conf" \
-    -M "/usr/share/devtools/makepkg-${arch}.conf" \
+    -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
     "${buildroot}/${repo}-${arch}/root" \
     pacman -Syu --noconfirm
   setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n

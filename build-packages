@@ -27,7 +27,7 @@ for i in ${depPkgName}; do
   _pushd build/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
-      -M "/usr/share/devtools/makepkg-${arch}.conf" \
+      -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
     setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || exit 1
@@ -40,7 +40,7 @@ for i in ${optPkgName}; do
   _pushd build/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
-      -M "/usr/share/devtools/makepkg-${arch}.conf" \
+      -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
     setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || ( echo ${i} >> ${basedir}/broken-packages )
