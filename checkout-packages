@@ -2,6 +2,12 @@
 
 . common
 
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ${0} <branch>"
+  echo "Example: ${0} main"
+  exit 1
+fi
+
 mkdir -p build
 cd build
 
@@ -10,6 +16,7 @@ for i in ${depPkgName} ${optPkgName}; do
     pkgctl repo clone $i
   fi
   _pushd $i
-    git pull origin ${gitbranch}
+    git checkout $1
+    git pull origin $1
   _popd
 done
