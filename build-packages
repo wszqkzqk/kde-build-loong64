@@ -8,7 +8,7 @@ basedir=${PWD}
 # Add temporary repository to pacman.conf
 rm extra*.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
-sed "72i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
+sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 
 # Create temporary repository
 rm -fr build-repo
