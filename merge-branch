@@ -1,0 +1,19 @@
+#!/bin/bash
+
+. common
+
+if [ "$#" -lt 2 ]; then
+  echo "Usage: ${0} <origin> <dest>"
+  echo "Example: ${0} kde-build main"
+  exit 1
+fi
+
+mkdir -p build
+cd build
+
+for i in ${depPkgName} ${optPkgName}; do
+  _pushd $i
+    git checkout $2
+    git merge $1
+  _popd
+done
