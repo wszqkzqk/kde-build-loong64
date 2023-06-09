@@ -11,7 +11,7 @@ basedir=${PWD}
 for pkg in ${depPkgName} ${optPkgName}; do
     _pushd build/${pkg}
     for _pkgfile in $(makepkg --packagelist); do
-        namcap ${_pkgfile} >> ${basedir}/namcap.log
+        namcap ${_pkgfile}
     done
     _popd
 done
