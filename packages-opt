@@ -116,17 +116,6 @@ krdc
 krfb
 ktorrent
 neochat
-telepathy-kde-accounts-kcm
-telepathy-kde-approver
-telepathy-kde-auth-handler
-telepathy-kde-call-ui
-telepathy-kde-contact-list
-telepathy-kde-contact-runner
-telepathy-kde-desktop-applets
-telepathy-kde-filetransfer-handler
-telepathy-kde-integration-module
-telepathy-kde-send-file
-telepathy-kde-text-ui
 tokodon
 
 ### kde-office
@@ -139,7 +128,6 @@ akregator
 grantlee-editor
 itinerary
 kalarm
-kalendar
 kdepim-addons
 kleopatra
 kmail
@@ -191,7 +179,6 @@ kdialog
 keditbookmarks
 keysmith
 kfind
-kfloppy
 kgpg
 kongress
 konsole

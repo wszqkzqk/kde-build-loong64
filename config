@@ -1,4 +1,4 @@
-version=23.04.3
-branch=stable
-gitbranch=main # main/kde-unstable
-repo=extra
+version=23.07.80
+branch=unstable
+gitbranch=kde-unstable # main/kde-unstable
+repo=kde-unstable
