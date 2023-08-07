@@ -1,0 +1,12 @@
+#!/bin/bash
+
+. common
+
+cd build
+
+for i in ${depPkgName} ${optPkgName}; do
+  if [ -d $i ]; then
+  pushd $i
+    git diff
+  popd
+done
