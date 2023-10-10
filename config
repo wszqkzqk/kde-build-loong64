@@ -1,4 +1,4 @@
-version=23.08.1
+version=23.08.2
 branch=stable
 gitbranch=kde-build # main/kde-unstable
 repo=extra
