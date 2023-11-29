@@ -23,7 +23,7 @@ kturtle
 kwordquiz
 marble
 minuet
-parley
+# parley
 rocs
 step
 
@@ -87,7 +87,7 @@ kdegraphics-thumbnailers
 
 ### kde-multimedia
 audiocd-kio
-audiotube
+# audiotube
 dragon
 elisa
 ffmpegthumbs
@@ -108,13 +108,13 @@ kdeconnect
 kdenetwork-filesharing
 kget
 kio-extras
-kio-gdrive
+# kio5-extras
+# kio-gdrive
 kio-zeroconf
 konqueror
 konversation
-kopete
 krdc
-krfb
+# krfb
 ktorrent
 neochat
 tokodon
@@ -127,7 +127,7 @@ akonadi-calendar-tools
 akonadiconsole
 akregator
 grantlee-editor
-itinerary
+# itinerary
 kalarm
 kdepim-addons
 kleopatra
@@ -144,9 +144,9 @@ zanshin
 
 ### kde-sdk
 cervisia
-kde-dev-utils
 kde-dev-scripts
-dolphin-plugins
+kde-dev-utils
+# dolphin-plugins
 kapptemplate
 kcachegrind
 kdesdk-kio
@@ -169,6 +169,7 @@ partitionmanager
 ### kde-utilities
 ark
 filelight
+isoimagewriter
 kalk
 kate
 kbackup
@@ -191,7 +192,6 @@ ktrip
 kwalletmanager
 kweather
 markdownpart
-print-manager
 skanpage
 sweeper
 telly-skout

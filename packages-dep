@@ -16,9 +16,9 @@ baloo-widgets
 
 ### kde-network
 libktorrent
-signon-kwallet-extension
-kaccounts-integration
-kaccounts-providers
+# signon-kwallet-extension
+# kaccounts-integration
+# kaccounts-providers
 
 ### PIM
 kpimtextedit
@@ -58,9 +58,11 @@ kitinerary
 kaddressbook
 kpublictransport
 kopeninghours
-kosmindoormap
+# kosmindoormap
+khealthcertificate
+mimetreeparser
 
-# kde-system
+### kde-system
 dolphin
 kpmcore
 
