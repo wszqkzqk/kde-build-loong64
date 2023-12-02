@@ -108,8 +108,8 @@ kdeconnect
 kdenetwork-filesharing
 kget
 kio-extras
-# kio5-extras
-# kio-gdrive
+kio5-extras
+kio-gdrive
 kio-zeroconf
 konqueror
 konversation
@@ -146,7 +146,7 @@ zanshin
 cervisia
 kde-dev-scripts
 kde-dev-utils
-# dolphin-plugins
+dolphin-plugins
 kapptemplate
 kcachegrind
 kdesdk-kio
@@ -192,7 +192,7 @@ ktrip
 kwalletmanager
 kweather
 markdownpart
-skanpage
+# skanpage
 sweeper
 telly-skout
 yakuake
