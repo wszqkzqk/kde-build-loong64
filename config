@@ -1,3 +1,3 @@
-version=24.01.80
-branch=unstable
-repo=kde-unstable
+version=23.08.4
+branch=stable
+repo=stable
