@@ -16,9 +16,9 @@ baloo-widgets
 
 ### kde-network
 libktorrent
-# signon-kwallet-extension
-# kaccounts-integration
-# kaccounts-providers
+signon-kwallet-extension
+kaccounts-integration
+kaccounts-providers
 
 ### PIM
 kpimtextedit
