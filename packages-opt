@@ -114,7 +114,7 @@ kio-zeroconf
 konqueror
 konversation
 krdc
-# krfb
+krfb
 ktorrent
 neochat
 tokodon
@@ -127,7 +127,7 @@ akonadi-calendar-tools
 akonadiconsole
 akregator
 grantlee-editor
-# itinerary
+itinerary
 kalarm
 kdepim-addons
 kleopatra
@@ -192,7 +192,7 @@ ktrip
 kwalletmanager
 kweather
 markdownpart
-# skanpage
+skanpage
 sweeper
 telly-skout
 yakuake
