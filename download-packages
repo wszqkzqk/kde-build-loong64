@@ -2,4 +2,10 @@
 
 . common
 
-rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${branch}/release-service/${version}/src/ ${SRCDEST}/
+if [ "$#" -lt 2 ]; then
+  echo "Usage: ${0} <stable|unstable> <version>"
+  echo "Example: ${0} stable 6.0.0"
+  exit 1
+fi
+
+rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:$1/release-service/$2/src/ ${SRCDEST}/
