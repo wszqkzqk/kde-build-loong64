@@ -1,9 +1,17 @@
 #!/bin/bash
 
 . common
+
+if [ "$#" -lt 2 ]; then
+  echo "Usage: ${0} <package> <repo>"
+  echo "Example: ${0} kio extra"
+  exit 1
+fi
+
 basedir=${PWD}
 package=$1
-arch=$2
+repo=$2
+arch=$3
 
 # Add temporary repository to pacman.conf
 rm extra*.conf

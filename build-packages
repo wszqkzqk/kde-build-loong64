@@ -2,8 +2,16 @@
 
 . common
 
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ${0} <repo>"
+  echo "Example: ${0} extra"
+  exit 1
+fi
+
 rm -f broken-packages
 basedir=${PWD}
+repo=$1
+arch=$2
 
 # Add temporary repository to pacman.conf
 rm extra*.conf
@@ -16,7 +24,6 @@ mkdir build-repo
 repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
-arch=$1
 [[ -z ${arch} ]] && arch=$(uname -m)
 
 # Cleanup package cache
