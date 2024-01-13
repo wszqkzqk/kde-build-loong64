@@ -15,26 +15,26 @@ checkIntegrity() {
 echo "Downloading packages from $server..."
 for i in ${depPkgName} ${optPkgName}; do
        _pushd build/${i}
-	unset pkgname pkgrel arch
+	unset pkgname pkgver pkgrel arch
 	. PKGBUILD
 	for a in ${arch[@]}; do
 		for j in ${pkgname[@]}; do
-			if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
-                               scp ${server}:"~/packages/${i}/${j}-${version}-${pkgrel}-${a}${PKGEXT}" .
+			if [ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
+                               scp ${server}:"~/packages/${i}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}" .
 			fi
 
-			if [ -f ${j}-${version}-${pkgrel}-${a}${PKGEXT} ]; then
+			if [ -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ]; then
 				echo "Checking ${j} ${a} integrity..."
-                               if ! checkIntegrity ${j}-${version}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${j}-${version}-${pkgrel}-${a}${PKGEXT}"; then
+                               if ! checkIntegrity ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} "~/packages/${i}/${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}"; then
 					echo "ERROR: ${j} ${a} corrupted"
-					rm ${j}-${version}-${pkgrel}-${a}${PKGEXT} ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
+					rm ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT} ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}.sig &> /dev/null
 					exit 1
 				fi
 
-				if [ ! -f ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ]; then
+				if [ ! -f ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}.sig ]; then
 					echo "Signing and uploading signatures..."
-					gpg --detach-sign --use-agent ${j}-${version}-${pkgrel}-${a}${PKGEXT}
-                                       scp ${j}-${version}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/"
+					gpg --detach-sign --use-agent ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}
+                                       scp ${j}-${pkgver}-${pkgrel}-${a}${PKGEXT}.sig ${server}:"~/packages/${i}/"
 				fi
 			else
 				echo "WARNING: ${j} ${a} not found"
