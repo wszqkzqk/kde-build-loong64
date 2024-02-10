@@ -2,13 +2,8 @@
 
 . common
 
-if [ "$#" -lt 2 ]; then
-  echo "Usage: ${0} <repo> <commit message>"
-  exit 1
-fi
-
 for i in ${depPkgName} ${optPkgName}; do
   _pushd build/${i}
-    pkgctl release --repo $1 --message "$2" || exit 1
+    pkgctl release "$@" || exit 1
   _popd
 done
