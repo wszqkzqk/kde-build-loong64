@@ -108,11 +108,11 @@ kdeconnect
 kdenetwork-filesharing
 kget
 kio-extras
-kio5-extras
 kio-gdrive
 kio-zeroconf
 konqueror
 konversation
+kopete
 krdc
 krfb
 ktorrent
@@ -144,8 +144,8 @@ zanshin
 
 ### kde-sdk
 cervisia
-kde-dev-scripts
 kde-dev-utils
+kde-dev-scripts
 dolphin-plugins
 kapptemplate
 kcachegrind
@@ -169,7 +169,6 @@ partitionmanager
 ### kde-utilities
 ark
 filelight
-isoimagewriter
 kalk
 kate
 kbackup
@@ -192,6 +191,7 @@ ktrip
 kwalletmanager
 kweather
 markdownpart
+print-manager
 skanpage
 sweeper
 telly-skout
