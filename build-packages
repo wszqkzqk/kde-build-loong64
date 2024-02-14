@@ -14,13 +14,12 @@ repo=$1
 arch=$2
 
 # Add temporary repository to pacman.conf
-rm extra*.conf
+rm -f *.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 
 # Create temporary repository
-rm -fr build-repo
-mkdir build-repo
+mkdir -p build-repo
 repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
 # Pass i686 as argument if you want to build i686 packages on a x86_64 system
