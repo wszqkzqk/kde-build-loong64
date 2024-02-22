@@ -59,8 +59,10 @@ kaddressbook
 kpublictransport
 kopeninghours
 kosmindoormap
+khealthcertificate
+mimetreeparser
 
-# kde-system
+### kde-system
 dolphin
 kpmcore
 
