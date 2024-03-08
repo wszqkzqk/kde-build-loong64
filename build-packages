@@ -27,27 +27,42 @@ repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
 # Build packages
+touch built-packages
 for i in ${depPkgName}; do
+  if grep -q -x $i built-packages > /dev/null ; then
+    continue
+  fi
   _pushd build/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || exit 1
+    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+      echo $i >> ${basedir}/built-packages
+    else
+      exit 1
+    fi
     cp $(makepkg --packagelist) ${basedir}/build-repo
     repo-add -n ${basedir}/build-repo/build.db.tar ${basedir}/build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
 done
 
 for i in ${optPkgName}; do
+  if grep -q -x $i built-packages ; then
+    continue
+  fi
   _pushd build/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n || ( echo ${i} >> ${basedir}/broken-packages )
+    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+      echo $i >> ${basedir}/built-packages
+    else
+      echo $i >> ${basedir}/broken-packages
+    fi
   _popd
 done
 
