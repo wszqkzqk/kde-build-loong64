@@ -14,7 +14,6 @@ repo=$2
 arch=$3
 
 # Add temporary repository to pacman.conf
-rm extra*.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 
