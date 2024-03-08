@@ -8,13 +8,11 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-rm -f broken-packages
 basedir=${PWD}
 repo=$1
 arch=$2
 
 # Add temporary repository to pacman.conf
-rm -f *.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 

@@ -5,13 +5,12 @@ if [ ! -d build ]; then
 fi
 
 . common
-rm -f namcap.log
 basedir=${PWD}
 
 for pkg in ${depPkgName} ${optPkgName}; do
     _pushd build/${pkg}
     for _pkgfile in $(makepkg --packagelist); do
-        namcap ${_pkgfile}
+        namcap ${_pkgfile} | tee namcap.log
     done
     _popd
 done
