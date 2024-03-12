@@ -1,0 +1,26 @@
+bluez-qt5
+breeze-icons
+frameworkintegration5
+kactivities-stats5
+kcalendarcore5
+kcontacts5
+kdav5
+kdesu5
+kdnssd5
+kholidays5
+kimageformats5
+kitemmodels5
+knotifyconfig5
+kpeople5
+krunner5
+ktexteditor5
+modemmanager-qt5
+networkmanager-qt5
+oxygen-icons
+prison5
+purpose5
+qqc2-desktop-style5
+
+# porting aids
+kdelibs4support
+kross
