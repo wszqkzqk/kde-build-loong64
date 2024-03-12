@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
 
 if [ "$#" -lt 1 ]; then
   echo "Usage: ${0} <branch>"
@@ -8,8 +11,8 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-mkdir -p build
-cd build
+mkdir -p ${__PKG_REPO_ROOT_PATH__}
+cd ${__PKG_REPO_ROOT_PATH__}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then

@@ -2,6 +2,8 @@
 
 import argparse
 import os
+import subprocess
+
 from pathlib import Path
 
 def define_command_line_args():
@@ -77,8 +79,11 @@ if __name__ == "__main__":
         buildroot = buildroot.replace("<pkg-list>", args.package_list)
 
     # Here we push all variables that the shell scripts will need.
+    # Make sure the scripts are using those instead of the hardcoded ones.
     os.environ["__BUILDROOT__"] = buildroot
     os.environ["__PKG_LIST__"] = args.package_list
     os.environ["__SCRIPT_ROOT__"] = script_dir
+    os.environ["__PKG_REPO_ROOT_PATH__"] = os.path.realpath(f"{script_dir}/../packages/{args.package_list}")
 
-    main()
+    # Here we start the build
+    subprocess.run([f"{script_dir}/scripts/checkout-packages", "main"])
