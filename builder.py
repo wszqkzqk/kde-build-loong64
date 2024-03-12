@@ -18,6 +18,7 @@ def define_command_line_args():
     parser.add_argument('--pretend', help="Do not run, just output the commands that would run", action="store_true")
     parser.add_argument('--verbose', help="Don't be shy on output", action='store_true')
     parser.add_argument('--testing', help="Build on a testing repository", action="store_true")
+    parser.add_argument('--repository', help="The target arch-linux target repository", default="extra")
     parser.add_argument('--target-version', help="The target version of the packages you want to build. Should match tarballs.")
     parser.add_argument('--create_package_folder', help="creates the package folders if they don't exist", action="store_true")
     parser.add_argument('--buildroot',
@@ -122,13 +123,16 @@ if __name__ == "__main__":
     # Prepare the build machine to run
     if args.steps is None or "5" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
+        repository = args.repository
+        if args.testing:
+            repository += "-testing"
 
         # TODO: This is still using the branches. fix this before moving on.
         calls = [
             "git clone git@gitlab.archlinux.org:archlinux/kde-build.git"
             f"cd kde-build && git checkout {args.package_list}",
-            "mkdir -p ~/buildroot/extra-testing-x86_64",
-            "mkarchroot ~/buildroot/extra-testing-x86_64/root base-devel",
+            f"mkdir -p ~/buildroot/{repository}-x86_64",
+            f"mkarchroot ~/buildroot/{repository}-x86_64/root base-devel",
             "cd kde-build && ./checkout-packages main",
             "cd kde-build && gpg --import build/kwin/keys/pgp/*"
         ]
@@ -141,7 +145,7 @@ if __name__ == "__main__":
     if args.steps is None or "6" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
 
-        calls = ["cd kde-build && ./build-packages extra-testing"]
+        calls = ["cd kde-build && ./build-packages extra"]
 
         for call in calls:
             new_call = [] + base_call
