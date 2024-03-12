@@ -1,48 +1,110 @@
-Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
+# Building KDE for Archlinux
 
-== Requirements ==
-* devtools (these scripts use the chroots in /var/lib/archbuild/)
-* ssh access to repos.archlinux.org and depot.kde.org without user
-  interaction
-* set sudo to allow running makechrootpkg without password
-* set your SRCDEST and INTEGRITY_CHECK=('sha256') in makepkg.conf
-* set your gpg-key in makepkg.conf
+# Prepare the packages:
 
-== Usage by file ==
-* build-packages: run makechrootpkg for all packages and install those that are
-  defined in packages-dep to a temporary repo.
-** it will fail if a package from packages-dep will fail. Other broken
-   packages will be just skipped and shown at the end.
-* checkout-packages: checkout the working tree from SVN.
-* cleanup-packages: remove any logs, packages, signatures, src and pkg dirs
-  from the working copy.
-* commit-packages: commit all changes to the SVN branch. This does NOT release
-  any package.
-* config: set version and branch. Also a target repo can be set.
-* download-packages: download the sources from KDE server. If they are already
-  downloaded just check integrity.
-* install-packages: install all KDE packages from the build dir.
-* move-packages: move packages between two repos.
-* release-packages: run commitpkg. This actually commit, release and upload
-  the packages.
-* run-checkpkg: run the checkpkg script on every package.
-* run-namcap: run namcap on all packages and store the result to namcap.log.
-* show-namcap: show namcap.log for all packages.
-* sign-packages: add signatures files to the packages in the build dir.
-* svndiff: displays all local changes for the SVN branch.
-* syncrepo: used to sync kde-unstable from trunk.
-* update-pkgbuids: updates pkgver to the one configured in config; resets
-  pkgrel to 1. It also updates the checksum array.
+## First things First
 
-== Sample workflow ==
-* edit config to your needs
-* run download-packages to get all sources
-* run checkout-packages to get the abs working tree
-* run update-pkgbuilds to update all PKGBUILDs
-* optional edit PKGBUILDs (e.g. remove old patches etc.)
-* build all packages for x86_64 using build-packages
-* run run-namcap and have a look at the logs with show-namcap
-* run sign-packages to add signatures files to the packages built on remote
-  (e.g. on pkgbuild.com)
-* run release-packages 'Upstream release' to upload and release all packages to
-  the repo
+1 - Make sure your hardware token is using a keychain.
+This is needed because we will sign *tons* of packages during the build, and if you need to touch every time a package is being signed, you will probably miss some packages and the build will fail.
+
+2 - make sure you have pkgdest configured in ~/.config/pacman/makepkg.conf
+
+## Clone the build script
+
+Clone https://gitlab.archlinux.org/archlinux/kde-build,
+there's a branch for each release type, we want the plasma branch today
+Use different checkouts for each branch.
+
+The difference in the branches are the download url and packagelist.
+
+## Fetch all the PKGBUILDS for the package list
+
+After the checkout is done, and a branch has been selected
+run `./checkout-packages main` to grab the PKGBUILD package sources
+
+First we need to do some cleanup - remove no longer necessary patches, sed lines etc. I usually run  grep patch build/*/PKGBUILD
+If there are patches, look on the actual upstream source repositories (not pkgbuild) if the patch is still needed, and remove the ones that are not.
+don't commit anything, just do the changes locally
+
+## If the packages are embargoed:
+
+`./download-packages stable <version>` to get the sources
+
+## Fetch the sources
+
+Grab the upstream sources and update the PKGBUILDs
+
+`./update-pkgbuilds stable <version>`
+
+If there are respins (for instance, instead of 6.1.0, a 6.1.0.1, you need to manually set the pkgver of those, and run `updpkgsums`)
+
+# Build the sources on archlinux build machines
+
+## Commit the changes done to the pkgbuilds
+
+Do not open merge requests for those, just commit directly. The reason is lack of manpower to update everything. The following command will commit everything into the packages repositories, not on the kde-build git.
+
+`./commit-packages main "Update to <version>"`
+
+## Build the Packages:
+
+1 - ssh into build.archlinux.org
+2 - repeat the kde-build git clone and ./checkout-packages
+3 - decide where you want your build roots to be, and modify the buildroot variable in ./common accordingly
+it needs to be somewhere in HOME since we don't have write permissions elsewhere on the build server
+
+(TODO: make ./common source an external config dir so you can customize stuff without touching upstream files)
+or ask if the variable isn't set.
+
+4 - now setup the build root. You should only need to do this once (per repo)
+```
+mkdir /path/to/buildroot/extra-testing-x86_64
+mkarchroot /path/to/buildroot/extra-testing-x86_64/root base-devel
+```
+Careful with wrong folder names, you don't have permission to run sudo to remove the resulting folder.
+you can move it though, so what I do is I keep a ~/trash dir and move every borked attempt there,
+and then periodically ask sysadmins to delete it
+
+5 - Import the PGP keys
+
+gpg --import build/kwin/keys/pgp/*
+
+6 - Build the Packages and wait
+
+`./build-packages extra-testing `
+
+this will build every package sequentially, from packages-dep first and packages-opt then
+packages-dep contains packages that are dependencies of other packages. If some of these fails, the process will abort until the build is fixed
+packages-opt contains leaves in the dependency tree. Build failures are not fatal, they will just be reported at the end (but of course need to be fixed too)
+
+TOOD: It is very rudimentary. This needs rewriting for proper dependency handling
+If a package breaks, before restarting, open packages-dep and delete the packages already built so you don't build them again
+
+7 - If a package breaks during build, analyze the resulting error, add the necessary packages `locally on your machine`, commit, update the packages on the arch linux build system, and re-trigger the build.
+
+8 - As soon as the build finishes, look for missing stuff. Grep for `could not find` on the server, this is enough for cmake based projects, and add the necessary dependencies on your local machine. update the sources on the arch build, and rebuild.
+
+9 -  Log off from the server, everything there should be finihsed.
+
+# Back to Localhost:
+
+1 - scp all the build packages to your local `pkgdest`
+2 - `./run-checkpkg`
+3 - `./run-namcap`
+
+Analyze carefully the output of those two scripts since they have a `lot` of false positives.
+ignore everything that is `error` within debug packages, for instance.
+
+4 - `release-packages`
+
+the release-packages script just forwards all flags to pkgctl release.
+if you are targeting `testing`, you need to set `-t` for pre-existing packages,
+and `--repo` for packages that don't exist.
+the `-t` and `--repo` flags are broken currently so we need to run things twice.
+
+```
+pkgctl release -t -m "Update to <version>"
+pkgctl release --repo extra-testing -m "Update to <version>"
+```
+
+
