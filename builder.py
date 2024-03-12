@@ -128,11 +128,13 @@ if __name__ == "__main__":
             repository += "-testing"
 
         # TODO: This is still using the branches. fix this before moving on.
+        # TODO: buildroot is currently hardcoded on the branches. this will
+        # NOT work with my current code.
         calls = [
             "git clone git@gitlab.archlinux.org:archlinux/kde-build.git"
             f"cd kde-build && git checkout {args.package_list}",
-            f"mkdir -p ~/buildroot/{repository}-x86_64",
-            f"mkarchroot ~/buildroot/{repository}-x86_64/root base-devel",
+            f"mkdir -p ~/kde-build-root/{repository}-x86_64",
+            f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
             "cd kde-build && ./checkout-packages main",
             "cd kde-build && gpg --import build/kwin/keys/pgp/*"
         ]
