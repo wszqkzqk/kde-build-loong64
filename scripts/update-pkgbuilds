@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
 
 if [ "$#" -lt 2 ]; then
   echo "Usage: ${0} <stable|unstable> <version>"
@@ -10,7 +13,7 @@ fi
 
 for i in ${depPkgName} ${optPkgName}; do
 
-    _pushd build/${i}
+    _pushd ${__PKG_REPO_ROOT_PATH__}/${i}
     sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/$1/|g" -i PKGBUILD
     sed -r "s|pkgver=.*|pkgver=$2|g" -i PKGBUILD
     sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD

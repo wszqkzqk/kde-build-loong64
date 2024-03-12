@@ -3,6 +3,7 @@
 import argparse
 import os
 import subprocess
+import textwrap
 
 from pathlib import Path
 
@@ -17,10 +18,22 @@ def define_command_line_args():
     parser.add_argument('--pretend', help="Do not run, just output the commands that would run", action="store_true")
     parser.add_argument('--verbose', help="Don't be shy on output", action='store_true')
     parser.add_argument('--testing', help="Build on a testing repository", action="store_true")
+    parser.add_argument('--target-version', help="The target version of the packages you want to build. Should match tarballs.")
     parser.add_argument('--create_package_folder', help="creates the package folders if they don't exist", action="store_true")
     parser.add_argument('--buildroot',
                             help="folder where the build will happen",
                             default=f'{Path.home()}/buildroot/<pkg-list>')
+
+    parser.add_argument('--steps', help='''
+    1 - clone pkgbuild repositories
+    2 - download embargoed  packages
+    3 - update pkgbuilds
+    4 - commit changes to packages
+    5 - connect to ssh and build things on the remote machine
+    6 - fetch data from the remote machine to local
+    7 - Validate packages
+    8 - Release packages
+''', nargs='*')
 
     args = parser.parse_args()
     return args
@@ -74,6 +87,10 @@ if __name__ == "__main__":
         print("Please set pkgdest in your makepkg.conf")
         exit(1)
 
+    if args.target_version is None:
+        print("Please specify the version of the packages you want to build.")
+        exit(1)
+
     buildroot = args.buildroot
     if "<pkg-list>" in buildroot:
         buildroot = buildroot.replace("<pkg-list>", args.package_list)
@@ -85,5 +102,15 @@ if __name__ == "__main__":
     os.environ["__SCRIPT_ROOT__"] = script_dir
     os.environ["__PKG_REPO_ROOT_PATH__"] = os.path.realpath(f"{script_dir}/../packages/{args.package_list}")
 
-    # Here we start the build
-    subprocess.run([f"{script_dir}/scripts/checkout-packages", "main"])
+    if args.steps is None or "1" in args.steps:
+        print("Starting Step 1 - ")
+        # Here we start the build
+        subprocess.run([f"{script_dir}/scripts/checkout-packages", "main"])
+
+    if args.steps is None or "2" in args.steps:
+        # is there a way, to, programatically know if a package is embargoed?
+        # subprocess.run([f"{script_dir}/scripts/download-packages", "stable", args.target_version])
+        pass
+
+    if args.steps is None or "3" in args.steps:
+        subprocess.run([f"{script_dir}/scripts/update-pkgbuilds", "stable", args.target_version])

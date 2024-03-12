@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
 
 if [ "$#" -lt 1 ]; then
   echo "Usage: ${0} <repo>"
