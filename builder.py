@@ -29,10 +29,11 @@ def define_command_line_args():
     2 - download embargoed  packages
     3 - update pkgbuilds
     4 - commit changes to packages
-    5 - connect to ssh and build things on the remote machine
-    6 - fetch data from the remote machine to local
-    7 - Validate packages
-    8 - Release packages
+    5 - connect to ssh and prepare the build system
+    6 - build the software on the ssh machine
+    7 - fetch data from the remote machine to local
+    8 - Validate packages
+    9 - Release packages
 ''', nargs='*')
 
     args = parser.parse_args()
@@ -117,3 +118,32 @@ if __name__ == "__main__":
 
     if args.steps is None or "4" in args.steps:
         subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
+
+    # Prepare the build machine to run
+    if args.steps is None or "5" in args.steps:
+        base_call = ["ssh", "build.archlinux.org"]
+
+        # TODO: This is still using the branches. fix this before moving on.
+        calls = [
+            "git clone git@gitlab.archlinux.org:archlinux/kde-build.git"
+            f"cd kde-build && git checkout {args.package_list}",
+            "mkdir -p ~/buildroot/extra-testing-x86_64",
+            "mkarchroot ~/buildroot/extra-testing-x86_64/root base-devel",
+            "cd kde-build && ./checkout-packages main",
+            "cd kde-build && gpg --import build/kwin/keys/pgp/*"
+        ]
+
+        for call in calls:
+            new_call = [] + base_call
+            new_call.append(call)
+            subprocess.run(new_call)
+    
+    if args.steps is None or "6" in args.steps:
+        base_call = ["ssh", "build.archlinux.org"]
+
+        calls = ["cd kde-build && ./build-packages extra-testing"]
+
+        for call in calls:
+            new_call = [] + base_call
+            new_call.append(call)
+            subprocess.run(new_call)
