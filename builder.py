@@ -114,3 +114,6 @@ if __name__ == "__main__":
 
     if args.steps is None or "3" in args.steps:
         subprocess.run([f"{script_dir}/scripts/update-pkgbuilds", "stable", args.target_version])
+
+    if args.steps is None or "4" in args.steps:
+        subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
