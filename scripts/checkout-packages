@@ -16,7 +16,13 @@ cd ${__PKG_REPO_ROOT_PATH__}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
-    pkgctl repo clone $i
+    if ${__REMOTE_BUILD__}; then
+      echo "Remote"
+      pkgctl repo clone $i --protocol https 
+    else
+      echo "Local"
+      pkgctl repo clone $i
+    fi
   fi
   _pushd $i
     git checkout $1

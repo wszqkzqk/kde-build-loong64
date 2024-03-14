@@ -108,6 +108,7 @@ if __name__ == "__main__":
     os.environ["__PKG_LIST__"] = args.package_list
     os.environ["__SCRIPT_ROOT__"] = script_dir
     os.environ["__PKG_REPO_ROOT_PATH__"] = os.path.realpath(f"{script_dir}/../packages/{args.package_list}")
+    os.environ["__REMOTE_BUILD__"] = "true" if args.remote else "false"
 
     if args.steps is None or "1" in args.steps:
         print("Starting Step 1 - ")
@@ -144,7 +145,7 @@ if __name__ == "__main__":
         # TODO: buildroot is currently hardcoded on the branches. this will
         # NOT work with my current code.
         calls = [
-            "git clone https://gitlab.archlinux.org/archlinux/kde-build.git"
+            "git clone https://gitlab.archlinux.org/archlinux/kde-build.git",
             f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
             f"mkdir -p ~/kde-build-root/{repository}-x86_64",
             f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
@@ -160,9 +161,7 @@ if __name__ == "__main__":
 
         calls = [
             "cd kde-build && git pull origin work/branchless", # TODO move this to origin main
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 3 --repository={repository}",
-#            f"cd kde-build && gpg --import {buildroot}/{repository}/kwin/keys/pgp/*"
-            f"cd kde-build &&./builder.py --remote --package-list={args.package_list} --steps B --repository={repository}"
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 3 B --repository={repository} --target-version={args.target_version}",
         ]
 
         for call in calls:
