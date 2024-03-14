@@ -127,12 +127,19 @@ if __name__ == "__main__":
         if args.testing:
             repository += "-testing"
 
+        # Make sure we have the necessary information on the server.
+        # TODO: I'm checking just for one possible file, check also for ~/.config/makepkg.conf
+        out = subprocess.check_output(["ssh", "build.archlinux.org", 'cat  ~/.makepkg.conf | grep "PKGDEST\|PACKAGER" | wc -l'])
+        if out.decode() != "2\n":
+            print("Please configure your makepkg.conf on build.archlinux.org. you need at least PKGDEST and PACKAGER configured.")
+            exit(1)
+
         # TODO: This is still using the branches. fix this before moving on.
         # TODO: buildroot is currently hardcoded on the branches. this will
         # NOT work with my current code.
         calls = [
             "git clone git@gitlab.archlinux.org:archlinux/kde-build.git"
-            f"cd kde-build && git checkout {args.package_list}",
+            f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
             f"mkdir -p ~/kde-build-root/{repository}-x86_64",
             f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
             "cd kde-build && ./checkout-packages main",
@@ -148,8 +155,9 @@ if __name__ == "__main__":
         base_call = ["ssh", "build.archlinux.org"]
 
         calls = [
+            "cde kde-build && git pull origin work/branchless" # TODO move this to origin main
             "cd kde-build && ./build-packages extra"
-            ]
+        ]
 
         for call in calls:
             new_call = [] + base_call
