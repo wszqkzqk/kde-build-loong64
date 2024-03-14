@@ -37,7 +37,7 @@ for i in ${depPkgName}; do
   if grep -q -x $i built-packages > /dev/null ; then
     continue
   fi
-  _pushd build/${i}
+  _pushd ${__PKG_REPO_ROOT_PATH__}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
@@ -57,7 +57,7 @@ for i in ${optPkgName}; do
   if grep -q -x $i built-packages ; then
     continue
   fi
-  _pushd build/${i}
+  _pushd ${__PKG_REPO_ROOT_PATH__}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
