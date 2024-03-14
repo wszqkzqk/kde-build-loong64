@@ -13,14 +13,22 @@ def define_command_line_args():
                     description='organizes Qt and KDE Building process on archlinux',
                     epilog='')
 
-    parser.add_argument('--package-list', help="The name of the list you want to build now.")
-    parser.add_argument('--list-packages', help="The name of the list you want to build now.", action="store_true")
-    parser.add_argument('--pretend', help="Do not run, just output the commands that would run", action="store_true")
-    parser.add_argument('--verbose', help="Don't be shy on output", action='store_true')
-    parser.add_argument('--testing', help="Build on a testing repository", action="store_true")
-    parser.add_argument('--repository', help="The target arch-linux target repository", default="extra")
-    parser.add_argument('--target-version', help="The target version of the packages you want to build. Should match tarballs.")
-    parser.add_argument('--create_package_folder', help="creates the package folders if they don't exist", action="store_true")
+    parser.add_argument('--package-list',
+                            help="The name of the list you want to build now.")
+    parser.add_argument('--list-packages',
+                            help="List the possible package groups that this script can build.", 
+                            action="store_true")
+    parser.add_argument('--testing',
+                            help="Build on a testing repository",
+                            action="store_true")
+    parser.add_argument('--repository',
+                            help="The target arch-linux target repository",
+                            default="extra")
+    parser.add_argument('--target-version', 
+                            help="The target version of the packages you want to build. Should match tarballs.")
+    parser.add_argument('--remote',
+                            help="Flag that indicates we are running on build.archlinux.org", 
+                            action="store_true")
     parser.add_argument('--buildroot',
                             help="folder where the build will happen",
                             default=f'{Path.home()}/buildroot/<pkg-list>')
@@ -35,6 +43,7 @@ def define_command_line_args():
     7 - fetch data from the remote machine to local
     8 - Validate packages
     9 - Release packages
+    B - Build packages (remote only)
 ''', nargs='*')
 
     args = parser.parse_args()
@@ -45,6 +54,7 @@ def get_packages(script_dir: str) -> [str]:
     return subfolders
 
 def check_pkgdest() -> bool:
+    print("Checking validity of makepkg.conf. Ignore possible errors during check.")
     makepkgs = [
         f'{Path.home()}/.config/pacman/makepkg.conf',
         f'{Path.home()}/.makepkg.conf',
@@ -52,18 +62,13 @@ def check_pkgdest() -> bool:
     ]
 
     for makepkg in makepkgs:
-        try:
-            with open(makepkg) as f:
-                for line in f:
-                    line = line.strip()
-                    if line.startswith('#'):
-                        continue
+        out = subprocess.check_output(["bash", "-c", f'cat  {makepkg} | grep "PKGDEST\|PACKAGER" | wc -l'])
+        value = out.decode()[0]
+        if not value in ["0", "1"]:
+            print("Check Finished")
+            return True
 
-                    if line.startswith('PKGDEST'):
-                        return True
-        except:
-            continue
-
+    print("Check Finished")
     return False
 
 def main():
@@ -86,7 +91,7 @@ if __name__ == "__main__":
         exit(1)
 
     if not check_pkgdest():
-        print("Please set pkgdest in your makepkg.conf")
+        print("Please set PKGDEST and PACKAGER in your makepkg.conf")
         exit(1)
 
     if args.target_version is None:
@@ -120,12 +125,13 @@ if __name__ == "__main__":
     if args.steps is None or "4" in args.steps:
         subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
 
+    repository = args.repository
+    if args.testing:
+        repository += "-testing"
+
     # Prepare the build machine to run
     if args.steps is None or "5" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
-        repository = args.repository
-        if args.testing:
-            repository += "-testing"
 
         # Make sure we have the necessary information on the server.
         # TODO: I'm checking just for one possible file, check also for ~/.config/makepkg.conf
@@ -142,8 +148,6 @@ if __name__ == "__main__":
             f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
             f"mkdir -p ~/kde-build-root/{repository}-x86_64",
             f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
-            "cd kde-build && ./checkout-packages main",
-            "cd kde-build && gpg --import build/kwin/keys/pgp/*"
         ]
 
         for call in calls:
@@ -155,8 +159,10 @@ if __name__ == "__main__":
         base_call = ["ssh", "build.archlinux.org"]
 
         calls = [
-            "cde kde-build && git pull origin work/branchless" # TODO move this to origin main
-            "cd kde-build && ./build-packages extra"
+            "cd kde-build && git pull origin work/branchless", # TODO move this to origin main
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 3 --repository={repository}",
+#            f"cd kde-build && gpg --import {buildroot}/{repository}/kwin/keys/pgp/*"
+            f"cd kde-build &&./builder.py --remote --package-list={args.package_list} --steps B --repository={repository}"
         ]
 
         for call in calls:
@@ -164,6 +170,10 @@ if __name__ == "__main__":
             new_call.append(call)
             subprocess.run(new_call)
     
+    if args.remote and "B" in args.steps:
+        subprocess.run([f"{script_dir}/scripts/build-packages", repository])
+        exit(0)
+
     # Validate Packages
     if args.steps is None or "8" in args.steps:
         subprocess.run([f"{script_dir}/scripts/run-namcap"])
