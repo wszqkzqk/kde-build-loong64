@@ -17,7 +17,7 @@ cd ${__PKG_REPO_ROOT_PATH__}
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
     if ${__REMOTE_BUILD__}; then
-      echo "Remote"
+      echo "Trying to clone $i on the remote server"
       pkgctl repo clone --protocol https $i 
     else
       echo "Local"
