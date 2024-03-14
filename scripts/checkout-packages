@@ -18,7 +18,7 @@ for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
     if ${__REMOTE_BUILD__}; then
       echo "Remote"
-      pkgctl repo clone $i --protocol https 
+      pkgctl repo clone --protocol https $i 
     else
       echo "Local"
       pkgctl repo clone $i

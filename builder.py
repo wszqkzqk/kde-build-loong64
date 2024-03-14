@@ -161,7 +161,7 @@ if __name__ == "__main__":
 
         calls = [
             "cd kde-build && git pull origin work/branchless", # TODO move this to origin main
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 3 B --repository={repository} --target-version={args.target_version}",
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 --repository={repository} --target-version={args.target_version}",
         ]
 
         for call in calls:
