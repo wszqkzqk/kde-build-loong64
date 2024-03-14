@@ -138,7 +138,7 @@ if __name__ == "__main__":
         # TODO: buildroot is currently hardcoded on the branches. this will
         # NOT work with my current code.
         calls = [
-            "git clone git@gitlab.archlinux.org:archlinux/kde-build.git"
+            "git clone https://gitlab.archlinux.org/archlinux/kde-build.git"
             f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
             f"mkdir -p ~/kde-build-root/{repository}-x86_64",
             f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
