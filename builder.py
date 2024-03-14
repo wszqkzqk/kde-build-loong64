@@ -147,9 +147,27 @@ if __name__ == "__main__":
     if args.steps is None or "6" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
 
-        calls = ["cd kde-build && ./build-packages extra"]
+        calls = [
+            "cd kde-build && ./build-packages extra"
+            ]
 
         for call in calls:
             new_call = [] + base_call
             new_call.append(call)
             subprocess.run(new_call)
+    
+    # Validate Packages
+    if args.steps is None or "8" in args.steps:
+        subprocess.run([f"{script_dir}/scripts/run-namcap"])
+        subprocess.run([f"{script_dir}/scripts/run-checkpkg"])
+
+    # Release Packages
+    if args.steps is None or "9" in args.steps:
+        if args.testing:
+            # Run twice, one with -t, and another with --repo
+            # This is a regression from devtools.
+            subprocess.run([f"{script_dir}/scripts/release-packages", "-t", "-m", f"Update to {args.target_version}"])
+            subprocess.run([f"{script_dir}/scripts/release-packages", "--repo", "extra-testing", "-m", f"Update to {args.target_version}"])
+        else:
+            # TODO: What to do with packages that are newer and not in the repo yet?
+            subprocess.run([f"{script_dir}/scripts/release-packages", "-m", f"Update to {args.target_version}"])

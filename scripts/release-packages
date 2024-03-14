@@ -1,9 +1,15 @@
 #!/bin/bash
 
-. common
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+cd ${__PKG_REPO_ROOT_PATH__}
 
 for i in ${depPkgName} ${optPkgName}; do
-  _pushd build/${i}
+  _pushd ${i}
     pkgctl release "$@" # || exit 1
   _popd
 done

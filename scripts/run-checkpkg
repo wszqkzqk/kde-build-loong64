@@ -1,13 +1,14 @@
 #!/bin/bash
 
-if [ ! -d build ]; then
-  exit 1
-fi
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
 
-. common
+. ${SCRIPTPATH}/common
+
+cd ${__PKG_REPO_ROOT_PATH__}
 
 for pkg in ${depPkgName} ${optPkgName}; do
-  _pushd build/${pkg}
+  _pushd ${pkg}
   checkpkg
   _popd
 done
