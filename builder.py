@@ -31,7 +31,7 @@ def define_command_line_args():
                             action="store_true")
     parser.add_argument('--buildroot',
                             help="folder where the build will happen",
-                            default=f'{Path.home()}/buildroot/<pkg-list>')
+                            default=f'{Path.home()}/buildroot/')
 
     parser.add_argument('--steps', help='''
     1 - clone pkgbuild repositories
@@ -99,8 +99,6 @@ if __name__ == "__main__":
         exit(1)
 
     buildroot = args.buildroot
-    if "<pkg-list>" in buildroot:
-        buildroot = buildroot.replace("<pkg-list>", args.package_list)
 
     # Here we push all variables that the shell scripts will need.
     # Make sure the scripts are using those instead of the hardcoded ones.
@@ -109,6 +107,10 @@ if __name__ == "__main__":
     os.environ["__SCRIPT_ROOT__"] = script_dir
     os.environ["__PKG_REPO_ROOT_PATH__"] = os.path.realpath(f"{script_dir}/../packages/{args.package_list}")
     os.environ["__REMOTE_BUILD__"] = "true" if args.remote else "false"
+
+    if args.remote:
+        print("Hello")
+        print(f"Setting the buildroot to {buildroot}")
 
     if args.steps is None or "1" in args.steps:
         print("Starting Step 1 - ")
@@ -148,7 +150,7 @@ if __name__ == "__main__":
             "git clone https://gitlab.archlinux.org/archlinux/kde-build.git",
             f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
             f"mkdir -p ~/{buildroot}/{repository}-x86_64",
-            f"mkarchroot ~/{biuldroot}/{repository}-x86_64/root base-devel",
+            f"mkarchroot ~/{buildroot}/{repository}-x86_64/root base-devel",
         ]
 
         for call in calls:
@@ -172,9 +174,12 @@ if __name__ == "__main__":
         for call in calls:
             new_call = [] + base_call
             new_call.append(call)
-            subprocess.run(new_call)
-    
+            out = subprocess.check_output(new_call)
+            print(out.decode())        
+            print("-------------------")
+
     if args.remote and "B" in args.steps:
+        print("Trying to build packages:")
         subprocess.run([f"{script_dir}/scripts/build-packages", repository])
         exit(0)
 

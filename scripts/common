@@ -2,7 +2,7 @@
 [[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
 [[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
 
-buildroot=${BUILDROOT}
+buildroot=${__BUILDROOT__}
 
 unset depPkgName
 while read i; do
