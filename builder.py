@@ -159,9 +159,14 @@ if __name__ == "__main__":
     if args.steps is None or "6" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
 
+        # Brief explanation of the calls here:
+        # 1 - tries to clone the package builds. if it already exist, it should do nothing
+        # 3 - tries to update the package builds. 
+        # B - tries to build the software, only works with --remote.
+        # TODO: Unbreak Build on remote.
         calls = [
             "cd kde-build && git pull origin work/branchless", # TODO move this to origin main
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 --repository={repository} --target-version={args.target_version}",
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 3 --repository={repository} --target-version={args.target_version}",
         ]
 
         for call in calls:
