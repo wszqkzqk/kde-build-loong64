@@ -147,8 +147,8 @@ if __name__ == "__main__":
         calls = [
             "git clone https://gitlab.archlinux.org/archlinux/kde-build.git",
             f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
-            f"mkdir -p ~/kde-build-root/{repository}-x86_64",
-            f"mkarchroot ~/kde-build-root/{repository}-x86_64/root base-devel",
+            f"mkdir -p ~/{buildroot}/{repository}-x86_64",
+            f"mkarchroot ~/{biuldroot}/{repository}-x86_64/root base-devel",
         ]
 
         for call in calls:
