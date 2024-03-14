@@ -38,8 +38,8 @@ def define_command_line_args():
     2 - download embargoed  packages
     3 - update pkgbuilds
     4 - commit changes to packages
-    5 - connect to ssh and prepare the build system
-    6 - build the software on the ssh machine
+    5 - connect to ssh and prepare the remote build system
+    6 - request a remote build
     7 - fetch data from the remote machine to local
     8 - Validate packages
     9 - Release packages
@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
     if args.steps is None or "2" in args.steps:
         # is there a way, to, programatically know if a package is embargoed?
-        # subprocess.run([f"{script_dir}/scripts/download-packages", "stable", args.target_version])
+        subprocess.run([f"{script_dir}/scripts/download-packages", "stable", args.target_version])
         pass
 
     if args.steps is None or "3" in args.steps:
@@ -178,10 +178,8 @@ if __name__ == "__main__":
             print(out.decode())        
             print("-------------------")
 
-    if args.remote and "B" in args.steps:
-        print("Trying to build packages:")
-        subprocess.run([f"{script_dir}/scripts/build-packages", repository])
-        exit(0)
+    if args.steps is None or "7" in args.steps:
+        print("Download packages from remote host - unimplemented.")
 
     # Validate Packages
     if args.steps is None or "8" in args.steps:
@@ -198,3 +196,8 @@ if __name__ == "__main__":
         else:
             # TODO: What to do with packages that are newer and not in the repo yet?
             subprocess.run([f"{script_dir}/scripts/release-packages", "-m", f"Update to {args.target_version}"])
+
+    if args.remote and "B" in args.steps:
+        print("Trying to build packages (remote machine):")
+        subprocess.run([f"{script_dir}/scripts/build-packages", repository])
+        
