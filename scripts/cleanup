@@ -4,3 +4,4 @@ rm -f broken-packages
 rm -f broken-rebuilds
 rm -f built-packages
 rm -f namcap.log
+touch build-repo/build.db{,.tar}
