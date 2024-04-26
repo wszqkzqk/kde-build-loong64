@@ -14,6 +14,8 @@ cd build
 for i in ${depPkgName} ${optPkgName}; do
   _pushd $i
     git checkout $2
-    git merge $1 --no-commit
+    git pull
+    git reset $1
+    git stash
   _popd
 done
