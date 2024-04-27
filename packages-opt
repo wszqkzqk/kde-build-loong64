@@ -108,7 +108,7 @@ kdeconnect
 kdenetwork-filesharing
 kget
 kio-extras
-kio5-extras
+#kio5-extras
 kio-gdrive
 kio-zeroconf
 konqueror
