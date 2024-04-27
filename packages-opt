@@ -1,4 +1,5 @@
 ### kde-accessibility
+accessibility-inspector
 kmag
 kmousetool
 kmouth
@@ -68,6 +69,7 @@ kubrick
 lskat
 palapeli
 picmi
+skladnik
 
 ### kde-graphics
 arianna
@@ -86,6 +88,7 @@ svgpart
 kdegraphics-thumbnailers
 
 ### kde-multimedia
+audex
 audiocd-kio
 audiotube
 dragon
@@ -169,8 +172,10 @@ partitionmanager
 ### kde-utilities
 ark
 filelight
+francis
 isoimagewriter
 kalk
+kalm
 kate
 kbackup
 kcalc
