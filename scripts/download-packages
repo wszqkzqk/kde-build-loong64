@@ -2,10 +2,9 @@
 
 . common
 
-if [ "$#" -lt 2 ]; then
-  echo "Usage: ${0} <stable|unstable> <version>"
-  echo "Example: ${0} stable 6.0.0"
-  exit 1
+if [[ ${suite} == 'kf5' || ${suite} == 'kf6' ]]; then
+    rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/frameworks/${version%.*}/ ${SRCDEST}/
+    [[ ${suite} == 'kf5' ]] && mv ${SRCDEST}/portingAids/* ${SRCDEST}/
+elif [[ ${suite} == 'plasma' || ${suite} == 'release-service' ]]; then
+    rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/${suite}/${version}/src/ ${SRCDEST}/
 fi
-
-rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:$1/release-service/$2/src/ ${SRCDEST}/
