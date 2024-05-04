@@ -1,6 +1,9 @@
 #!/bin/bash
 
-. common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
 
 if [[ ${suite} == 'kf5' || ${suite} == 'kf6' ]]; then
     rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/frameworks/${version%.*}/ ${SRCDEST}/
