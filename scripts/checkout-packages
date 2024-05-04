@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ${0} <branch>"
+  echo "Example: ${0} main"
+  exit 1
+fi
+
 SCRIPT=$(readlink -f "$0")
 SCRIPTPATH=$(dirname "$SCRIPT")
 
@@ -10,13 +16,7 @@ cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
-    if ${__REMOTE_BUILD__}; then
-      echo "Trying to clone $i on the remote server"
-      pkgctl repo clone --protocol https $i 
-    else
-      echo "Local"
-      pkgctl repo clone $i
-    fi
+    pkgctl repo clone $i
   fi
   _pushd $i
     git checkout $1

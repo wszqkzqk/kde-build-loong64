@@ -5,17 +5,11 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
-if [ "$#" -lt 2 ]; then
-  echo "Usage: ${0} <branch> <commit-message>"
-  echo "Example: ${0} main \"Update to new version\""
-  exit 1
-fi
-
-cd ${__PKG_REPO_ROOT_PATH__}
+cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   _pushd $i
-    git commit -am "$2"
+    git commit -am "Update to ${version}"
     git push origin $1
   _popd
 done
