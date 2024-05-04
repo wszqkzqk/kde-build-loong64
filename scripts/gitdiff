@@ -1,8 +1,11 @@
 #!/bin/bash
 
-. common
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
 
-cd build
+. ${SCRIPTPATH}/common
+
+cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ -d $i ]; then
