@@ -1,13 +1,14 @@
 #!/bin/bash
 
-. common
-
 if [ "$#" -lt 1 ]; then
-       echo "Usage: ${0} <repo>"
-       echo "Example: ${0} extra"
-	exit 1
+    echo "Usage: ${0} <repo>"
+    echo "Example: ${0} extra"
+    exit 1
 fi
 
-_repo=$1
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
 
-pkgctl db remove $_repo ${depPkgName} ${optPkgName}
+. ${SCRIPTPATH}/common
+
+pkgctl db remove $1 ${depPkgName} ${optPkgName}

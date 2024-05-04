@@ -5,7 +5,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
-cd ${__PKG_REPO_ROOT_PATH__}
+cd ${packages_dir}
 
 for pkg in ${depPkgName} ${optPkgName}; do
     _pushd ${pkg}
