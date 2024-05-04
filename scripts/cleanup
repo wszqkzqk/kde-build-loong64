@@ -1,8 +1,0 @@
-rm -fr build-repo
-rm -f *.conf
-rm -f broken-packages
-rm -f broken-rebuilds
-rm -f built-packages
-rm -f namcap.log
-mkdir build-repo
-touch build-repo/build.db{,.tar}

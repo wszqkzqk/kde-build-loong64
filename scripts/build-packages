@@ -7,15 +7,7 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
-if [ "$#" -lt 1 ]; then
-  echo "Usage: ${0} <repo>"
-  echo "Example: ${0} extra"
-  exit 1
-fi
-
 basedir=${PWD}
-repo=$1
-arch=$2
 
 echo "Basedir is ${basedir}"
 echo "Buildroot is ${buildroot}"
@@ -28,9 +20,6 @@ sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i 
 mkdir -p build-repo
 repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
-# Pass i686 as argument if you want to build i686 packages on a x86_64 system
-[[ -z ${arch} ]] && arch=$(uname -m)
-
 # Cleanup package cache
 arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
@@ -40,13 +29,13 @@ for i in ${depPkgName}; do
   if grep -q -x $i built-packages > /dev/null ; then
     continue
   fi
-  _pushd ${__PKG_REPO_ROOT_PATH__}/${i}
+  _pushd ${packages_dir}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+    if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
       echo $i >> ${basedir}/built-packages
     else
       exit 1
@@ -60,13 +49,13 @@ for i in ${optPkgName}; do
   if grep -q -x $i built-packages ; then
     continue
   fi
-  _pushd ${__PKG_REPO_ROOT_PATH__}/${i}
+  _pushd ${packages_dir}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+    if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
       echo $i >> ${basedir}/built-packages
     else
       echo $i >> ${basedir}/broken-packages

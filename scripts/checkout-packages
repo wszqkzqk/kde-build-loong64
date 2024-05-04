@@ -5,14 +5,8 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
-if [ "$#" -lt 1 ]; then
-  echo "Usage: ${0} <branch>"
-  echo "Example: ${0} main"
-  exit 1
-fi
-
-mkdir -p ${__PKG_REPO_ROOT_PATH__}
-cd ${__PKG_REPO_ROOT_PATH__}
+mkdir -p ${packages_dir}
+cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then

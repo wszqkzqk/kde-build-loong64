@@ -1,22 +1,26 @@
 . /etc/makepkg.conf
 [[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
 [[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
+. config
 
-buildroot=${__BUILDROOT__}
+buildroot=${__BUILDROOT__:-${HOME}/buildroot}
+scriptroot=${__SCRIPT_ROOT__:-..}
+packages_dir=${__PKG_REPO_ROOT_PATH__:-packages/${suite}}
+arch=$(uname -m)
 
 unset depPkgName
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
 		depPkgName="${depPkgName} ${i}"
 	fi
-done < ${__SCRIPT_ROOT__}/package-list/${__PKG_LIST__}/packages-dep
+done < ${scriptroot}/package-list/${suite}/packages-dep
 
 unset optPkgName
 while read i; do
 	if $(echo "${i}" | grep -q -v '^#'); then
 		optPkgName="${optPkgName} ${i}"
 	fi
-done < ${__SCRIPT_ROOT__}/package-list/${__PKG_LIST__}/packages-opt
+done < ${scriptroot}/package-list/${suite}/packages-opt
 
 pwd=$(pwd)
 
