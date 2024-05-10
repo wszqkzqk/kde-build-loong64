@@ -161,9 +161,9 @@ if __name__ == "__main__":
         calls = [
             "git clone https://gitlab.archlinux.org/archlinux/kde-build.git",
             # TODO: Remove this checkout
-            f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard work/branchless", 
-            f"mkdir -p ~/{buildroot}/{repository}-x86_64",
-            f"mkarchroot ~/{buildroot}/{repository}-x86_64/root base-devel",
+            f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard origin/work/branchless", 
+            f"mkdir -p {buildroot}/{repository}-x86_64",
+            f"mkarchroot {buildroot}/{repository}-x86_64/root base-devel",
         ]
 
         for call in calls:
@@ -180,7 +180,7 @@ if __name__ == "__main__":
         # B - tries to build the software, only works with --remote.
         # TODO: Unbreak Build on remote.
         calls = [
-            "cd kde-build && git pull origin work/branchless", # TODO move this to origin main
+            f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard origin/work/branchless", 
             f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version}",
         ]
 
