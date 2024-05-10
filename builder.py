@@ -109,6 +109,10 @@ if __name__ == "__main__":
 
     buildroot = args.buildroot
 
+    repository = args.repository
+    if args.testing:
+        repository += "-testing"
+
     # Here we push all variables that the shell scripts will need.
     # Make sure the scripts are using those instead of the hardcoded ones.
     os.environ["__BUILDROOT__"] = buildroot
@@ -116,6 +120,8 @@ if __name__ == "__main__":
     os.environ["__SCRIPT_ROOT__"] = script_dir
     os.environ["__PKG_REPO_ROOT_PATH__"] = os.path.realpath(f"{script_dir}/../packages/{args.package_list}")
     os.environ["__REMOTE_BUILD__"] = "true" if args.remote else "false"
+    os.environ["__REPO__"] = repository
+    os.environ["__PKG_VERSION__"] = args.target_version
 
     if args.remote:
         print("Hello")
@@ -136,9 +142,6 @@ if __name__ == "__main__":
     if args.steps is None or "4" in args.steps:
         subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
 
-    repository = args.repository
-    if args.testing:
-        repository += "-testing"
 
     # Prepare the build machine to run
     if args.steps is None or "5" in args.steps:
