@@ -6,12 +6,21 @@ import subprocess
 import textwrap
 
 from pathlib import Path
+import argparse
+
+class SmartFormatter(argparse.HelpFormatter):
+
+    def _split_lines(self, text, width):
+        if text.startswith('R|'):
+            return text[2:].splitlines()  
+        return argparse.HelpFormatter._split_lines(self, text, width)
 
 def define_command_line_args():
     parser = argparse.ArgumentParser(
                     prog='builder',
                     description='organizes Qt and KDE Building process on archlinux',
-                    epilog='')
+                    epilog='',
+                    formatter_class=SmartFormatter)
 
     parser.add_argument('--package-list',
                             help="The name of the list you want to build now.")
@@ -33,7 +42,7 @@ def define_command_line_args():
                             help="folder where the build will happen",
                             default=f'{Path.home()}/buildroot/')
 
-    parser.add_argument('--steps', help='''
+    parser.add_argument('--steps', help='''R|
     1 - clone pkgbuild repositories
     2 - download embargoed  packages
     3 - update pkgbuilds
@@ -114,7 +123,6 @@ if __name__ == "__main__":
 
     if args.steps is None or "1" in args.steps:
         print("Starting Step 1 - ")
-        # Here we start the build
         subprocess.run([f"{script_dir}/scripts/checkout-packages", "main"])
 
     if args.steps is None or "2" in args.steps:
