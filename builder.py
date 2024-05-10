@@ -169,7 +169,9 @@ if __name__ == "__main__":
         for call in calls:
             new_call = [] + base_call
             new_call.append(call)
+            print(f"Running {new_call}")
             subprocess.run(new_call)
+            print(f"Finished")
     
     if args.steps is None or "6" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
