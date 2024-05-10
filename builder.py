@@ -122,6 +122,7 @@ if __name__ == "__main__":
     os.environ["__REMOTE_BUILD__"] = "true" if args.remote else "false"
     os.environ["__REPO__"] = repository
     os.environ["__PKG_VERSION__"] = args.target_version
+    os.environ["__STABILITY__"] = "stable"
 
     if args.remote:
         print("Hello")
@@ -133,11 +134,11 @@ if __name__ == "__main__":
 
     if args.steps is None or "2" in args.steps:
         # is there a way, to, programatically know if a package is embargoed?
-        subprocess.run([f"{script_dir}/scripts/download-packages", "stable", args.target_version])
+        subprocess.run([f"{script_dir}/scripts/download-packages"])
         pass
 
     if args.steps is None or "3" in args.steps:
-        subprocess.run([f"{script_dir}/scripts/update-pkgbuilds", "stable", args.target_version])
+        subprocess.run([f"{script_dir}/scripts/update-pkgbuilds"])
 
     if args.steps is None or "4" in args.steps:
         subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
@@ -159,7 +160,8 @@ if __name__ == "__main__":
         # NOT work with my current code.
         calls = [
             "git clone https://gitlab.archlinux.org/archlinux/kde-build.git",
-            f"cd kde-build && git checkout work/branchless", # TODO: Remove this checkout
+            # TODO: Remove this checkout
+            f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard work/branchless", 
             f"mkdir -p ~/{buildroot}/{repository}-x86_64",
             f"mkarchroot ~/{buildroot}/{repository}-x86_64/root base-devel",
         ]
