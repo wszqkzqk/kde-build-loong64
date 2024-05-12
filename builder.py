@@ -213,6 +213,14 @@ if __name__ == "__main__":
             subprocess.run([f"{script_dir}/scripts/release-packages", "-m", f"Update to {args.target_version}"])
 
     if args.remote and "B" in args.steps:
+        print("###############################################################")
         print(f"Trying to build packages for {repository} (remote machine):")
-        result = subprocess.run([f"{script_dir}/scripts/build-packages", repository])
-        print(f"Result: {result}")
+        result = subprocess.run(
+            [f"{script_dir}/scripts/build-packages", repository],       
+                stdout = subprocess.PIPE,
+                stderr = subprocess.STDOUT,
+                text = True
+        )
+        print(f"Result: {result.stdout}")
+        print("###################### END ####################")
+        
