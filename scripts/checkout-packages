@@ -19,17 +19,3 @@ if $remote_build; then
 else
   echo "LOCAL BUILD"
 fi
-
-for i in ${depPkgName} ${optPkgName}; do
-  if [ ! -d $i ]; then
-    if $remote_build; then
-      pkgctl repo clone $i --protocol https
-    else
-      pkgctl repo clone $i
-    fi
-  fi
-  _pushd $i
-    git checkout $1
-    git pull origin $1
-  _popd
-done
