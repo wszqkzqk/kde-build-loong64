@@ -14,6 +14,12 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 mkdir -p ${packages_dir}
 cd ${packages_dir}
 
+if $remote_build; then
+  echo "REMOTE BUILD";
+else
+  echo "LOCAL BUILD";
+fi
+
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
     if $remote_build; then
