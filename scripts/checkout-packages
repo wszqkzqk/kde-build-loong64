@@ -15,9 +15,9 @@ mkdir -p ${packages_dir}
 cd ${packages_dir}
 
 if $remote_build; then
-  echo "REMOTE BUILD";
+  echo "REMOTE BUILD"
 else
-  echo "LOCAL BUILD";
+  echo "LOCAL BUILD"
 fi
 
 for i in ${depPkgName} ${optPkgName}; do
