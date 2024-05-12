@@ -13,7 +13,7 @@ packages_dir=${__PKG_REPO_ROOT_PATH__:-packages/${suite}}
 version=${__PKG_VERSION__:-${version}}
 repo=${__REPO__:-${repo}}
 release=${__STABILITY__:-${release}}
-
+remote_build=${__REMOTE_BUILD__:false}
 arch=$(uname -m)
 
 echo "Version set to" ${version}

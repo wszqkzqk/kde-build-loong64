@@ -16,7 +16,11 @@ cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ ! -d $i ]; then
-    pkgctl repo clone $i
+    if $remote_build; then
+      pkgctl repo clone $i --protocol https
+    else
+      pkgctl repo clone $i
+    fi
   fi
   _pushd $i
     git checkout $1
