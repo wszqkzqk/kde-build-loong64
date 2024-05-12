@@ -183,8 +183,8 @@ if __name__ == "__main__":
         # TODO: Unbreak Build on remote.
         calls = [
             f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard origin/work/branchless",
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1 --repository={repository} --target-version={args.target_version}",
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version}",
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1  --repository={repository} --target-version={args.target_version}",
+#            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version}",
         ]
 
         for call in calls:
