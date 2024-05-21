@@ -1,0 +1,14 @@
+#!/bin/bash
+
+. common
+
+if [ "$#" -lt 2 ]; then
+	echo "Usage: ${0} <repo-from> <repo-to>"
+	echo "Example: ${0} staging extra"
+	exit 1
+fi
+
+repofrom=$1
+repoto=$2
+
+pkgctl db move $repofrom $repoto $(cat ${scriptroot}/package-list/${suite}/rebuild.list);
