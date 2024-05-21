@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
+  pushd rebuild/${i}
+    setconf PKGBUILD pkgrel+=1
+  popd
+done
