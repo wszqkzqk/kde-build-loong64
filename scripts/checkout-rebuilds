@@ -1,0 +1,28 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+mkdir -p ${packages_dir}
+cd ${packages_dir}
+
+if $remote_build; then
+  echo "REMOTE BUILD"
+else
+  echo "LOCAL BUILD"
+fi
+
+for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
+  if [ ! -d $i ]; then
+    if $remote_build; then
+      pkgctl repo clone  --protocol https $i
+    else
+      pkgctl repo clone $i
+    fi
+  fi
+  _pushd $i
+    git pull origin main
+  _popd
+done

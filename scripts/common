@@ -8,7 +8,7 @@
 # over the .config file.
 suite=${__PKG_LIST__:-${suite}}
 buildroot=${__BUILDROOT__:-${HOME}/buildroot}
-scriptroot=${__SCRIPT_ROOT__:-..}
+scriptroot=${__SCRIPT_ROOT__:-${PWD}/..}
 packages_dir=${__PKG_REPO_ROOT_PATH__:-packages/${suite}}
 version=${__PKG_VERSION__:-${version}}
 repo=${__REPO__:-${repo}}
