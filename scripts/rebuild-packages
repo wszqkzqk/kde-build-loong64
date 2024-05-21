@@ -1,0 +1,38 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+rm -f broken-rebuilds
+basedir=${PWD}
+
+# Add temporary repository to pacman.conf
+rm -f *.conf
+cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
+sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
+
+# Cleanup package cache
+arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
+
+# Build packages
+cd ${packages_dir}
+for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
+  pushd ${i}
+    arch-nspawn \
+      -C "${basedir}/${repo}.conf" \
+      -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
+      "${buildroot}/${repo}-${arch}/root" --bind-ro=${basedir}/build-repo:/tmp/build-repo \
+      pacman -Syu --noconfirm
+    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} \
+      -c -n -d ${basedir}/build-repo:/tmp/build-repo || ( echo ${i} >> ${basedir}/broken-rebuilds )
+  popd
+done
+
+if [ -s broken-rebuilds ]; then
+  echo "Broken rebuilds:"
+  cat broken-rebuilds
+else
+  echo "All packages rebuilt successfully!"
+fi
