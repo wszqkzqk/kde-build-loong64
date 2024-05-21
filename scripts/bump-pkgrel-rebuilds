@@ -5,6 +5,9 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
+mkdir -p ${packages_dir}
+cd ${packages_dir}
+
 for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
   pushd rebuild/${i}
     setconf PKGBUILD pkgrel+=1
