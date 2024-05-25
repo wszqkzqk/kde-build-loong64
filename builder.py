@@ -150,7 +150,7 @@ if __name__ == "__main__":
 
         # Make sure we have the necessary information on the server.
         # TODO: I'm checking just for one possible file, check also for ~/.config/makepkg.conf
-        out = subprocess.check_output(["ssh", "build.archlinux.org", 'cat  ~/.config/makepkg.conf | grep "PKGDEST\|PACKAGER" | wc -l'])
+        out = subprocess.check_output(["ssh", "build.archlinux.org", 'cat  ~/.config/pacman/makepkg.conf | grep "PKGDEST\|PACKAGER" | wc -l'])
         if out.decode() != "2\n":
             print("Please configure your makepkg.conf on build.archlinux.org. you need at least PKGDEST and PACKAGER configured.")
             exit(1)
