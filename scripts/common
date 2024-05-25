@@ -2,7 +2,7 @@
 [[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
 [[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
 
-if [  -f .config ]; then
+if [  -f config ]; then
 	. config
 else
 	echo "No configuration found. Assuming that you are using the python wrapper"
