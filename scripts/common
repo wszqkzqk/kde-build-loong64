@@ -1,7 +1,12 @@
 . /etc/makepkg.conf
 [[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
 [[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
-. config
+
+if [  -f .config ]; then
+	. config
+else
+	echo "No configuration found. Assuming that you are using the python wrapper"
+fi
 
 # variables with underscores are set by the
 # python build script and takes precedence
