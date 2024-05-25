@@ -194,6 +194,19 @@ if __name__ == "__main__":
             print("-------------------")
 
     if args.steps is None or "7" in args.steps:
+        base_call = ["ssh", "build.archlinux.org"]
+
+        # TODO: Unbreak Build on remote.
+        calls = [
+            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}",
+        ]
+
+        for call in calls:
+            new_call = [] + base_call
+            new_call.append(call)
+            out = subprocess.check_output(new_call)
+            print(out.decode())
+            print("-------------------")
         f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}",
 
     # Validate Packages
