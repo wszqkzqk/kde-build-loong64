@@ -207,7 +207,6 @@ if __name__ == "__main__":
             out = subprocess.check_output(new_call)
             print(out.decode())
             print("-------------------")
-        f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}",
 
     # Validate Packages
     if args.steps is None or "8" in args.steps:
