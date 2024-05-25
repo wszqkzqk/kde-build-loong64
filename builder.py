@@ -48,8 +48,8 @@ def define_command_line_args():
     3 - update pkgbuilds
     4 - commit changes to packages
     5 - connect to ssh and prepare the remote build system
-    6 - request a remote build
-    7 - fetch data from the remote machine to local
+    6 - Update the remote packages
+    7 - Builds the remote packages
     8 - Validate packages
     9 - Release packages
     B - Build packages (remote only)
@@ -184,7 +184,6 @@ if __name__ == "__main__":
         calls = [
             f"cd kde-build && git fetch && git checkout work/branchless && git reset --hard origin/work/branchless",
             f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1  --repository={repository} --target-version={args.target_version}",
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version}",
         ]
 
         for call in calls:
@@ -195,7 +194,7 @@ if __name__ == "__main__":
             print("-------------------")
 
     if args.steps is None or "7" in args.steps:
-        print("Download packages from remote host - unimplemented.")
+        f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}",
 
     # Validate Packages
     if args.steps is None or "8" in args.steps:
