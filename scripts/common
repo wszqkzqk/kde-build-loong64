@@ -1,0 +1,48 @@
+. /etc/makepkg.conf
+[[ -r ~/.makepkg.conf ]] && . ~/.makepkg.conf
+[[ -r ~/.config/pacman/makepkg.conf ]] && . ~/.config/pacman/makepkg.conf
+
+if [  -f config ]; then
+	. config
+else
+	echo "No configuration found. Assuming that you are using the python wrapper"
+fi
+
+# variables with underscores are set by the
+# python build script and takes precedence
+# over the .config file.
+suite=${__PKG_LIST__:-${suite}}
+buildroot=${__BUILDROOT__:-${HOME}/buildroot}
+scriptroot=${__SCRIPT_ROOT__:-${PWD}/..}
+packages_dir=${__PKG_REPO_ROOT_PATH__:-packages/${suite}}
+version=${__PKG_VERSION__:-${version}}
+repo=${__REPO__:-${repo}}
+release=${__STABILITY__:-${release}}
+remote_build=${__REMOTE_BUILD__:-false}
+arch=$(uname -m)
+
+echo "Version set to" ${version}
+
+unset depPkgName
+while read i; do
+	if $(echo "${i}" | grep -q -v '^#'); then
+		depPkgName="${depPkgName} ${i}"
+	fi
+done < ${scriptroot}/package-list/${suite}/packages-dep
+
+unset optPkgName
+while read i; do
+	if $(echo "${i}" | grep -q -v '^#'); then
+		optPkgName="${optPkgName} ${i}"
+	fi
+done < ${scriptroot}/package-list/${suite}/packages-opt
+
+pwd=$(pwd)
+
+_pushd() {
+	pushd "$@" > /dev/null
+}
+
+_popd() {
+	popd "$@" > /dev/null
+}

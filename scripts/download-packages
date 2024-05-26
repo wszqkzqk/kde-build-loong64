@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+if [[ ${suite} == 'kf5' || ${suite} == 'kf6' ]]; then
+    rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/frameworks/${version%.*}/ ${SRCDEST}/
+    [[ ${suite} == 'kf5' ]] && mv ${SRCDEST}/portingAids/* ${SRCDEST}/
+elif [[ ${suite} == 'plasma' ]]; then
+    rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/${suite}/${version}/ ${SRCDEST}/
+elif [[ ${suite} == 'release-service' ]]; then
+    rsync -e ssh -rchL --progress --partial ftparchlinux@tinami.kde.org:${release}/${suite}/${version}/src/ ${SRCDEST}/
+fi

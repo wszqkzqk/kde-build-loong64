@@ -1,44 +1,42 @@
 #!/bin/bash
 
-. common
+echo "Starting to build packages";
 
-if [ "$#" -lt 1 ]; then
-  echo "Usage: ${0} <repo>"
-  echo "Example: ${0} extra"
-  exit 1
-fi
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
 
 basedir=${PWD}
-repo=$1
-arch=$2
 
-# Add temporary repository to pacman.conf
+echo "Basedir is ${basedir}"
+echo "Buildroot is ${buildroot}"
+
+echo Add temporary repository to pacman.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf
 
-# Create temporary repository
+echo Create temporary repository
 mkdir -p build-repo
 repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
-# Pass i686 as argument if you want to build i686 packages on a x86_64 system
-[[ -z ${arch} ]] && arch=$(uname -m)
-
-# Cleanup package cache
+echo Cleanup package cache
 arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 
-# Build packages
+echo Build packages
 touch built-packages
 for i in ${depPkgName}; do
   if grep -q -x $i built-packages > /dev/null ; then
     continue
   fi
-  _pushd build/${i}
+  echo "Trying to build ${packages_dir}/${i}"
+  _pushd ${packages_dir}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+    if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
       echo $i >> ${basedir}/built-packages
     else
       exit 1
@@ -52,13 +50,13 @@ for i in ${optPkgName}; do
   if grep -q -x $i built-packages ; then
     continue
   fi
-  _pushd build/${i}
+  _pushd ${packages_dir}/${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" \
       pacman -Syuu --noconfirm
-    if setarch ${arch} sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+    if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
       echo $i >> ${basedir}/built-packages
     else
       echo $i >> ${basedir}/broken-packages

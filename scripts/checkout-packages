@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+  echo "Usage: ${0} <branch>"
+  echo "Example: ${0} main"
+  exit 1
+fi
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+mkdir -p ${packages_dir}
+cd ${packages_dir}
+
+if $remote_build; then
+  echo "REMOTE BUILD"
+else
+  echo "LOCAL BUILD"
+fi
+
+for i in ${depPkgName} ${optPkgName}; do
+  if [ ! -d $i ]; then
+    if $remote_build; then
+      pkgctl repo clone  --protocol https $i
+    else
+      pkgctl repo clone $i
+    fi
+  fi
+  _pushd $i
+    git checkout $1
+    git pull origin $1
+  _popd
+done

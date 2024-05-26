@@ -1,0 +1,14 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+cd ${packages_dir}
+
+for i in ${depPkgName} ${optPkgName}; do
+  _pushd ${i}
+    pkgctl release "$@" || exit 1
+  _popd
+done

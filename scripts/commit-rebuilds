@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+cd ${packages_dir}
+
+for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
+  _pushd $i
+    git commit -am "Qt ${version} rebuild"
+    git push origin main
+  _popd
+done

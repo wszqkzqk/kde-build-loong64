@@ -1,0 +1,15 @@
+#!/bin/bash
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+for i in ${depPkgName} ${optPkgName}; do
+    _pushd ${packages_dir}/${i}
+    sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${release}/|g" -i PKGBUILD
+    sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
+    sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+    updpkgsums
+    _popd
+done

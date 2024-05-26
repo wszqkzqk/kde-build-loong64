@@ -1,22 +1,21 @@
 #!/bin/bash
 
-. common
-
 if [ "$#" -lt 1 ]; then
   echo "Usage: ${0} <branch>"
   echo "Example: ${0} main"
   exit 1
 fi
 
-mkdir -p build
-cd build
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
-  if [ ! -d $i ]; then
-    pkgctl repo clone $i
-  fi
   _pushd $i
-    git checkout $1
-    git pull origin $1
+    git commit -am "Update to ${version}"
+    git push origin $1
   _popd
 done

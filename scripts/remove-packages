@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: ${0} <repo>"
+    echo "Example: ${0} extra"
+    exit 1
+fi
+
+SCRIPT=$(readlink -f "$0")
+SCRIPTPATH=$(dirname "$SCRIPT")
+
+. ${SCRIPTPATH}/common
+
+pkgctl db remove $1 ${depPkgName} ${optPkgName}

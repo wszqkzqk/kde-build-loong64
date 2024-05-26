@@ -1,9 +1,0 @@
-#!/bin/bash
-
-. common
-
-for i in ${depPkgName} ${optPkgName}; do
-  _pushd build/${i}
-    pkgctl release "$@" || exit 1
-  _popd
-done

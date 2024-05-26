@@ -1,0 +1,48 @@
+Welcome to Pierre's simple and stupid scripts to semi-automate the maintaince of KDE!
+
+== Requirements ==
+* devtools (these scripts use the chroots in /var/lib/archbuild/)
+* ssh access to repos.archlinux.org and depot.kde.org without user
+  interaction
+* set sudo to allow running makechrootpkg without password
+* set your SRCDEST and INTEGRITY_CHECK=('sha256') in makepkg.conf
+* set your gpg-key in makepkg.conf
+
+== Usage by file ==
+* build-packages: run makechrootpkg for all packages and install those that are
+  defined in packages-dep to a temporary repo.
+** it will fail if a package from packages-dep will fail. Other broken
+   packages will be just skipped and shown at the end.
+* checkout-packages: checkout the working tree from SVN.
+* cleanup-packages: remove any logs, packages, signatures, src and pkg dirs
+  from the working copy.
+* commit-packages: commit all changes to the SVN branch. This does NOT release
+  any package.
+* config: set version and branch. Also a target repo can be set.
+* download-packages: download the sources from KDE server. If they are already
+  downloaded just check integrity.
+* install-packages: install all KDE packages from the build dir.
+* move-packages: move packages between two repos.
+* release-packages: run commitpkg. This actually commit, release and upload
+  the packages.
+* run-checkpkg: run the checkpkg script on every package.
+* run-namcap: run namcap on all packages and store the result to namcap.log.
+* show-namcap: show namcap.log for all packages.
+* sign-packages: add signatures files to the packages in the build dir.
+* svndiff: displays all local changes for the SVN branch.
+* syncrepo: used to sync kde-unstable from trunk.
+* update-pkgbuids: updates pkgver to the one configured in config; resets
+  pkgrel to 1. It also updates the checksum array.
+
+== Sample workflow ==
+* edit config to your needs
+* run download-packages to get all sources
+* run checkout-packages to get the abs working tree
+* run update-pkgbuilds to update all PKGBUILDs
+* optional edit PKGBUILDs (e.g. remove old patches etc.)
+* build all packages for x86_64 using build-packages
+* run run-namcap and have a look at the logs with show-namcap
+* run sign-packages to add signatures files to the packages built on remote
+  (e.g. on pkgbuild.com)
+* run release-packages 'Upstream release' to upload and release all packages to
+  the repo
