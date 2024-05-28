@@ -30,6 +30,7 @@ for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
   popd
 done
 
+cd ${basedir}
 if [ -s broken-rebuilds ]; then
   echo "Broken rebuilds:"
   cat broken-rebuilds
