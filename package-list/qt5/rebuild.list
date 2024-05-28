@@ -21,9 +21,7 @@ dtkdeclarative
 fcitx-qt5
 fcitx5-qt
 kmymoney
-kwin
-libfm-qt
-libqtxdg
+libqt5xdg
 lmms
 qt5-mqtt
 skrooge
