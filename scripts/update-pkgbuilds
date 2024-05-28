@@ -7,8 +7,14 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 for i in ${depPkgName} ${optPkgName}; do
     _pushd ${packages_dir}/${i}
+    if [[ ${suite} == 'qt5' ]]; then
+        commit=`git ls-remote https://invent.kde.org/qt/qt/${i/5-/}.git kde/5.15 | cut -f1`
+        sed -r "s|_commit=.*|_commit=${commit}|g" -i PKGBUILD
+        sed -r "s|_basever=.*|_basever=${version}|g" -i PKGBUILD
+    else
+        sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
+    fi
     sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${release}/|g" -i PKGBUILD
-    sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
     updpkgsums
     _popd
