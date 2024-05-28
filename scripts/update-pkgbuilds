@@ -15,7 +15,11 @@ for i in ${depPkgName} ${optPkgName}; do
         sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     fi
     sed -r "s|https://download.kde.org/.*stable/|https://download.kde.org/${release}/|g" -i PKGBUILD
-    sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+    if [[ ${i} == 'qt5-webengine' || ${i} == 'qt5-script' ]]; then
+        setconf PKGBUILD pkgrel+=1
+    else
+        sed -r 's|pkgrel=.*|pkgrel=1|g' -i PKGBUILD
+    fi
     updpkgsums
     _popd
 done
