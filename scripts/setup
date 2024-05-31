@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -lt 4 ]; then
+if [ "$#" -lt 1 ]; then
   echo "Usage: ${0} <suite> <stable|unstable> <version> <repo>"
   echo "Example: ${0} kf6 stable 6.0.0 extra-testing"
   exit 1
@@ -17,6 +17,6 @@ mkdir build-repo
 touch build-repo/build.db{,.tar}
 
 echo "suite=$1" >> config
-echo "release=$2" >> config
-echo "version=$3" >> config
-echo "repo=$4" >> config
+[[ -n $2 ]] && echo "release=$2" >> config
+[[ -n $3 ]] && echo "version=$3" >> config
+[[ -n $4 ]] && echo "repo=$4" >> config
