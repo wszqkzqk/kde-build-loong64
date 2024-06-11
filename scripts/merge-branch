@@ -16,9 +16,8 @@ cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   _pushd $i
-    git checkout $2
+    git checkout $1
     git pull
-    git reset $1
-    git stash
+    git checkout -B $2
   _popd
 done
