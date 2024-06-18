@@ -11,6 +11,8 @@ for i in ${depPkgName} ${optPkgName}; do
         commit=`git ls-remote https://invent.kde.org/qt/qt/${i/5-/}.git kde/5.15 | cut -f1`
         sed -r "s|_commit=.*|_commit=${commit}|g" -i PKGBUILD
         sed -r "s|_basever=.*|_basever=${version}|g" -i PKGBUILD
+    elif [[ ${suite} == 'qt6' ]]; then
+        sed -r "s|_pkgver=.*|_pkgver=${version}|g" -i PKGBUILD
     else
         sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     fi
