@@ -10,7 +10,7 @@ cd ${packages_dir}
 for i in ${depPkgName} ${optPkgName}; do
   if [ -d $i ]; then
     _pushd $i
-      git diff
+      git --no-pager diff
     _popd
   fi
 done
