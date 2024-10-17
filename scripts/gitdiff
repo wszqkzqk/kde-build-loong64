@@ -9,7 +9,8 @@ cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   if [ -d $i ]; then
-  pushd $i
-    git diff
-  popd
+    _pushd $i
+      git diff
+    _popd
+  fi
 done
