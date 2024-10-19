@@ -1,6 +1,8 @@
 dtklog
+dtkcore
 dtkgui
 dtkwidget
+dtkdeclarative
 deepin-album
 deepin-calculator
 deepin-clipboard
@@ -18,7 +20,6 @@ deepin-reader
 deepin-screen-recorder
 deepin-session-ui
 deepin-system-monitor
-dtkdeclarative
 fcitx-qt5
 fcitx5-qt
 kmymoney
