@@ -1,9 +1,10 @@
-deepin-qt6integration
-deepin-qt6platform-plugins
+dtk6log
 dtk6core
 dtk6gui
 dtk6widget
 dtk6declarative
+deepin-qt6integration
+deepin-qt6platform-plugins
 fcitx-qt5
 fcitx5-qt
 libfm-qt
