@@ -16,7 +16,6 @@ kapidox W: Referenced python module 'svn.core' is an uninstalled dependency (nee
 kapidox W: Referenced python module 'requests' is an uninstalled dependency (needed in files ['usr/lib/python3.12/site-packages/kapidox/utils.py'])
 kapidox W: Dependency python detected and implicitly satisfied (python modules ['fnmatch.fnmatch', 'textwrap', 'os.path', 'argparse', 'logging', 're', 'contextlib.contextmanager', 'pathlib', 'urllib.parse.urljoin', 'datetime', 'json', 'urllib.error.HTTPError', 'urllib.request.Request', 'functools.cmp_to_key', 'sys', 'os', 'urllib.request.urlretrieve', 'urllib.request.urlopen', 'fnmatch', 'typing.Dict', 'tempfile', 'os.environ', 'glob', 'pathlib.Path', 'typing.Optional', 'typing.Any', 'itertools', 'subprocess', 'codecs', 'functools.reduce', 'shutil', 'time', 'xml.etree.ElementTree', 'string'] needed in files ['usr/lib/python3.12/site-packages/kapidox/depdiagram_prepare.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram/generate.py', 'usr/lib/python3.12/site-packages/kapidox/utils.py', 'usr/bin/kapidox-depdiagram-prepare', 'usr/lib/python3.12/site-packages/kapidox/argparserutils.py', 'usr/bin/kapidox-depdiagram-generate', 'usr/lib/python3.12/site-packages/kapidox/models.py', 'usr/lib/python3.12/site-packages/kapidox/hlfunctions.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram/block.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram_generate.py', 'usr/bin/kapidox-generate', 'usr/lib/python3.12/site-packages/kapidox/kapidox_generate.py', 'usr/lib/python3.12/site-packages/kapidox/generator.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram/framework.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram/frameworkdb.py', 'usr/lib/python3.12/site-packages/kapidox/preprocessing.py'], programs ['python', 'python3'] needed in scripts ['usr/lib/python3.12/site-packages/kapidox/kapidox_generate.py', 'usr/lib/python3.12/site-packages/kapidox/depdiagram_prepare.py', 'usr/bin/kapidox-depdiagram-generate', 'usr/bin/kapidox-depdiagram-prepare', 'usr/lib/python3.12/site-packages/kapidox/depdiagram_generate.py', 'usr/bin/kapidox-generate'])
 kapidox W: Dependency bash detected and implicitly satisfied (programs ['sh'] needed in scripts ['usr/bin/depdiagram_generate_all'])
-kbookmarks W: Dependency included, but may not be needed ('kconfigwidgets')
 kcmutils W: Unused shared library '/usr/lib/libKF6GuiAddons.so.6' by file ('usr/lib/libKF6KCMUtils.so.6.8.0')
 PKGBUILD (kcolorscheme) W: Description should not contain the package name.
 kcolorscheme W: Description should not contain the package name.
@@ -25,18 +24,14 @@ kdoctools W: Dependency included, but may not be needed ('docbook-xsl')
 <unknown>:37: SyntaxWarning: invalid escape sequence '\s'
 ki18n W: Referenced python module 'psyco' is an uninstalled dependency (needed in files ['usr/lib/cmake/KF6I18n/ts-pmap-compile.py'])
 ki18n W: Dependency included, but may not be needed ('iso-codes')
-kiconthemes W: Dependency included, but may not be needed ('kconfigwidgets')
 kiconthemes W: Dependency included, but may not be needed ('qt6-svg')
 kio W: Unused shared library '/usr/lib/libKF6KIOCore.so.6' by file ('usr/lib/kf6/kioworker')
-kio W: Dependency included, but may not be needed ('kconfigwidgets')
-kio W: Dependency included, but may not be needed ('qt6-5compat')
 kirigami W: Dependency included, but may not be needed ('qt6-svg')
 knewstuff W: Referenced QML module 'org.kde.kcmutils' is an uninstalled dependency (needed in files ['usr/lib/qt6/qml/org/kde/newstuff/Page.qml', 'usr/lib/qt6/qml/org/kde/newstuff/EntryDetails.qml'])
 knewstuff W: Referenced QML module 'org.kde.newstuff.core' is an uninstalled dependency (needed in files ['usr/lib/qt6/qml/org/kde/newstuff/QuestionAsker.qml'])
 knewstuff W: Referenced QML module 'org.kde.newstuff.tools.dialog' is an uninstalled dependency (needed in files ['usr/bin/knewstuff-dialog6'])
 kpty W: Dependency included, but may not be needed ('libutempter')
 ktexteditor W: Unused shared library '/usr/lib/libgcc_s.so.1' by file ('usr/lib/libKF6TextEditor.so.6.8.0')
-ktextwidgets W: Dependency included, but may not be needed ('kconfigwidgets')
 modemmanager-qt W: Dependency included, but may not be needed ('modemmanager')
 networkmanager-qt W: Dependency included, but may not be needed ('networkmanager')
 prison E: Uncommon license identifiers such as 'MIT' require license files below /usr/share/licenses/prison/ or switching to common license identifiers. Found 0/1 required license files.
