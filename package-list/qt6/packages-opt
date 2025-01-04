@@ -8,6 +8,7 @@ qt6-httpserver
 qt6-imageformats
 qt6-location
 qt6-lottie
+qt6-mqtt
 qt6-networkauth
 qt6-quick3dphysics
 qt6-quickeffectmaker
