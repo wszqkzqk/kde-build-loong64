@@ -21,7 +21,7 @@ mkdir -p build-repo
 repo-add -n build-repo/build.db.tar > /dev/null 2>&1
 
 echo Cleanup package cache
-arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
+arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -fr /var/cache/pacman/pkg/*
 
 echo Build packages
 touch built-packages
