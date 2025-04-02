@@ -12,8 +12,10 @@ libqtxdg
 qt6ct
 calibre
 gammaray
-kwin
 layer-shell-qt
+kwin
+plasma-integration
 pyqt6
 qtcreator
 skrooge
+telegram-desktop
