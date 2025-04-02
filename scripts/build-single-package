@@ -14,6 +14,9 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 basedir=${PWD}
 package=$1
 
+echo "Basedir is ${basedir}"
+echo "Buildroot is ${buildroot}"
+
 # Add temporary repository to pacman.conf
 cp /usr/share/devtools/pacman.conf.d/${repo}.conf .
 sed "73i[build]\nServer = file:///${basedir}/build-repo\nSigLevel = Never\n" -i ${repo}.conf

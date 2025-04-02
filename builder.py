@@ -42,6 +42,10 @@ def define_command_line_args():
                             help="folder where the build will happen",
                             default=f'{Path.home()}/buildroot/')
 
+    parser.add_argument('--packages-to-build', 
+                        help="Builds just the list of packages specified in the list",
+                        required=False)
+
     parser.add_argument('--steps', help='''R|
     1 - clone pkgbuild repositories
     2 - download embargoed  packages
@@ -195,10 +199,14 @@ if __name__ == "__main__":
 
     if args.steps is None or "7" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
-
+        cmd: str = f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}"
+        if args.packages_to_build is not None:
+            print(type(args.packages_to_build))
+            cmd += f" --packages-to-build=\"{args.packages_to_build}\""
+        
         # TODO: Unbreak Build on remote.
         calls = [
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}",
+            cmd
         ]
 
         for call in calls:
@@ -225,14 +233,24 @@ if __name__ == "__main__":
             subprocess.run([f"{script_dir}/scripts/release-packages", "-m", f"Update to {args.target_version}"])
 
     if args.remote and "B" in args.steps:
+
         print("###############################################################")
         print(f"Trying to build packages for {repository} (remote machine):")
-        result = subprocess.run(
-            [f"{script_dir}/scripts/build-packages", repository],       
-                stdout = subprocess.PIPE,
-                stderr = subprocess.STDOUT,
-                text = True
-        )
+        if args.packages_to_build is None:
+            result = subprocess.run(
+                [f"{script_dir}/scripts/build-packages", repository],       
+                    stdout = subprocess.PIPE,
+                    stderr = subprocess.STDOUT,
+                    text = True
+            )
+        else:
+            for package in args.packages_to_build:
+                result = subprocess.run(
+                    [f"{script_dir}/scripts/build-single-package", package],       
+                    stdout = subprocess.PIPE,
+                    stderr = subprocess.STDOUT,
+                    text = True
+                )
         print(f"Result: {result.stdout}")
         print("If there was an error on this call, make sure you run this script")
         print("Inside of the ssh host to fetch the packages")
