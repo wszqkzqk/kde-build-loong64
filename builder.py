@@ -244,7 +244,7 @@ if __name__ == "__main__":
                     text = True
             )
         else:
-            for package in args.packages_to_build:
+            for package in args.packages_to_build.split(' '):
                 result = subprocess.run(
                     [f"{script_dir}/scripts/build-single-package", package],       
                     stdout = subprocess.PIPE,
