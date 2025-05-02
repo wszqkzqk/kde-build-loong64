@@ -13,6 +13,7 @@ for i in ${depPkgName} ${optPkgName}; do
         sed -r "s|_basever=.*|_basever=${version}|g" -i PKGBUILD
     elif [[ ${suite} == 'qt6' ]]; then
         sed -r "s|_pkgver=.*|_pkgver=${version}|g" -i PKGBUILD
+        sed -r "s|_chromium=.*|_chromium=|g" -i PKGBUILD
     else
         sed -r "s|pkgver=.*|pkgver=${version}|g" -i PKGBUILD
     fi
