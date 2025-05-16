@@ -13,6 +13,7 @@ kscreen
 ksshaskpass
 kwallet-pam
 kwayland-integration
+kwin-x11
 kwrited
 plasma-browser-integration
 plasma-desktop
