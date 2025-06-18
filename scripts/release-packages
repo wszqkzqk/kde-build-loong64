@@ -5,10 +5,20 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
+rm -f broken-releases
+
 cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   _pushd ${i}
-    pkgctl release "$@" || exit 1
+    pkgctl release "$@" || echo $i >> ${basedir}/broken-releases
   _popd
 done
+
+cd ${basedir}
+if [ -s broken-releases ]; then
+  echo "The following packages could not be released:"
+  cat broken-releases
+else
+  echo "All packages released successfully!"
+fi
