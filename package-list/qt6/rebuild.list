@@ -17,6 +17,7 @@ calibre
 gammaray
 layer-shell-qt
 kwin
+kwin-x11
 plasma-integration
 pyqt6
 qtcreator
