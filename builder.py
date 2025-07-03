@@ -46,16 +46,16 @@ def define_command_line_args():
                         help="Builds just the list of packages specified in the list",
                         required=False)
 
+    parser.add_argument("--remote-user", help="The folder where to fetch the packages.")
+
     parser.add_argument('--steps', help='''R|
     1 - clone pkgbuild repositories
     2 - download embargoed  packages
     3 - update pkgbuilds
-    4 - commit changes to packages
+    4 - connect to ssh and prepare the remote build system
     5 - connect to ssh and prepare the remote build system
-    6 - Update the remote packages
-    7 - Builds the remote packages
-    8 - Validate packages
-    9 - Release packages
+    6 - Builds the remote packages
+    7 - Release packages
     B - Build packages (remote only)
 ''', nargs='*')
 
@@ -65,6 +65,23 @@ def define_command_line_args():
 def get_packages(script_dir: str) -> [str]:
     subfolders = [ f.name for f in os.scandir(f'{script_dir}/package-list') if f.is_dir() ]
     return subfolders
+
+def get_pkgdest() -> str:
+    print("Checking validity of makepkg.conf. Ignore possible errors during check.")
+    makepkgs = [
+        f'{Path.home()}/.config/pacman/makepkg.conf',
+        f'{Path.home()}/.makepkg.conf',
+        '/etc/makepkg.conf'
+    ]
+
+    for makepkg in makepkgs:
+        out = subprocess.check_output(["bash", "-c", f"cat {makepkg} | grep PKGDEST | cut -d'=' -f2 | cut -d'\"' -f2 "])
+        value = out.decode()[0]
+        if len(value):
+            return value
+
+    # the above return always work
+    return "" # never runs.
 
 def check_pkgdest() -> bool:
     print("Checking validity of makepkg.conf. Ignore possible errors during check.")
@@ -144,12 +161,8 @@ if __name__ == "__main__":
     if args.steps is None or "3" in args.steps:
         subprocess.run([f"{script_dir}/scripts/update-pkgbuilds"])
 
-    if args.steps is None or "4" in args.steps:
-        subprocess.run([f"{script_dir}/scripts/commit-packages", "main", f"Update to {args.target_version}"])
-
-
     # Prepare the build machine to run
-    if args.steps is None or "5" in args.steps:
+    if args.steps is None or "4" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
 
         # Make sure we have the necessary information on the server.
@@ -177,17 +190,18 @@ if __name__ == "__main__":
             subprocess.run(new_call)
             print(f"Finished")
     
-    if args.steps is None or "6" in args.steps:
+    if args.steps is None or "5" in args.steps:
+        if args.remote_user is None:
+            print("Please specify the remote user.")
+            exit(1)
         base_call = ["ssh", "build.archlinux.org"]
 
         # Brief explanation of the calls here:
-        # 1 - tries to clone the package builds. if it already exist, it should do nothing
-        # 3 - tries to update the package builds. 
-        # B - tries to build the software, only works with --remote.
+        # 1 - Update the buildscripts and reset the build infra.
+        # 2 - Syncs the packages folder with the local changes to the remote
         # TODO: Unbreak Build on remote.
         calls = [
-            f"cd kde-build && git fetch && git checkout master && git reset --hard origin/master",
-            f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps 1  --repository={repository} --target-version={args.target_version}",
+            f"cd kde-build && git fetch && git checkout master && git reset --hard origin/master && git clean -fxd",
         ]
 
         for call in calls:
@@ -197,7 +211,9 @@ if __name__ == "__main__":
             print(out.decode())        
             print("-------------------")
 
-    if args.steps is None or "7" in args.steps:
+        out = subprocess.check_output(["rsync", "-uav", f"{script_dir}/../packages/", f"build.archlinux.org:/home/tcanabrava/packages"])
+
+    if args.steps is None or "6" in args.steps:
         base_call = ["ssh", "build.archlinux.org"]
         cmd: str = f"cd kde-build && ./builder.py --remote --package-list={args.package_list} --steps B --repository={repository} --target-version={args.target_version} --buildroot={args.buildroot}"
         if args.packages_to_build is not None:
@@ -216,13 +232,22 @@ if __name__ == "__main__":
             print(out.decode())
             print("-------------------")
 
+    if args.steps is None or "7" in args.steps:
+        if args.remote_user is None:
+            print("Please specify the remote user.")
+            exit(1)
+
+        subprocess.run(["rsync", "-avm", f"build.archlinux.org:/home/{args.remote_user}/pkgdest/", get_pkgdest()])
+
     # Validate Packages
-    if args.steps is None or "8" in args.steps:
-        subprocess.run([f"{script_dir}/scripts/run-namcap"])
-        subprocess.run([f"{script_dir}/scripts/run-checkpkg"])
+    # Re-enable this when it makes more sense.
+    # currently it's a validation by eye and this is not really useful.
+    # if args.steps is None or "8" in args.steps:
+    #    subprocess.run([f"{script_dir}/scripts/run-namcap"])
+    #    subprocess.run([f"{script_dir}/scripts/run-checkpkg"])
 
     # Release Packages
-    if args.steps is None or "9" in args.steps:
+    if args.steps is None or "8" in args.steps:
         if args.testing:
             # Run twice, one with -t, and another with --repo
             # This is a regression from devtools.
