@@ -5,6 +5,8 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
+basedir=${PWD}
+
 rm -f broken-releases
 
 cd ${packages_dir}
