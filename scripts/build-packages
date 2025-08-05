@@ -39,6 +39,7 @@ for i in ${depPkgName}; do
     if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
       echo $i >> ${basedir}/built-packages
     else
+      echo "Failed to build $i"
       exit 1
     fi
     cp $(makepkg --packagelist) ${basedir}/build-repo
