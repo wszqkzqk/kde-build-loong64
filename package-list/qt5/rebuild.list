@@ -3,7 +3,6 @@ dtkcore
 dtkgui
 dtkwidget
 dtkdeclarative
-deepin-album
 deepin-calculator
 deepin-clipboard
 deepin-compressor
@@ -16,7 +15,6 @@ deepin-qt-dbus-factory
 deepin-qt5integration
 deepin-qt5platform-plugins
 deepin-image-viewer
-deepin-reader
 deepin-screen-recorder
 deepin-session-ui
 deepin-system-monitor
