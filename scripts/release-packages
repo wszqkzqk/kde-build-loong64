@@ -13,6 +13,7 @@ cd ${packages_dir}
 
 for i in ${depPkgName} ${optPkgName}; do
   _pushd ${i}
+    git add REUSE.toml LICENSE LICENSES/*
     pkgctl release "$@" || echo $i >> ${basedir}/broken-releases
   _popd
 done
