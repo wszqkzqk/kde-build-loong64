@@ -21,6 +21,7 @@ cd ${packages_dir}
 for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
   if grep -q -x $i rebuilt-packages ; then
     continue
+  fi
   pushd ${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
