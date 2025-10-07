@@ -62,6 +62,8 @@ for i in ${optPkgName}; do
     else
       echo $i >> ${basedir}/broken-packages
     fi
+    cp $(makepkg --packagelist) ${basedir}/build-repo
+    repo-add -n ${basedir}/build-repo/build.db.tar ${basedir}/build-repo/*.pkg.tar.zst > /dev/null 2>&1
   _popd
 done
 

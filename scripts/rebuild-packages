@@ -19,14 +19,21 @@ arch-nspawn "${buildroot}/${repo}-${arch}/root" rm -f /var/cache/pacman/pkg/*
 # Build packages
 cd ${packages_dir}
 for i in $(cat ${scriptroot}/package-list/${suite}/rebuild.list); do
+  if grep -q -x $i rebuilt-packages ; then
+    continue
   pushd ${i}
     arch-nspawn \
       -C "${basedir}/${repo}.conf" \
       -M "/usr/share/devtools/makepkg.conf.d/${arch}.conf" \
       "${buildroot}/${repo}-${arch}/root" --bind-ro=${basedir}/build-repo:/tmp/build-repo \
       pacman -Syu --noconfirm
-    setarch ${arch} sudo makechrootpkg -r ${buildroot}/${repo}-${arch} \
-      -c -n -d ${basedir}/build-repo:/tmp/build-repo || ( echo ${i} >> ${basedir}/broken-rebuilds )
+    if sudo makechrootpkg -r "${buildroot}/${repo}-${arch}" -c -n ; then
+      echo $i >> ${basedir}/rebuilt-packages
+    else
+      echo $i >> ${basedir}/broken-rebuilds
+    fi
+    cp $(makepkg --packagelist) ${basedir}/build-repo
+    repo-add -n ${basedir}/build-repo/build.db.tar ${basedir}/build-repo/*.pkg.tar.zst > /dev/null 2>&1
   popd
 done
 
