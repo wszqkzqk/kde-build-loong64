@@ -23,6 +23,7 @@ kwin
 kwin-x11
 plasma-integration
 pyqt6
+pyside6
 qtcreator
 kmymoney
 skrooge
