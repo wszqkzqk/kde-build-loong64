@@ -11,4 +11,6 @@ SCRIPTPATH=$(dirname "$SCRIPT")
 
 . ${SCRIPTPATH}/common
 
-pkgctl db remove $1 ${depPkgName} ${optPkgName}
+for i in ${depPkgName} ${optPkgName}; do
+  pkgctl db remove --noconfirm $1 $i
+done
