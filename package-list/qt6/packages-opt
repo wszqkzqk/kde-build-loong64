@@ -1,4 +1,5 @@
 qt6-3d
+qt6-canvaspainter
 qt6-charts
 qt6-datavis3d
 qt6-doc
@@ -10,6 +11,7 @@ qt6-location
 qt6-lottie
 qt6-mqtt
 qt6-networkauth
+qt6-openapi
 qt6-quick3dphysics
 qt6-quickeffectmaker
 qt6-remoteobjects
@@ -17,6 +19,7 @@ qt6-scxml
 qt6-sensors
 qt6-serialbus
 qt6-speech
+qt6-tasktree
 qt6-translations
 qt6-virtualkeyboard
 qt6-webview
