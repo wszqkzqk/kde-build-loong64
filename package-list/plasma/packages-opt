@@ -19,6 +19,8 @@ plasma-browser-integration
 plasma-desktop
 plasma-disks
 plasma-firewall
+plasma-keyboard
+plasma-login-manager
 plasma-nm
 plasma-pa
 plasma-sdk
