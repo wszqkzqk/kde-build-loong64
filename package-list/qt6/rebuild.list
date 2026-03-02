@@ -1,8 +1,8 @@
-dtk6log
-dtk6core
-dtk6gui
-dtk6widget
-dtk6declarative
+dtklog
+dtkcore
+dtkgui
+dtkwidget
+dtkdeclarative
 deepin-kwin
 deepin-launchpad
 deepin-qt6integration
